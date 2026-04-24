@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700&display=swap");
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Christelle's Family Recipes — Design system
+ * Warm cream background, turquoise primary, soft serif headings.
+ * All colors in oklch.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-season-spring: var(--season-spring);
+  --color-season-summer: var(--season-summer);
+  --color-season-autumn: var(--season-autumn);
+  --color-season-winter: var(--season-winter);
+  --color-season-all: var(--season-all);
+
+  --color-difficulty-easy: var(--difficulty-easy);
+  --color-difficulty-medium: var(--difficulty-medium);
+  --color-difficulty-hard: var(--difficulty-hard);
+
+  --color-cost-low: var(--cost-low);
+  --color-cost-mid: var(--cost-mid);
+  --color-cost-high: var(--cost-high);
+
+  --shadow-card: 0 6px 24px -12px oklch(0.55 0.12 195 / 0.35);
+  --shadow-card-hover: 0 18px 40px -16px oklch(0.55 0.14 195 / 0.45);
+  --gradient-hero: linear-gradient(135deg, oklch(0.95 0.04 195), oklch(0.97 0.025 80));
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Warm cream background */
+  --background: oklch(0.985 0.012 90);
+  --foreground: oklch(0.25 0.03 220);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.03 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.03 220);
+
+  /* Turquoise primary */
+  --primary: oklch(0.72 0.12 195);
+  --primary-foreground: oklch(0.99 0 0);
+  --primary-deep: oklch(0.5 0.12 200);
+
+  --secondary: oklch(0.94 0.03 195);
+  --secondary-foreground: oklch(0.3 0.06 200);
+
+  --muted: oklch(0.95 0.015 90);
+  --muted-foreground: oklch(0.5 0.02 220);
+
+  --accent: oklch(0.88 0.08 195);
+  --accent-foreground: oklch(0.25 0.06 200);
+
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.9 0.02 195);
+  --input: oklch(0.9 0.02 195);
+  --ring: oklch(0.72 0.12 195);
+
+  /* Pastilles — saisons */
+  --season-spring: oklch(0.85 0.12 140);
+  --season-summer: oklch(0.85 0.14 80);
+  --season-autumn: oklch(0.78 0.14 50);
+  --season-winter: oklch(0.85 0.08 230);
+  --season-all: oklch(0.88 0.06 195);
+
+  /* Pastilles — difficulté */
+  --difficulty-easy: oklch(0.85 0.12 150);
+  --difficulty-medium: oklch(0.85 0.13 85);
+  --difficulty-hard: oklch(0.78 0.16 30);
+
+  /* Pastilles — coût */
+  --cost-low: oklch(0.88 0.1 160);
+  --cost-mid: oklch(0.85 0.13 90);
+  --cost-high: oklch(0.78 0.15 35);
+}
+
+.dark {
+  --background: oklch(0.2 0.03 220);
+  --foreground: oklch(0.97 0.01 90);
+  --card: oklch(0.25 0.04 220);
+  --card-foreground: oklch(0.97 0.01 90);
+  --popover: oklch(0.25 0.04 220);
+  --popover-foreground: oklch(0.97 0.01 90);
+  --primary: oklch(0.78 0.12 195);
+  --primary-foreground: oklch(0.2 0.03 220);
+  --primary-deep: oklch(0.6 0.13 200);
+  --secondary: oklch(0.3 0.05 200);
+  --secondary-foreground: oklch(0.97 0.01 90);
+  --muted: oklch(0.3 0.03 220);
+  --muted-foreground: oklch(0.75 0.02 90);
+  --accent: oklch(0.4 0.08 200);
+  --accent-foreground: oklch(0.97 0.01 90);
+  --destructive: oklch(0.7 0.19 22);
+  --destructive-foreground: oklch(0.97 0.01 90);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.6 0.1 195);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
