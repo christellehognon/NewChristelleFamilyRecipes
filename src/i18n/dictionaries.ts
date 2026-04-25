@@ -12,7 +12,6 @@ type Dictionary = {
   footer: {
     brand: string;
     cookedWith: string;
-    inFamily: string;
     sendEmail: string;
     privacy: string;
     legal: string;
@@ -45,7 +44,6 @@ type Dictionary = {
     hello: string;
     lead: string;
     about: string;
-    credo: string;
     family: string;
     metaTitle: string;
     metaDesc: string;
@@ -118,7 +116,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
   fr: {
     nav: {
       home: "Accueil",
-      chef: "Le chef",
+      chef: "Les chefs",
       contact: "Contact",
       openMenu: "Ouvrir le menu",
       langLabel: "Langue",
@@ -126,7 +124,6 @@ export const dictionaries: Record<Lang, Dictionary> = {
     footer: {
       brand: "Christelle's Family Recipes",
       cookedWith: "Cuisiné avec",
-      inFamily: "en famille",
       sendEmail: "Envoyer un email",
       privacy: "Politique de confidentialité",
       legal: "Mentions légales",
@@ -134,9 +131,9 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     home: {
       badge: "✨ Cuisine de famille",
-      titleA: "Les recettes que ma famille",
+      titleA: "Les recettes tout le monde",
       titleB: "adore vraiment.",
-      lead: "Carnet de cuisine partagé entre les générations — des classiques de Mamie aux expérimentations gourmandes des plus jeunes.",
+      lead: "Carnet de cuisine partagé entre les générations — des classiques de la cuisine française aux expérimentations gourmandes des plus jeunes.",
       shuffle: "Mélanger les recettes",
       searchPlaceholder: "Recherche par recette ou ingrédient…",
       clearSearch: "Effacer la recherche",
@@ -158,10 +155,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
     chef: {
       badge: "👩‍🍳 La cheffe",
       hello: "Bonjour, moi c'est",
-      lead: "J'ai créé ce carnet pour rassembler toutes les recettes que ma famille adore cuisiner — celles qu'on se transmet de génération en génération, et celles qu'on invente le dimanche après-midi.",
+      lead: "Je suis passionnée de cuisine grâce à des femmes merveilleuses qui m'ont énormément appris ! Mon credo : la cuisine doit rester simple, généreuse et partagée. Pas de chichis, des bons produits, et beaucoup d'amour.",
       about: "À propos",
-      credo:
-        "Mon credo : la cuisine doit rester simple, généreuse et partagée. Pas de chichis, des bons produits, et beaucoup d'amour.",
       family: "Les femmes qui m'ont tout appris",
       metaTitle: "Le chef — Christelle's Family Recipes",
       metaDesc:
@@ -262,7 +257,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
   en: {
     nav: {
       home: "Home",
-      chef: "The chef",
+      chef: "The chefs",
       contact: "Contact",
       openMenu: "Open menu",
       langLabel: "Language",
@@ -270,7 +265,6 @@ export const dictionaries: Record<Lang, Dictionary> = {
     footer: {
       brand: "Christelle's Family Recipes",
       cookedWith: "Cooked with",
-      inFamily: "as a family",
       sendEmail: "Send an email",
       privacy: "Privacy policy",
       legal: "Legal notice",
@@ -278,9 +272,9 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     home: {
       badge: "✨ Family cooking",
-      titleA: "The recipes my family",
+      titleA: "Recipes that everyone",
       titleB: "truly loves.",
-      lead: "A cooking notebook shared across generations — from Grandma's classics to the youngest's tasty experiments.",
+      lead: "A cooking notebook shared across generations — from French culinary classics to the youngest's tasty experiments.",
       shuffle: "Shuffle recipes",
       searchPlaceholder: "Search by recipe or ingredient…",
       clearSearch: "Clear search",
@@ -302,10 +296,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
     chef: {
       badge: "👩‍🍳 The chef",
       hello: "Hello, I'm",
-      lead: "I created this notebook to gather all the recipes my family loves to cook — the ones passed down through generations, and the ones we invent on Sunday afternoons.",
+      lead: "I’m passionate about cooking thanks to some wonderful women who have taught me so much! My credo: cooking should stay simple, generous and shared. No fuss, good ingredients, and lots of love.",
       about: "About",
-      credo:
-        "My credo: cooking should stay simple, generous and shared. No fuss, good ingredients, and lots of love.",
       family: "The women who taught me everything",
       metaTitle: "The chef — Christelle's Family Recipes",
       metaDesc:

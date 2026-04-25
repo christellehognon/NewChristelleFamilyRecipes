@@ -1,4 +1,4 @@
-
+import { englishTranslations as englishEn } from "@/i18n/recipes.en";
 export type Season = "Printemps" | "Été" | "Automne" | "Hiver" | "Toutes saisons";
 export type Difficulty = "Facile" | "Technique";
 export type AveragePrice = "€" | "€€" | "€€€";
@@ -127,7 +127,7 @@ export const recipes = [{
     averagePrice: "€",
     difficulty: "Facile",
     isVegetarian: true,
-    ingredients: ["3 bocaux d’olives arbequinas de 350g", "1 bouquet garni", "4 gousses d’ail", "4 piments oiseaux", "huile d’olive"],
+    ingredients: ["3 jars of Arbequina olives (350 g each)", "1 bouquet garni", "4 cloves of garlic", "4 bird's eye chilies", "olive oil"],
     description: "Rincer les olives plusieurs fois à l’eau claire. Mettre tous les ingrédients dans un bocal de 1l et recouvrir avec l’huile d’olive. Laisser macérer environ quatre semaines avant dégustation."
 },
 {
@@ -349,7 +349,7 @@ export const recipes = [{
     description: "Couper le veau en dés de 2 cm de côtés. Dans une cocotte en fonte, faire chauffer un filet d'huile d'olive. Faire revenir le veau. Pendant ce temps, hâcher l'oignon et couper les poivrons en carrés. Après coloration, réserver le veau. Faire revenir l'oignon et les poivrons sans qu'ils ne brûlent. Remettre le veau et déglacer avec le bouillon. Verser la brique de Tomate Frito. Ajouter l'ail pressé. Assaisonner avec le piment d'Espelette et le sel. Laisser cuire à couvert à feu doux. Servir avec du riz."
 },
 {
-    image: "",
+    image: "/img/gallery/img_58.jpg",
     authorImg: "/img/top-chiefs/img_2.jpg",
     name: "Visitandines",
     slug: "visitandines",
@@ -606,7 +606,7 @@ export const recipes = [{
     difficulty: "Technique",
     isVegetarian: true,
     ingredients: ["200g de poudre d'amandes", "200g de sucre glace", "150g de blancs d'oeuf", "200g de sucre en poudre", "5cl d'eau", "1g de colorant alimentaire en poudre"],
-    description: "Préchauffer le four à 140°C. Pour colorer les coques avec du cacao, diminuer la quantité de poudre d'amandes: pour 30g de cacao il ne faut que 170g de poudre d'amandes. Verser la poudre d'amande et le sucre glace ,et le cacao le cas échéant, dans un mixeur. Faire tourner pendant 30 secondes pour affiner le mélange (tant pour tant), puis tamiser. Dans une casserole, mélanger l'eau et le sucre semoule avec une spatule et cuire à 118-119 °C. Avant d'atteindre cette température, mettre 75g de blancs dans la cuve d'un batteur et les monter. Lorsque le sucre a atteint la bonne température, le verser sur les blancs montés en laissant couler un filet du sirop le long de la paroi du bol. Ajouter le colorant en poudre si nécessaire. Continuer à fouetter ensuite jusqu'à refroidissement de la meringue. Verser le reste de blancs d’œufs sur le tant pour tant. Incorporer une petite partie de la meringue froide à ce mélange, puis ajouter le reste petit à petit en macaronant la pâte. Remplir une poche à douille avec cette préparation et dresser les macarons sur du papier sulfurisé. Lâcher la plaque de 50cm de hauteur afin de chasser les bulles d'air. Laisser crôuter 15 minutes. Enfourner pendant 10 minutes en tournant la plaque à mi-cuisson. Laisser ensuite les coques refroidir avant de les décoller du papier cuisson. Remplir une poche à douille avec la préparation choisie. Coller les coques deux par deux"
+    description: "Préchauffer le four à 140°C. Pour colorer les coques avec du cacao, diminuer la quantité de poudre d'amandes: pour 30g de cacao il ne faut que 170g de poudre d'amandes. Verser la poudre d'amande et le sucre glace ,et le cacao le cas échéant, dans un mixeur. Faire tourner pendant 30 secondes pour affiner le mélange (tant pour tant), puis tamiser. Dans une casserole, mélanger l'eau et le sucre semoule avec une spatule et cuire à 118-119 °C. Avant d'atteindre cette température, mettre 75g de blancs dans la cuve d'un batteur et les monter. Lorsque le sucre a atteint la bonne température, le verser sur les blancs montés en laissant couler un filet du sirop le long de la paroi du bol. Ajouter le colorant en poudre si nécessaire. Continuer à fouetter ensuite jusqu'à refroidissement de la meringue. Verser le reste de blancs d’œufs sur le tant pour tant. Incorporer une petite partie de la meringue froide à ce mélange, puis ajouter le reste petit à petit en macaronant la pâte. Remplir une poche à douille avec cette préparation et dresser les macarons sur du papier sulfurisé. Lâcher la plaque de 50cm de hauteur afin de chasser les bulles d'air. Laisser crôuter 15 minutes. Enfourner pendant 10 minutes en tournant la plaque à mi-cuisson. Laisser ensuite les coques refroidir avant de les décoller du papier cuisson. Remplir une poche à douille avec la préparation choisie. Coller les coques deux par deux."
 },
 {
     image: "/img/gallery/img_29.jpg",
@@ -886,17 +886,427 @@ export const recipeTypes: RecipeType[] = [
   "Végétarien"
 ];
 
+// English translations for selected recipes (by slug).
+// This enables the localization helper to fall back to these translations when lang = 'en'.
+export const englishTranslations: Record<string, { name_en: string; description_en: string; ingredients_en: string[]; timeToCook_en: string }> = {
+  "riz-au-lait": {
+    name_en: "Rice pudding",
+    description_en:
+      "Split the vanilla pod and scrape. Rinse the rice. Boil the milk with vanilla and rice. Cook until the rice absorbs all the liquid. Add sugar. Cool at room temperature. Serve in glasses.",
+    ingredients_en: ["1 L milk", "250 g round rice", "1 vanilla pod", "80 g sugar"],
+    timeToCook_en: "30 minutes",
+  },
+  "terrine-de-porc": {
+    name_en: "Pork terrine",
+    description_en:
+      "Chop the liver, bacon, veal and shallots. Add eggs, parsley and breadcrumbs, season well. Bake in a loaf pan in a bain-marie at 200°C for about 1h30. Cool and unmold; optionally finish with jelly.",
+    ingredients_en: [
+      "400 g pork liver",
+      "300 g fatty bacon",
+      "300 g veal",
+      "3 eggs",
+      "2 tsp salt",
+      "Pepper",
+      "Nutmeg",
+      "3 shallots",
+      "Parsley",
+      "1 bay leaf",
+      "1 packet clear jelly (optional)"
+    ],
+    timeToCook_en: "1h30 total",
+  },
+  "tarte-aux-pommes": {
+    name_en: "Apple Tart",
+    description_en: "Classic apple tart with caramelized apples",
+    ingredients_en: ["Apples", "Pastry crust", "Butter", "Sugar", "Eggs"],
+    timeToCook_en: "60 minutes",
+  },
+  "magret-de-canard-sauce-au-poivre-vert": {
+    name_en: "Duck breast with green peppercorn sauce",
+    description_en: "Duck breast with peppercorn sauce, cream and cognac",
+    ingredients_en: ["Duck breast", "Green peppercorns", "Cream", "Cognac", "Stock", "Salt", "Black pepper"],
+    timeToCook_en: "20 minutes",
+  },
+  "confiture-de-poivrons-rouges": {
+    name_en: "Red pepper jam",
+    description_en: "Sweet and mildly tangy jam",
+    ingredients_en: ["Red peppers", "Sugar", "Vinegar", "Lemon juice"],
+    timeToCook_en: "40 minutes",
+  },
+  "salade-de-pates-au-melon-et-au-magret-fume": {
+    name_en: "Pasta salad with melon and smoked magret",
+    description_en: "Cold pasta salad with melon chunks and smoked magret",
+    ingredients_en: ["Pasta", "Melon", "Smoked magret", "Olive oil", "Herbs"],
+    timeToCook_en: "20 minutes",
+  },
+  "paella": {
+    name_en: "Paella",
+    description_en: "Spanish rice dish with seafood and/or meat",
+    ingredients_en: ["Rice", "Seafood/Meat", "Saffron", "Stock", "Tomato"],
+    timeToCook_en: "60-90 minutes",
+  },
+  "pot-au-feu": {
+    name_en: "Pot-au-feu",
+    description_en: "Classic French beef stew with vegetables",
+    ingredients_en: ["Beef", "Onions", "Carrots", "Leeks", "Herbs", "Water"],
+    timeToCook_en: "120 minutes",
+  },
+  "blanquette-de-veau": {
+    name_en: "Veal Blanquette",
+    description_en: "Veal in a creamy white sauce",
+    ingredients_en: ["Veal", "Cream", "Egg yolks", "Mushrooms", "Carrots"],
+    timeToCook_en: "120 minutes",
+  },
+  "lasagnes-chevre-epinards": {
+    name_en: "Lasagna with Goat Cheese and Spinach",
+    description_en: "Layered pasta with spinach and goat cheese",
+    ingredients_en: ["Pasta sheets", "Spinach", "Goat cheese", "Tomato sauce", "Béchamel"],
+    timeToCook_en: "60 minutes",
+  },
+  "quiche-lorraine": {
+    name_en: "Lorraine Quiche",
+    description_en: "Savory tart with bacon and cheese",
+    ingredients_en: ["Puff pastry", "Bacon", "Eggs", "Cream", "Cheese"],
+    timeToCook_en: "45 minutes",
+  },
+  "tarte-chevre-courgettes": {
+    name_en: "Goat Cheese and Zucchini Tart",
+    description_en: "Zucchini tart with goat cheese",
+    ingredients_en: ["Puff pastry", "Zucchini", "Goat cheese", "Cream", "Eggs"],
+    timeToCook_en: "45 minutes",
+  },
+  "empanada-au-thon": {
+    name_en: "Tuna Empanadas",
+    description_en: "Savory tuna-filled pastries",
+    ingredients_en: ["Empanada dough", "Tuna", "Onion", "Tomato sauce"],
+    timeToCook_en: "45 minutes",
+  },
+  "poulet-au-vin-jaune": {
+    name_en: "Chicken in Vin Jaune",
+    description_en: "Chicken simmered in vin jaune and mushrooms",
+    ingredients_en: ["Chicken", "Vin Jaune", "Cream", "Mushrooms"],
+    timeToCook_en: "60 minutes",
+  },
+  "polenta-frite": {
+    name_en: "Fried Polenta",
+    description_en: "Crispy polenta slices fried until golden",
+    ingredients_en: ["Polenta", "Water", "Oil", "Salt"],
+    timeToCook_en: "30 minutes",
+  },
+  "cocktail-de-champagne-aux-framboises": {
+    name_en: "Champagne Cocktail with Raspberry",
+    description_en: "Champagne cocktail with raspberries",
+    ingredients_en: ["Champagne", "Raspberries", "Sugar"],
+    timeToCook_en: "10 minutes",
+  },
+  "tuiles-aux-amandes": {
+    name_en: "Almond Tuile Cookies",
+    description_en: "Crispy almond cookies",
+    ingredients_en: ["Almonds", "Sugar", "Egg whites", "Butter"],
+    timeToCook_en: "15 minutes",
+  },
+  "caviar-d-aubergines": {
+    name_en: "Eggplant Caviar",
+    description_en: "Smoked eggplant dip",
+    ingredients_en: ["Eggplant", "Olive oil", "Garlic", "Lemon"],
+    timeToCook_en: "40 minutes",
+  },
+  "tarte-saumon-poireaux": {
+    name_en: "Salmon and Leek Tart",
+    description_en: "Tart with salmon and leeks in creamy filling",
+    ingredients_en: ["Puff pastry", "Salmon", "Leeks", "Cream", "Eggs"],
+    timeToCook_en: "45-60 minutes",
+  },
+  "macarons": {
+    name_en: "Macarons",
+    description_en: "French almond meringue cookies with fillings",
+    ingredients_en: ["Almond flour", "Powdered sugar", "Egg whites", "Sugar"],
+    timeToCook_en: "60 minutes",
+  },
+  "ganache-chocolat-blanc-gingembre": {
+    name_en: "White Chocolate Ginger Ganache",
+    description_en: "Ganache with white chocolate and ginger",
+    ingredients_en: ["White chocolate", "Cream", "Ginger"],
+    timeToCook_en: "15 minutes",
+  },
+  "gelee-de-framboises-et-feve-de-tonka": {
+    name_en: "Raspberry Jelly with Tonka Bean",
+    description_en: "Raspberry jelly infused with Tonka bean",
+    ingredients_en: ["Raspberries", "Sugar", "Agar/Agar-agar", "Tonka bean"],
+    timeToCook_en: "15 minutes + chilling",
+  },
+  "panacotta-coulis-de-framboises": {
+    name_en: "Panna Cotta with Raspberry Coulis",
+    description_en: "Creamy panna cotta served with raspberry coulis",
+    ingredients_en: ["Cream", "Gelatin", "Sugar", "Raspberries"],
+    timeToCook_en: "20 minutes + chilling",
+  },
+  "magret-seche": {
+    name_en: "Cured Duck Breast",
+    description_en: "Duck breast cured and sliced",
+    ingredients_en: ["Duck breast", "Salt", "Herbs"],
+    timeToCook_en: "48 hours curing + slicing",
+  },
+  "salade-caesar": {
+    name_en: "Caesar Salad",
+    description_en: "Classic Caesar salad",
+    ingredients_en: ["Romaine", "Croutons", "Parmesan", "Caesar dressing"],
+    timeToCook_en: "15 minutes",
+  },
+  "magret-seche-fourre-au-foie-gras": {
+    name_en: "Cured Duck Breast with Foie Gras",
+    description_en: "Duck breast cured and filled with foie gras",
+    ingredients_en: ["Duck breast", "Foie gras", "Salt", "Pepper"],
+    timeToCook_en: "60 minutes",
+  },
+  "roules-au-pesto": {
+    name_en: "Pesto Rolls",
+    description_en: "Rolled pastry with pesto filling",
+    ingredients_en: ["Pastry", "Pesto", "Cheese"],
+    timeToCook_en: "30-40 minutes",
+  },
+  "champignons-au-four": {
+    name_en: "Oven-Roasted Mushrooms",
+    description_en: "Mushrooms baked with herbs and garlic",
+    ingredients_en: ["Mushrooms", "Garlic", "Herbs", "Olive oil"],
+    timeToCook_en: "25-30 minutes",
+  },
+  "lomo-seche": {
+    name_en: "Dried Lomo",
+    description_en: "Cured pork loin",
+    ingredients_en: ["Pork loin", "Salt", "Spices"],
+    timeToCook_en: "3-4 weeks curing (method dependent)",
+  },
+  "tian": {
+    name_en: "Vegetable Tian",
+    description_en: "Layered vegetables baked in a dish",
+    ingredients_en: ["Vegetables", "Olive oil", "Herbs"],
+    timeToCook_en: "40-60 minutes",
+  },
+  "cake-au-thon": {
+    name_en: "Tuna Cake",
+    description_en: "Savory tuna loaf cake",
+    ingredients_en: ["Tuna", "Eggs", "Flour", "Herbs"],
+    timeToCook_en: "45 minutes",
+  },
+  "gyosas": {
+    name_en: "Gyoza",
+    description_en: "Japanese dumplings filled with meat/veg",
+    ingredients_en: ["Dumpling wrappers", "Filling"],
+    timeToCook_en: "30 minutes",
+  },
+  "pates-imperiaux": {
+    name_en: "Imperial Pastry",
+    description_en: "Delicate pastry bites",
+    ingredients_en: ["Pastry", "Fillings"],
+    timeToCook_en: "40 minutes",
+  },
+  "salade-de-pates-aux-crevettes": {
+    name_en: "Shrimp Pasta Salad",
+    description_en: "Chilled pasta salad with shrimp",
+    ingredients_en: ["Pasta", "Shrimp", "Vegetables", "Dressing"],
+    timeToCook_en: "20 minutes",
+  },
+  "ganache-mojito": {
+    name_en: "Mojito Ganache",
+    description_en: "Chocolate ganache with a Mojito twist",
+    ingredients_en: ["Chocolate", "Cream", "Mint", "Lime"],
+    timeToCook_en: "15-20 minutes",
+  },
+  "tarte-tatin": {
+    name_en: "Apple tarte tatin",
+    description_en: "Caramelized apple tart",
+    ingredients_en: ["Apples", "Butter", "Sugar", "Puff pastry"],
+    timeToCook_en: "60 minutes",
+  },
+  "tian-de-courgettes-au-riz": {
+    name_en: "Zucchini Tian with Rice",
+    description_en:
+      "Boil the rice, sauté onions and garlic, mix with rice. Slice tomatoes and zucchinis. Layer rice and vegetables in a baking dish with thyme and bake until tender.",
+    ingredients_en: [
+      "4 medium zucchinis",
+      "4 ripe tomatoes",
+      "2 onions",
+      "2 cloves garlic",
+      "100 g long-grain rice",
+      "2 tbsp olive oil",
+      "Thyme",
+      "Salt/pepper"
+    ],
+    timeToCook_en: "50 minutes",
+  },
+  "olives-a-la-niçoise": {
+    name_en: "Niçoise Olives",
+    description_en:
+      "Olives marinated with garlic, herbs and olive oil. Simple and flavorful starter.",
+    ingredients_en: ["3 jars Niçoise olives", "1 bouquet garni", "4 garlic cloves", "4 bird's eye chilies", "olive oil"],
+    timeToCook_en: "20 minutes prep + marination weeks",
+  },
+  "la-frita": {
+    name_en: "La Frita (vegetable antipasto)",
+    description_en:
+      "Slow-cooked mixed vegetables (onion, peppers, tomatoes) with olive oil and herbs; served as an antipasto.",
+    ingredients_en: [
+      "1/3 onion",
+      "1/3 red pepper",
+      "1/3 green pepper",
+      "1/3 tomato",
+      "olive oil",
+      "herbs"
+    ],
+    timeToCook_en: "30 minutes + cooling",
+  },
+  "supreme-au-chocolat": {
+    name_en: "Chocolate Supreme",
+    description_en:
+      "Melt chocolate with butter, fold in sugar and almonds, then bake to create a moist center.",
+    ingredients_en: [
+      "250 g butter",
+      "250 g dark chocolate",
+      "250 g sugar",
+      "200 g almonds, ground",
+      "3 eggs",
+      "Flour"
+    ],
+    timeToCook_en: "25 minutes",
+  }
+};
+
+// Additional placeholder translations for remaining recipes (to be translated later)
+export const englishTranslationsExtra: Record<string, { name_en: string; description_en: string; ingredients_en?: string[]; timeToCook_en: string }> = {
+  "granite-de-pommes": {
+    name_en: "Apple granita",
+    description_en: "A refreshing apple granita with cinnamon",
+    ingredients_en: ["4 apples", "1 tsp cinnamon", "sugar to taste"],
+    timeToCook_en: "40 minutes",
+  },
+  "creme-patissiere": {
+    name_en: "Custard",
+    description_en: "A classic pastry cream for desserts",
+    ingredients_en: ["Milk", "Egg yolks", "Sugar", "Cornstarch"],
+    timeToCook_en: "15 minutes",
+  },
+  "gateau-au-yaourt": {
+    name_en: "Yogurt cake",
+    description_en: "Light yogurt cake",
+    ingredients_en: ["Yogurt", "Flour", "Sugar", "Eggs"],
+    timeToCook_en: "45 minutes",
+  },
+  "gateau-au-yaourt-sans-oeufs": {
+    name_en: "Eggless yogurt cake",
+    description_en: "Egg-free version of yogurt cake",
+    ingredients_en: ["Yogurt", "Flour", "Sugar", "Oil"],
+    timeToCook_en: "45 minutes",
+  },
+  "crepes": {
+    name_en: "Crepes",
+    description_en: "Thin French pancakes",
+    ingredients_en: ["Flour", "Eggs", "Milk", "Butter"],
+    timeToCook_en: "15 minutes",
+  },
+  "pate-lorrain": {
+    name_en: "Pâté Lorraine",
+    description_en: "Traditional Lorraine meat pie",
+    ingredients_en: ["Pork", "Veal", "Puff pastry"],
+    timeToCook_en: "60 minutes",
+  },
+  "tapenade": {
+    name_en: "Tapenade",
+    description_en: "Savory olive spread",
+    ingredients_en: ["Olives", "Capers", "Anchovies", "Olive oil"],
+    timeToCook_en: "10 minutes",
+  },
+  "fondant-au-chocolat": {
+    name_en: "Chocolate fondant",
+    description_en: "Warm chocolate cake with molten center",
+    ingredients_en: ["Chocolate", "Butter", "Sugar", "Eggs", "Flour"],
+    timeToCook_en: "25 minutes",
+  },
+  "osso-bucco": {
+    name_en: "Osso Bucco",
+    description_en: "Braised veal shanks",
+    ingredients_en: ["Veal shanks", "Onions", "Carrots", "Tomatoes", "Wine"],
+    timeToCook_en: "120 minutes",
+  },
+  "quatre-quart": {
+    name_en: "Pound cake",
+    description_en: "Classic quick bread",
+    ingredients_en: ["Eggs", "Sugar", "Butter", "Flour"],
+    timeToCook_en: "60 minutes",
+  },
+  "mousse-au-chocolat": {
+    name_en: "Chocolate mousse",
+    description_en: "Light and airy chocolate mousse",
+    ingredients_en: ["Chocolate", "Eggs", "Sugar", "Cream"],
+    timeToCook_en: "15 minutes",
+  },
+  "poulet-basquaise": {
+    name_en: "Basque chicken",
+    description_en: "Chicken simmered with peppers and tomatoes",
+    ingredients_en: ["Chicken", "Bell peppers", "Tomatoes", "Onion", "Oil"],
+    timeToCook_en: "60 minutes",
+  },
+  "axoa-de-veau": {
+    name_en: "Veal axoa",
+    description_en: "Basque veal stew with peppers",
+    ingredients_en: ["Veal", "Peppers", "Onion", "Potatoes"],
+    timeToCook_en: "120 minutes",
+  },
+  "visitandines": {
+    name_en: "Visitandines",
+    description_en: "Traditional almond-based cake",
+    ingredients_en: ["Almonds", "Eggs", "Sugar", "Flour"],
+    timeToCook_en: "25 minutes",
+  },
+  "gateau-roule": {
+    name_en: "Swiss roll",
+    description_en: "Rolled sponge cake with filling",
+    ingredients_en: ["Eggs", "Sugar", "Flour", "Cream"],
+    timeToCook_en: "25 minutes",
+  },
+  "clafoutis-aux-pommes": {
+    name_en: "Apple clafoutis",
+    description_en: "Egg custard baked with apples",
+    ingredients_en: ["Eggs", "Milk", "Sugar", "Flour", "Apples"],
+    timeToCook_en: "40 minutes",
+  }
+};
+
 /**
  * Helper that returns the localized fields of a recipe, falling back to French
  * when an English translation is not available.
  */
 export function localizeRecipe(recipe: Recipe, lang: "fr" | "en") {
   if (lang === "en") {
+    const t = englishTranslations[recipe.slug] ?? englishTranslationsExtra[recipe.slug as string];
+    const baseName = recipe.name_en ?? recipe.name;
+    const baseDesc = recipe.description_en ?? recipe.description;
+    const baseIngs = recipe.ingredients_en ?? recipe.ingredients;
+    const baseTime = recipe.timeToCook_en ?? recipe.timeToCook;
+    // First, try translations from the dictionaries
+    if (t) {
+      return {
+        name: t.name_en ?? baseName,
+        description: t.description_en ?? baseDesc,
+        ingredients: t.ingredients_en ?? baseIngs,
+        timeToCook: t.timeToCook_en ?? baseTime,
+      };
+    }
+    // Fallback: use English fields on the recipe if provided
+    if (recipe.name_en || recipe.description_en || recipe.ingredients_en || recipe.timeToCook_en) {
+      return {
+        name: recipe.name_en ?? baseName,
+        description: recipe.description_en ?? baseDesc,
+        ingredients: recipe.ingredients_en ?? baseIngs,
+        timeToCook: recipe.timeToCook_en ?? baseTime,
+      };
+    }
+    // Last resort: French fields
     return {
-      name: recipe.name_en ?? recipe.name,
-      description: recipe.description_en ?? recipe.description,
-      ingredients: recipe.ingredients_en ?? recipe.ingredients,
-      timeToCook: recipe.timeToCook_en ?? recipe.timeToCook,
+      name: baseName,
+      description: baseDesc,
+      ingredients: baseIngs,
+      timeToCook: baseTime,
     };
   }
   return {

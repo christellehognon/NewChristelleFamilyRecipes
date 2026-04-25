@@ -62,22 +62,12 @@ function ChefPage() {
               {t.chef.hello} <span className="italic text-primary-deep">{lead.name}</span>.
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-foreground/75">{t.chef.lead}</p>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-4xl px-4 py-12 md:px-6 md:py-16">
-          <div className="flex flex-col items-center gap-6 rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] md:flex-row md:p-10">
-            <ChefAvatar src={lead.img} alt={lead.name} />
-            <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                {t.chef.about}
-              </p>
-              <h2 className="mt-1 font-display text-2xl font-semibold">{lead.name}</h2>
-              <p className="mt-3 text-foreground/80">{leadLoc.description}</p>
-              <p className="mt-3 text-foreground/80">{t.chef.credo}</p>
+            <div className="mt-6 flex justify-center">
+              <ChefAvatar src={lead.img} alt={lead.name} />
             </div>
           </div>
-
+        </section>
+        <section className="mx-auto max-w-4xl px-4 py-12 md:px-6 md:py-16">
           <h2 className="mt-14 font-display text-2xl font-semibold md:text-3xl">
             {t.chef.family}
           </h2>

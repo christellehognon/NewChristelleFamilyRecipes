@@ -13,7 +13,6 @@ export function SiteFooter() {
         <p className="font-display text-base text-foreground">{t.footer.brand}</p>
         <p className="flex items-center gap-1.5">
           {t.footer.cookedWith} <Heart className="size-3.5 fill-primary text-primary" />{" "}
-          {t.footer.inFamily}
         </p>
         <div className="flex items-center gap-3">
           <a

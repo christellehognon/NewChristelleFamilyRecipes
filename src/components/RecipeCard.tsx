@@ -32,7 +32,7 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
           <img
             src={recipe.authorImg}
             alt={recipe.authorName ?? "Chef"}
-            className="size-7 rounded-full object-cover ring-2 ring-card"
+            className="size-9 rounded-full object-cover ring-2 ring-card"
           />
           {recipe.authorName && (
             <span className="text-xs font-semibold text-foreground">{recipe.authorName}</span>
