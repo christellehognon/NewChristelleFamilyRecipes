@@ -1,5 +1,5 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Clock, UtensilsCrossed } from "lucide-react";
+import { ArrowLeft, CookingPot, Clock, UtensilsCrossed } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
@@ -7,23 +7,21 @@ import {
   PricePastille,
   SeasonPastille,
 } from "@/components/RecipePastilles";
-import { localizeRecipe, recipes } from "@/data/recipes";
-import { translationsEn } from "@/data/recipes-en";
+import { localizeRecipe, recipes, splitCookingTime } from "@/data/recipes";
+// translationsEn removed; translations are stored inline in Recipe via *_en fields
 import { useI18n } from "@/i18n/I18nProvider";
 
 export const Route = createFileRoute("/recettes/$slug")({
   loader: ({ params }) => {
     const recipe = recipes.find((r) => r.slug === params.slug);
     if (!recipe) throw notFound();
-    // Merge English translations from external translations file if available
-    const slugKey = recipe.slug ?? "";
-    const t = translationsEn[slugKey] ?? translationsEn[recipe.name] ?? {};
+    // Build enriched with inline English fields if present
     const enriched = {
       ...recipe,
-      name_en: t.name_en ?? recipe.name_en ?? recipe.name,
-      description_en: t.description_en ?? recipe.description_en ?? recipe.description,
-      ingredients_en: t.ingredients_en ?? recipe.ingredients_en ?? recipe.ingredients,
-      timeToCook_en: t.timeToCook_en ?? recipe.timeToCook_en ?? recipe.timeToCook,
+      name_en: recipe.name_en ?? recipe.name,
+      description_en: recipe.description_en ?? recipe.description,
+      ingredients_en: recipe.ingredients_en ?? recipe.ingredients,
+      timeToCook_en: recipe.timeToCook_en ?? recipe.timeToCook,
     };
     return { recipe: enriched };
   },
@@ -74,6 +72,7 @@ function RecipePage() {
   const { t, lang } = useI18n();
   const { recipe } = Route.useLoaderData();
   const loc = localizeRecipe(recipe, lang);
+  const { prep, cook } = splitCookingTime(loc.timeToCook);
   // Split description into sentences for nicer step-like display
   const steps = loc.description
     .split(/(?<=[.!?])\s+/)
@@ -122,8 +121,13 @@ function RecipePage() {
               <DifficultyPastille difficulty={recipe.difficulty} />
               <PricePastille price={recipe.averagePrice} />
               <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                <Clock className="size-3.5" /> {loc.timeToCook}
+                <Clock className="size-3.5" /> {prep}
               </span>
+              {cook && (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                  <CookingPot className="size-3.5" />{cook}
+                </span>
+              )}
             </div>
           </header>
 

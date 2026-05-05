@@ -38,6 +38,12 @@ type Dictionary = {
     emptyReset: string;
     metaTitle: string;
     metaDesc: string;
+    legendTitle: string;
+    legendSeason: string;
+    legendDifficulty: string;
+    legendPrice: string;
+    legendPrep: string;
+    legendCook: string;
   };
   chef: {
     badge: string;
@@ -47,6 +53,12 @@ type Dictionary = {
     family: string;
     metaTitle: string;
     metaDesc: string;
+    legendTitle: string;
+    legendSeason: string;
+    legendDifficulty: string;
+    legendPrice: string;
+    legendPrep: string;
+    legendCook: string;
   };
   contact: {
     badge: string;
@@ -131,7 +143,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
     },
     home: {
       badge: "✨ Cuisine de famille",
-      titleA: "Les recettes tout le monde",
+      titleA: "Les recettes que tout le monde",
       titleB: "adore vraiment.",
       lead: "Carnet de cuisine partagé entre les générations — des classiques de la cuisine française aux expérimentations gourmandes des plus jeunes.",
       shuffle: "Mélanger les recettes",
@@ -151,6 +163,12 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "Christelle's Family Recipes — Recettes de famille",
       metaDesc:
         "Les recettes que tout le monde adore, partagées avec amour. Découvrez chaque jour de nouvelles inspirations cuisine.",
+      legendTitle: "Légende des icônes",
+      legendSeason: "Saison",
+      legendDifficulty: "Difficulté",
+      legendPrice: "Prix moyen",
+      legendPrep: "Temps de préparation",
+      legendCook: "Temps de cuisson",
     },
     chef: {
       badge: "👩‍🍳 La cheffe",
@@ -161,6 +179,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "Le chef — Christelle's Family Recipes",
       metaDesc:
         "Christelle, la cheffe de famille derrière le carnet, et toute la tribu qui partage la passion de la cuisine.",
+      legendTitle: "Icon legend",
+      legendSeason: "Saison",
+      legendDifficulty: "Difficulté",
+      legendPrice: "Prix moyen",
+      legendPrep: "Temps de préparation",
+      legendCook: "Temps de cuisson",
+    
     },
     contact: {
       badge: "✉️ Contact",
@@ -180,16 +205,14 @@ export const dictionaries: Record<Lang, Dictionary> = {
       placeholderName: "Jeanne D.",
       placeholderEmail: "jeanne@email.com",
       placeholderMessage: "Bonjour Christelle…",
-      consent:
-        "J'accepte que mon nom et mon email soient utilisés uniquement pour me répondre. Aucune donnée n'est stockée sur ce site. Voir la",
+      consent: "J'accepte que mon nom et mon email soient utilisés uniquement pour me répondre. Aucune donnée n'est stockée sur ce site. Voir la",
       consentLink: "politique de confidentialité",
       submit: "Envoyer le message",
       sending: "Envoi en cours…",
       toastSuccess: "Message envoyé ! Christelle vous répondra bientôt.",
       toastError: "Une erreur est survenue. Réessayez plus tard.",
       toastNetwork: "Impossible d'envoyer le message. Vérifiez votre connexion.",
-      toastNotConfigured:
-        "Le formulaire n'est pas encore configuré. La clé Web3Forms n'a pas été ajoutée.",
+      toastNotConfigured: "Le formulaire n'est pas encore configuré. La clé Web3Forms n'a pas été ajoutée.",
       errName: "Votre nom doit contenir au moins 2 caractères",
       errNameLong: "Votre nom est trop long",
       errEmail: "Email invalide",
@@ -290,8 +313,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
       emptyDesc: "Try other filters or reset your search.",
       emptyReset: "Reset filters",
       metaTitle: "Christelle's Family Recipes — Family recipes",
-      metaDesc:
-        "The recipes my family loves, shared with love. Discover new cooking inspiration every day.",
+      metaDesc: "The recipes my family loves, shared with love. Discover new cooking inspiration every day.",
+      legendTitle: "Icon legend",
+      legendSeason: "Season",
+      legendDifficulty: "Difficulty",
+      legendPrice: "Average price",
+      legendPrep: "Prep time",
+      legendCook: "Cooking time",
     },
     chef: {
       badge: "👩‍🍳 The chef",
@@ -300,8 +328,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
       about: "About",
       family: "The women who taught me everything",
       metaTitle: "The chef — Christelle's Family Recipes",
-      metaDesc:
-        "Christelle, the family chef behind the notebook, and the whole tribe sharing a passion for cooking.",
+      metaDesc: "Christelle, the family chef behind the notebook, and the whole tribe sharing a passion for cooking.",
+      legendTitle: "Icon legend",
+      legendSeason: "Season",
+      legendDifficulty: "Difficulty",
+      legendPrice: "Average price",
+      legendPrep: "Prep time",
+      legendCook: "Cooking time",
     },
     contact: {
       badge: "✉️ Contact",
@@ -321,16 +354,14 @@ export const dictionaries: Record<Lang, Dictionary> = {
       placeholderName: "Jane D.",
       placeholderEmail: "jane@email.com",
       placeholderMessage: "Hi Christelle…",
-      consent:
-        "I agree that my name and email may be used only to reply to me. No data is stored on this site. See the",
+      consent: "I agree that my name and email may be used only to reply to me. No data is stored on this site. See the",
       consentLink: "privacy policy",
       submit: "Send message",
       sending: "Sending…",
       toastSuccess: "Message sent! Christelle will reply soon.",
       toastError: "Something went wrong. Please try again later.",
       toastNetwork: "Could not send the message. Please check your connection.",
-      toastNotConfigured:
-        "The form is not configured yet. The Web3Forms key has not been added.",
+      toastNotConfigured: "The form is not configured yet. The Web3Forms key has not been added.",
       errName: "Your name must be at least 2 characters",
       errNameLong: "Your name is too long",
       errEmail: "Invalid email",
@@ -341,8 +372,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       errInvalid: "Invalid form",
       subject: (name: string) => `New message from ${name} — Christelle's Family Recipes`,
       metaTitle: "Contact — Christelle's Family Recipes",
-      metaDesc:
-        "A question, a recipe to share, want to talk cooking? Get in touch with Christelle.",
+      metaDesc: "A question, a recipe to share, want to talk cooking? Get in touch with Christelle.",
     },
     recipe: {
       back: "Back to recipes",

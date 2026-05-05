@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, UtensilsCrossed } from "lucide-react";
-import { localizeRecipe, type Recipe } from "@/data/recipes";
+import { CookingPot, Clock, UtensilsCrossed } from "lucide-react";
+import { localizeRecipe, type Recipe, splitCookingTime } from "@/data/recipes";
 import { DifficultyPastille, PricePastille, SeasonPastille } from "./RecipePastilles";
 import { useI18n } from "@/i18n/I18nProvider";
 
 export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: number }) {
   const { t, lang } = useI18n();
   const loc = localizeRecipe(recipe, lang);
+  const { prep, cook } = splitCookingTime(loc.timeToCook);
   return (
     <Link
       to="/recettes/$slug"
@@ -56,7 +57,17 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
 
         <div className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
           <Clock className="size-3.5" />
-          <span>{loc.timeToCook}</span>
+          <span>
+              <span className="font-medium text-foreground/70">{prep}</span>
+            </span>
+            {cook && (
+            <span className="inline-flex items-center gap-1.5">
+              <CookingPot className="size-3.5" />
+              <span>
+                <span className="font-medium text-foreground/70">{cook}</span>
+              </span>
+            </span>
+          )}
         </div>
       </div>
     </Link>

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Leaf, ChefHat, Coins, Clock, CookingPot } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { RefreshCw, Search, Shuffle, X } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -214,6 +215,19 @@ function HomePage() {
                 )}
               </FilterGroup>
             </div>
+            {/* Légende des icônes */}
+            <div className="mt-5 rounded-2xl border border-border/70 bg-card/60 px-4 py-3">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {t.home.legendTitle}
+              </p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-foreground/75">
+                <LegendItem icon={<Leaf className="size-3.5" />} label={t.home.legendSeason} />
+                <LegendItem icon={<ChefHat className="size-3.5" />} label={t.home.legendDifficulty} />
+                <LegendItem icon={<Coins className="size-3.5" />} label={t.home.legendPrice} />
+                <LegendItem icon={<Clock className="size-3.5" />} label={t.home.legendPrep} />
+                <LegendItem icon={<CookingPot className="size-3.5" />} label={t.home.legendCook} />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -283,5 +297,14 @@ function Pill({
     >
       {children}
     </button>
+  );
+}
+
+function LegendItem({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5">
+      <span className="text-primary-deep">{icon}</span>
+      {label}
+    </span>
   );
 }
