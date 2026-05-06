@@ -155,6 +155,7 @@ export const recipes: Recipe[] = [{
 {
     image: "",
     authorImg: "/img/top-chiefs/img_5.jpg",
+    authorName: "La Mémette",
     name: "La frita",
     slug: "la-frita",
     season: "Été",
