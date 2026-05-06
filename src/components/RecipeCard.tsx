@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { CookingPot, Clock, UtensilsCrossed } from "lucide-react";
 import { localizeRecipe, type Recipe, splitCookingTime } from "@/data/recipes";
+import { LazyImage } from "./LazyImage";
 import { DifficultyPastille, PricePastille, SeasonPastille } from "./RecipePastilles";
 import { useI18n } from "@/i18n/I18nProvider";
 
@@ -15,12 +16,11 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
       className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] animate-in fade-in slide-in-from-bottom-4"
       style={{ animationDelay: `${Math.min(index * 60, 400)}ms`, animationFillMode: "backwards" }}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+        <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         {recipe.image ? (
-          <img
+          <LazyImage
             src={recipe.image}
             alt={loc.name}
-            loading="lazy"
             className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

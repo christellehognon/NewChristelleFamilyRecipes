@@ -52,6 +52,7 @@ function HomePage() {
   const [price, setPrice] = useState<AveragePrice | null>(null);
   const [type, setType] = useState<RecipeType | null>(null);
   const [seed, setSeed] = useState(0);
+  const [visible, setVisible] = useState<number>(12);
   // Server renders with a stable order; client shuffles after hydration to avoid SSR/CSR mismatch
   const [displayed, setDisplayed] = useState(recipes);
 
@@ -239,7 +240,7 @@ function HomePage() {
 
           {filtered.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((recipe, i) => (
+              {filtered.slice(0, visible).map((recipe, i) => (
                 <RecipeCard key={recipe.slug} recipe={recipe} index={i} />
               ))}
             </div>
@@ -254,6 +255,16 @@ function HomePage() {
               >
                 {t.home.emptyReset}
               </Button>
+            </div>
+          )}
+          {filtered.length > visible && (
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => setVisible((v) => Math.min(v + 12, filtered.length))}
+                className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border"
+              >
+                Afficher plus
+              </button>
             </div>
           )}
         </section>
