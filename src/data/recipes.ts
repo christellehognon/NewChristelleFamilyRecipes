@@ -1,3 +1,5 @@
+import { truncate } from "fs/promises";
+
 // english translations removed; translations are now stored inline on each recipe via *_en fields
 export type Season = "Printemps" | "Été" | "Automne" | "Hiver" | "Toutes saisons";
 export type Difficulty = "Facile" | "Technique";
@@ -112,7 +114,7 @@ export const recipes: Recipe[] = [{
     description_en: "Chop the liver, bacon, veal, and shallots. Add the eggs, parsley, and crushed rusks. Season and mix everything well. Pour the mixture into a 26-cm terrine dish. Place the bay leaf on top. Cover with a lid. Bake in a water bath in the oven at 200°C for 1 hour and 30 minutes. (often longer!) Let cool and pour the jelly over the top.",
     ingredients_en: ["400g pork liver", "300g fatty bacon (which I substitute with smoked bacon bits)", "300g veal shank", "3 eggs", "3 tsp salt", "Pepper", "Nutmeg", "3 shallots", "A little parsley", "1 tsp four-spice mix", "3 crispbreads", "1 bay leaf", "1 packet of Madeira jelly (if you like it!)"],
     timeToCook_en: "30 minutes + 1h30 cooking time",
-
+    isVegetarian: false
   },
 {
     image: "/img/gallery/img_23.jpg",
@@ -245,6 +247,7 @@ export const recipes: Recipe[] = [{
     description_en: "The day before, soak the chickpeas. Parboil them so you can easily remove the tough skins. For the vegetable sauce, dice the vegetables. Sauté an onion in olive oil. Then add the carrots, bell pepper, zucchini, and eggplant. Cover with water. Season with coarse salt. Add the chickpeas, a can of peeled tomatoes, and a can of tomato paste. Add the leeks after 30 minutes of cooking. For the meat sauce, brown the chicken thighs, then sauté an onion. Add a can of peeled tomatoes and a can of tomato paste. Add a little water if needed. Season with a little coarse salt and harissa. For the couscous, pour it into a dish. Drizzle with a little oil. Pour in a little boiling water to rehydrate it. Microwave for one minute. Cook the merguez sausages in a skillet.",
     ingredients_en: ["300g of semolina", "4 chicken thighs", "4 merguez", "4 carrots", "2 onions", "2 zucchinis", "2 eggplants", "1 green pepper", "2 leeks", "200g of chickpeas", "salt", "pepper", "harissa", "water", "2 medium cans of peeled tomatoes", "2 cans of tomato paste", "olive oil"],
     timeToCook_en: "45min + 1h cooking time",
+    isVegetarian: false
   },
   {
     image: "/img/gallery/img_24.jpg",
@@ -319,7 +322,8 @@ export const recipes: Recipe[] = [{
     name_en: "Pâté Lorrain",
     description_en: "Marinate the meats the day before: Cut them into strips and then into 1 cm cubes. Place them in a bowl and add the pressed garlic, parsley, shallots, all finely chopped or minced. Strip the thyme and moisten with the white wine. Season with salt and pepper, mix well, and cover with plastic wrap. Refrigerate for 12 hours. The next day, preheat the oven to 200°C. Drain the meat. Open the roll of puff pastry while keeping its parchment paper. Place it on the baking sheet. Place the filling in the center in the shape of a large sausage, leaving a few centimeters free all around. Fold the 4 sides starting with the ends, turn the pâté so that the seam is underneath. Brush with beaten egg yolk. Create a hole in the center to form a chimney and make a grid for decoration with the tip of a knife. Bake for 45 minutes. Check for doneness and bake for an additional 10 to 15 minutes if necessary.",
     ingredients_en: ["250 g of pork shoulder", "250 g of veal shank", "2 shallots", "1 small bunch of parsley", "2 cloves of garlic", "1 sprig of thyme", "1 egg", "1 dl of dry white wine", "1 roll of puff pastry"],
-    timeToCook_en: "15 minutes + marination time"
+    timeToCook_en: "15 minutes + marination time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_27.jpg",
@@ -337,7 +341,8 @@ export const recipes: Recipe[] = [{
     name_en: "Tapenade",
     description_en: "Blend all the ingredients together. Enjoy on grilled bread.",
     ingredients_en: ["1 can of black olives (no pits)", "5 canned anchovies", "1 teaspoon of capers", "1/2 cup of olive oil"],
-    timeToCook_en: "10 minutes"
+    timeToCook_en: "10 minutes",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_19.jpg",
@@ -430,7 +435,8 @@ export const recipes: Recipe[] = [{
     name_en: "Basque Chicken",
     description_en: "In a cast-iron pot, heat a drizzle of olive oil. Brown the chicken. Meanwhile, chop the onion and cut the peppers into strips. After browning, set the chicken aside. Sauté the onion and peppers without burning them. Return the chicken to the pot and deglaze with the broth. Pour in the can of Frito tomatoes. Add the pressed garlic. Season with Espelette pepper and salt. Let cook covered over low heat. Serve with rice.",
     ingredients_en: ["4 chicken thighs", "1 onion", "1 green pepper", "1 red pepper", "2 garlic cloves", "1/4l chicken broth", "1 large can of Frito tomatoes", "salt", "Espelette pepper", "olive oil"],
-    timeToCook_en: "15 minutes + 1h15 cooking time"
+    timeToCook_en: "15 minutes + 1h15 cooking time",
+    isVegetarian: false
 },
   {
     image: "/img/gallery/img_18.jpg",
@@ -448,7 +454,8 @@ export const recipes: Recipe[] = [{
     name_en: "Veal Axoa",
     description_en: "Cut the veal into 2 cm cubes. In a cast-iron pot, heat a drizzle of olive oil. Brown the veal. Meanwhile, chop the onion and cut the peppers into squares. After browning, set the veal aside. Sauté the onion and peppers without burning them. Return the veal to the pot and deglaze with the broth. Pour in the can of Frito tomatoes. Add the pressed garlic. Season with Espelette pepper and salt. Let cook covered over low heat. Serve with rice.",
     ingredients_en: ["1kg veal to braise", "1 onion", "1 green pepper", "1 red pepper", "2 garlic cloves", "1/4l chicken broth", "1 large can of Frito tomatoes", "salt", "Espelette pepper", "olive oil"],
-    timeToCook_en: "15 minutes + 2 hours cooking time"
+    timeToCook_en: "15 minutes + 2 hours cooking time",
+    isVegetarian: false
 },
   {
     image: "/img/gallery/img_58.jpg",
@@ -561,7 +568,8 @@ export const recipes: Recipe[] = [{
     name_en: "Paella",
     description_en: "Heat the oil (preferably olive oil) in the paella pan, season with salt, and sauté the chorizo, followed by the chicken. Set aside on a plate. Next, sauté the bell pepper pieces in the paella pan. All your ingredients are now half-cooked. Add the rice and stir-fry vigorously until it turns translucent. Return the meat to the paella pan, scatter the peas and artichoke hearts, arrange the mussels around the edges like the petals of a daisy, then add the shrimp. Finally, pour in the boiling broth in which you have dissolved the saffron and Tomate frito. Bring to a boil over high heat, then reduce the heat so the paella simmers for about 20 minutes. After this time, the rice should have absorbed all the broth. Garnish with a few lemon wedges and serve directly from the cooking pan.",
     ingredients_en: ["4 chicken thighs", "1/2 chorizo", "300g shrimp", "1 liter of mussels", "300g rice", "1dl oil", "1 small can of peas", "1 green bell pepper", "1 can of artichoke hearts", "1 large carton of Tomate Frito", "salt", "saffron", "broth (3 times the volume of the rice, approx. 3/4l)"],
-    timeToCook_en: "1 hour + 50 minutes cooking time"
+    timeToCook_en: "1 hour + 50 minutes cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_11.jpg",
@@ -579,7 +587,8 @@ export const recipes: Recipe[] = [{
     name_en: "Pot-au-feu",
     description_en: "Place the meat in a large Dutch oven, cover it completely with water, and bring to a rapid boil. Skim off the foam regularly for 5 minutes, then lower the heat to maintain a gentle simmer. Add the coarse salt, onion, garlic, and bouquet garni. Let cook for 1 hour and 30 minutes. Then add the vegetables (except for the potatoes) and continue cooking for 1 hour. Finish by adding the potatoes and complete the cooking (30 minutes). Taste the broth at the end of cooking: if it isn’t flavorful enough, remove 1 liter and reduce it by half. Serve the meat and vegetables on a warm platter and the broth in a gravy boat.",
     ingredients_en: ["800 g beef chuck", "coarse salt", "pepper", "4 carrots", "4 leeks", "4 potatoes", "1 onion studded with a clove", "1 clove of garlic", "1 bouquet garni"],
-    timeToCook_en: "30 minutes + 3 hours cooking time"
+    timeToCook_en: "30 minutes + 3 hours cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_13.jpg",
@@ -597,7 +606,8 @@ export const recipes: Recipe[] = [{
     name_en: "Veal Blanquette",
     description_en: "Brown the meat pieces in a cast-iron pot. Set them aside, then sauté the chopped onions, the carrots cut into rounds, and the mushrooms. Meanwhile, pour the flour into a bowl and cover with water. Mix well. Return the meat to the pot, add the flour mixture and the bouquet garni. Season with salt and pepper. Simmer gently for two hours. At the end of cooking, add the cream mixed with vinegar. Serve with rice.",
     ingredients_en: ["1 kg veal", "60 g onions", "60 g carrots", "1 bouquet garni", "1/2 tablespoon salt", "1/4 teaspoon pepper", "olive oil", "40 g flour", "2 tablespoons cream", "125 g mushrooms", "2 tablespoons colored spirit vinegar"],
-    timeToCook_en: "15 minutes + 2 hours cooking time"
+    timeToCook_en: "15 minutes + 2 hours cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_14.jpg",
@@ -634,7 +644,8 @@ export const recipes: Recipe[] = [{
     name_en: "Quiche Lorraine",
     description_en: "In a mixing bowl, beat the eggs, then add the cream and pepper. Press the dough into a pie pan. Scatter the bacon bits and Emmental cheese over the top. Pour in the egg mixture. Bake in a preheated oven at 210°C for about 45 minutes. Serve with a green salad.",
     ingredients_en: ["1 shortcrust pastry", "200g smoked bacon bits", "5 eggs", "200ml crème fraîche", "200g grated Emmental cheese", "pepper"],
-    timeToCook_en: "10 minutes + 45 minutes cooking time"
+    timeToCook_en: "10 minutes + 45 minutes cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_16.jpg",
@@ -671,7 +682,8 @@ export const recipes: Recipe[] = [{
     name_en: "Tuna Empanada",
     description_en: "Dice the bell peppers. Sauté the bell peppers in a skillet with olive oil. Add the flaked tuna, tomato sauce, minced garlic, and saffron. Let everything simmer for a few minutes over low heat. Place one sheet of dough on the bottom of the baking pan. Spread the mixture evenly over the dough. Place the second sheet of dough on top, having first cut a small hole in the center and a lattice pattern on the surface. Fold the edges over and brush with egg yolk. Bake in a preheated oven at 210°C for about 45 minutes. Serve with a green salad. Thanks to Sandra for introducing me to this recipe!",
     ingredients_en: ["2 sheets of shortcrust pastry", "2 160-g cans of tuna", "1 small carton of tomato sauce", "1 red bell pepper", "1 green bell pepper", "saffron", "2 cloves of garlic", "1 egg yolk"],
-    timeToCook_en: "15 minutes + 45 minutes cooking time"
+    timeToCook_en: "15 minutes + 45 minutes cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_32.jpg",
@@ -689,7 +701,8 @@ export const recipes: Recipe[] = [{
     name_en: "Chicken with Yellow Wine",
     description_en: "Soak the morels in hot water for 30 minutes. Pour the Madeira wine into a saucepan. Reduce it. Add the morels and half a chicken bouillon cube. Cover with water and cook for 40 minutes. Season the chicken on the meat side with salt. Sear it on the skin side. Place the minced shallots, onion, garlic, and tarragon in a large pot with 250 ml of water, the yellow wine, 1.5 chicken bouillon cubes, and the sliced mushrooms. Bring to a boil over high heat. Then, add the chicken pieces and cook for 15 minutes. Remove the breasts as they cook faster. Cream the butter with the flour. When the other chicken pieces are cooked, remove them along with the tarragon. Reduce the cooking liquid (until almost dry), then add the butter mixture followed by the crème fraîche. Cook for 5 minutes, stirring constantly. Return the chicken pieces to the pan, coating them with the sauce, then add the drained morels. Serve in a warm dish sprinkled with fresh tarragon. You can serve it with white rice, fresh pasta, green beans, steamed potatoes, or better yet, fried polenta.",
     ingredients_en: ["1 free-range chicken, cut into pieces", "50 cl of Vin Jaune", "40 g of dried morels", "100g button mushrooms", "50cl heavy cream", "20g butter", "10cl Madeira", "2 chicken bouillon cubes", "4 shallots", "3 sprigs of tarragon", "20g flour", "1 onion", "2 cloves of garlic"],
-    timeToCook_en: "30 minutes + 45 minutes cooking time"
+    timeToCook_en: "30 minutes + 45 minutes cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_31.jpg",
@@ -784,7 +797,8 @@ export const recipes: Recipe[] = [{
     name_en: "Salmon and Leek Tart",
     description_en: "Clean the leeks and slice them into rounds. Cook them with a drizzle of olive oil. In a mixing bowl, beat the eggs, add the cream, season with salt and pepper. Add the leeks. Cut the salmon into pieces. Place the dough in a pie pan. Scatter the salmon pieces on top. Pour in the egg mixture. Bake in a preheated oven at 210°C for about 45 minutes. Serve with a green salad.",
     ingredients_en: ["1 shortcrust pastry", "250g of salmon", "6 eggs", "20cl of fresh cream", "3 leeks", "salt", "pepper", "olive oil"],
-    timeToCook_en: "10 minutes + 45 minutes cooking time"
+    timeToCook_en: "10 minutes + 45 minutes cooking time",
+    isVegetarian: false
 },
 {
     image: "/img/gallery/img_29.jpg",
@@ -859,7 +873,8 @@ export const recipes: Recipe[] = [{
     name_en: "Panna Cotta with Raspberry Coulis",
     description_en: "Soak the gelatin in a bowl of cold water until softened. Bring 10 cl of heavy cream to a boil with 100 g of sugar and the vanilla bean split in half. Then add the drained gelatin and the remaining cream. Pour the mixture into individual serving glasses and chill. For the coulis, wash the raspberries, then blend them in a blender with 20 g of sugar. Add water if necessary. Set aside in the refrigerator.",
     ingredients_en: ["3 sheets of gelatin (2 g each)", "40 cl heavy cream", "1 vanilla bean", "100 g granulated sugar", "10 cl water", "20 g granulated sugar", "125 g fresh raspberries"],
-    timeToCook_en: "15 minutes"
+    timeToCook_en: "15 minutes",
+    isVegetarian: true
     },
     {
         image: "/img/gallery/img_33.jpg", 
@@ -896,7 +911,8 @@ export const recipes: Recipe[] = [{
         name_en: "Duck Breast with Green Peppercorn Sauce",
         description_en: "A delicious and flavorful dish made with tender duck breast and a rich green peppercorn sauce.",
         ingredients_en: ["1 duck breast from the southwest", "green peppercorns in brine", "20cl of thick cream", "20cl of cognac", "60cl of hot water", "4 tablespoons of veal stock"],
-        timeToCook_en: "20 minutes"
+        timeToCook_en: "20 minutes",
+        isVegetarian: false
     },    
     {
         image: "/img/gallery/img_35.jpg", 
@@ -933,7 +949,8 @@ export const recipes: Recipe[] = [{
         name_en: "Pasta Salad with Melon and Smoked Duck Breast",
         description_en: "Cook the pasta. In the meantime, make melon balls. Remove the fat from the duck breast. When the pasta is cooked, drain it and refresh it with cold water. Drain again. Place the pasta in a salad bowl. Season it with garlic-infused olive oil. Mix well. Add the melon, slices of duck breast, and Parmesan shavings. Chop fresh basil.",
         ingredients_en: ["400g of orecchiette", "sliced smoked duck breast", "1 melon", "basil", "garlic-infused olive oil", "parmesan"],
-        timeToCook_en: "20 minutes"
+        timeToCook_en: "20 minutes",
+
     },   
     {
         image: "/img/gallery/img_39.jpg", 
@@ -970,7 +987,8 @@ export const recipes: Recipe[] = [{
         name_en: "Tuna Cake",
         description_en: "In a mixing bowl, mash the drained tuna. Cut the white fish fillet into small cubes. Mix them with the tuna. Season with salt and pepper. Add the 3 eggs, then the tomato sauce and flour. Mix everything well. Pour into a silicone cake mold. Bake at 210°C for 45 minutes. Serve chilled with a salad.",
         ingredients_en: ["2 cans of 185g tuna", "250g of white fish fillet", "3 eggs", "1 small carton of 212g tomato frito", "2 tablespoons of flour"],
-        timeToCook_en: "15 minutes + 45 minutes cooking time"
+        timeToCook_en: "15 minutes + 45 minutes cooking time",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_41.jpg", 
@@ -988,7 +1006,8 @@ export const recipes: Recipe[] = [{
         name_en: "Gyozas",
         description_en: "Boil water. Pour the flour and a pinch of salt into a bowl, then add the boiling water. Knead and moisten if necessary until you get a smooth dough (5 to 7 minutes). Form a ball, cover with plastic wrap, and let rest for 15 minutes. Place the ground meat in a bowl. Add the minced garlic clove, finely chopped chives, then season with salt and pepper. Add the cornstarch, a tablespoon of soy sauce, and sesame oil, then mix. Flour the work surface. Roll the dough into a cylinder and cut it into disks. Roll out each disk as thinly as possible until you can slightly see your fingers through it (you can also use a pasta machine). To form the gyozas, place some filling in a dough disk with a fork, moisten the edges, then fold the dry part into four flaps over the wet part. Once all the gyozas are made, arrange them in a circle in a non-stick pan and brown them in sesame oil. Then mix a tablespoon of cornstarch in about 150 ml of water, pour the mixture over the gyozas, cover and cook for 10 minutes over medium heat. Remove the lid and let them brown again for a few minutes, then flip the pan onto a plate. It's ready! Enjoy with soy sauce or plain.",
         ingredients_en: ["200g of flour", "100ml of water", "1 tablespoon of cornstarch", "200g of ground meat (pork and veal mix)", "1 garlic clove", "1 bunch of chives", "Soy sauce", "Sesame oil"],
-        timeToCook_en: "45 minutes + 20 minutes cooking time"
+        timeToCook_en: "45 minutes + 20 minutes cooking time",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_43.jpg", 
@@ -1006,7 +1025,8 @@ export const recipes: Recipe[] = [{
         name_en: "Imperial Pâtés",
         description_en: "Soak the mushrooms for 20 minutes in warm water and the vermicelli for 10 minutes in cold water. Finely chop the filling ingredients, mix well. Spread the rice paper sheets on the work surface and moisten them with a sponge soaked in water. Wait a few seconds for them to become pliable. Fill them with the stuffing and roll them up. Heat the oil in a pan and fry the rolls for 15 minutes until they are golden brown. Serve with salad, fresh mint, and nuoc mam sauce.",
         ingredients_en: ["300g of ground pork", "2 cans of crab", "1/2 packet of Chinese vermicelli", "1/2 packet of black mushrooms", "2 eggs", "2 garlic cloves", "2 onions", "1 small bunch of parsley", "rice paper sheets", "3 carrots"],
-        timeToCook_en: "45 minutes + 15 minutes cooking time"
+        timeToCook_en: "45 minutes + 15 minutes cooking time",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_42.jpg", 
@@ -1024,7 +1044,8 @@ export const recipes: Recipe[] = [{
         name_en: "Pasta Salad with Shrimp",
         description_en: "Cook the pasta in plenty of boiling water. In the meantime, dice the cucumber and red bell pepper. Rinse the pasta with cold water. Mix the pasta, cucumber, and bell pepper in a salad bowl. Coat with mayonnaise. Sprinkle with parmesan cheese. Mix everything well. Serve chilled.",
         ingredients_en: ["250g of pasta", "200g of fresh shrimp", "1 red bell pepper", "1 cucumber", "mayonnaise", "60g of parmesan"],
-        timeToCook_en: "20 minutes"
+        timeToCook_en: "20 minutes",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_29.jpg", 
@@ -1042,7 +1063,8 @@ export const recipes: Recipe[] = [{
         name_en: "Mojito Ganache",
         description_en: "Melt the white chocolate in a double boiler. Wash and zest the limes. Wash and leaf the mint. In a saucepan, combine the cream with the mint leaves and lime zest, then bring to a boil. Blend everything in a blender. Pour in 3 batches over the melted chocolate. Finish with the rum and almond powder. Cool the preparation. Using a piping bag, fill the macaron shells.",
         ingredients_en: ["15cl of heavy cream", "150g of white chocolate", "2cl of rum", "2 limes", "fresh mint", "60g of almond powder"],
-        timeToCook_en: "15 minutes"
+        timeToCook_en: "15 minutes",
+        isVegetarian: true
     },
     {
         image: "/img/gallery/img_45.jpg", 
@@ -1060,7 +1082,8 @@ export const recipes: Recipe[] = [{
         name_en: "Dried Duck Breast",
         description_en: "Place a layer of coarse salt in the bottom of an airtight container. Add a few sprigs of thyme and place the duck breast, flesh side down, on top of the salt. Place a few more sprigs of thyme on the fat side of the duck breast. Cover thoroughly with salt. Place the covered container in the refrigerator for 24 hours. Then, rinse the duck breast under water. Dry it thoroughly. Place the duck breast in a kitchen towel. Season generously with pepper on all sides. Wrap it in the towel and return it to the bottom of the fridge for 3 to 4 weeks. A big thank you to Valérie for sharing her recipe with me.",
         ingredients_en: ['1 duck breast', '1 kg coarse salt', 'thyme', 'pepper'],
-        timeToCook_en: "5 minutes"
+        timeToCook_en: "5 minutes",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_50.jpg", 
@@ -1078,7 +1101,8 @@ export const recipes: Recipe[] = [{
         name_en: "Caesar Salad",
         description_en: "Cook the hard-boiled eggs. Remove the nerves and fat from the chicken fillets. Sprinkle them with Espelette pepper. Roll them into a tight ballotine in plastic wrap. Repeat the process a second time. Cook in a pot of boiling water for about twenty minutes. Cook the farfalle pasta. Let everything cool down. For the sauce (for 2 people), in a blender, put one hard-boiled egg, one egg yolk, 5 anchovy fillets, 20g of grated parmesan, 1 tablespoon of lemon juice, 2cl of sherry vinegar, and pressed garlic. Blend everything together. Then add 5cl of olive oil in a thin stream. Add a tablespoon of cream to loosen the sauce. Season with Espelette pepper. For those who like it spicy, add Tabasco and Worcestershire sauce.",
         ingredients_en: ['Chicken fillets', 'farfalle pasta', 'arugula', '3 hard-boiled eggs', '1 egg yolk', 'parmesan cheese', 'lemon juice', 'sherry vinegar', '2 garlic cloves', 'anchovy fillets in oil', 'olive oil', 'Espelette pepper', 'cream'],
-        timeToCook_en: "30 minutes"
+        timeToCook_en: "30 minutes",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_52.jpg", 
@@ -1096,7 +1120,8 @@ export const recipes: Recipe[] = [{
         name_en: "Dried Duck Breast Stuffed with Foie Gras",
         description_en: "Cut a strip of foie gras weighing about 150 grams. Season it with a little fleur de sel and pepper. Using plastic wrap, shape the piece of foie gras into a cylinder. Place it in the freezer to harden, making it easier to insert into the duck breast. Make an incision in the center of the duck breast to create a cavity large enough to hold the foie gras insert. Once the foie gras is firm enough, insert it into the duck breast. Place a layer of coarse salt in the bottom of an airtight container. Add a few sprigs of thyme and place the duck breast, flesh side down, on the salt. Place a few more sprigs of thyme on the fat side of the duck breast. Cover well with salt. Place the closed container in the refrigerator for 24 hours. Then, rinse the duck breast under water. Dry it thoroughly. Place the duck breast in a kitchen towel. Season generously with pepper on all sides. Wrap it in the towel and return it to the bottom of the fridge for 3 to 4 weeks.",
         ingredients_en: ['150g of fresh foie gras', '1 duck breast', '1kg of coarse salt', 'thyme', 'black pepper'],
-        timeToCook_en: "15 minutes"
+        timeToCook_en: "15 minutes",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_53.jpg", 
@@ -1114,7 +1139,8 @@ export const recipes: Recipe[] = [{
         name_en: "Pesto Rolls",
         description_en: "Spread the slices of crustless white bread with a rolling pin to a thickness of 3 mm. Spread a very thin layer of pesto, place the slices of Serrano ham on top. Cut mozzarella into sticks and place them on the bread base, then roll everything up carefully. Using plastic wrap, shape into tight rolls. Chill in the refrigerator.",
         ingredients_en: ['Crustless white bread', '6 slices of Serrano ham', 'pesto', 'mozzarella'],
-        timeToCook_en: "20 minutes"
+        timeToCook_en: "20 minutes",
+        isVegetarian: false
     },
     {
         image: "/img/gallery/img_54.jpg", 
@@ -1132,7 +1158,8 @@ export const recipes: Recipe[] = [{
         name_en: "Baked Mushrooms",
         description_en: "Remove the stems from the mushrooms. Peel the caps. Work the cream cheese (goat, sheep, or cow cheese of your choice) by seasoning it with Espelette pepper. Fill the inside of the mushroom with the cream cheese. Cut pieces of ham, shape them to give them a voluminous form, and place them on top of the cheese. Bake in the oven at 210°C for about ten minutes.",
         ingredients_en: ['250g of fresh Paris mushrooms', '2-3 slices of Serrano ham', 'cream cheese', 'Espelette pepper'],
-        timeToCook_en: "20 minutes"
+        timeToCook_en: "20 minutes",
+        isVegetarian: false
     }, {
         image: "/img/gallery/img_55.jpg", 
         authorImg: "/img/top-chiefs/img_1.jpg",
@@ -1149,7 +1176,8 @@ export const recipes: Recipe[] = [{
         name_en: "Dried Lomo",
         description_en: "Trim the meat, weigh it to calculate the amount of salt, sugar, and spices needed. Mix everything in a bowl to make the adobado (the marinade). Sprinkle the salt, sugar, and spice mixture on all sides of the meat and massage it to ensure the mixture adheres well to the meat. Place the piece of meat in a bag and marinate it under vacuum. Keep it in the refrigerator at 3° / 5° C. The duration of salting depends on the thickness of the piece of meat. For a pork tenderloin with a diameter of 6 cm, it takes 0.5 days per cm of thickness + 1 day, so 3 + 1 = 4 days in salt. Turn the bag every day to salt and flavor the meat evenly. After the salting time has passed, remove the meat from the bag. Rinse and dry the meat with paper towels. Reapply spices around the meat (about 2% of its weight). Place the meat on a rack in the refrigerator at 3° / 5°C. The meat is considered sufficiently dry when it has lost between 30 and 40% of its initial weight.",
         ingredients_en: ['1 pork tenderloin of at least 500g', 'fine salt (4.5% of the weight of the meat)', 'blond cane sugar (half the weight of the salt)', 'paprika or pimenton de la Vera (3% of the weight of the meat)', 'freshly ground black pepper', 'Espelette pepper'],
-        timeToCook_en: "15 minutes"
+        timeToCook_en: "15 minutes",
+        isVegetarian: false
     }
     /*{
         image: "", 
