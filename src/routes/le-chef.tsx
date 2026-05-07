@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+/*import { createFileRoute } from "@tanstack/react-router";
 import { UserRound } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -107,3 +107,9 @@ function ChefPage() {
     </div>
   );
 }
+*/
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/le-chef')({
+  component: () => <input placeholder="test" autoFocus />,
+})

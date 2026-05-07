@@ -59,9 +59,8 @@ export const getRouter = () => {
     routeTree,
     context: {},
     scrollRestoration: true,
-    defaultPreloadStaleTime: 0,
+    defaultPreloadStaleTime: 30_000, // 30 secondes, ou Infinity si pas de données dynamiques
     defaultErrorComponent: DefaultErrorComponent,
   });
-
   return router;
 };

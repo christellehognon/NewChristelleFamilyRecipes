@@ -44,6 +44,7 @@ type Dictionary = {
     legendPrice: string;
     legendPrep: string;
     legendCook: string;
+    vegetarian: string;
   };
   chef: {
     badge: string;
@@ -169,6 +170,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       legendPrice: "Prix moyen",
       legendPrep: "Temps de préparation",
       legendCook: "Temps de cuisson",
+      vegetarian: "Végétarien",
     },
     chef: {
       badge: "👩‍🍳 La cheffe",
@@ -320,6 +322,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       legendPrice: "Average price",
       legendPrep: "Prep time",
       legendCook: "Cooking time",
+      vegetarian: "Vegetarian",
     },
     chef: {
       badge: "👩‍🍳 The chef",

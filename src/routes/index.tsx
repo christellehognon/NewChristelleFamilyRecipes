@@ -51,28 +51,28 @@ function HomePage() {
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const [price, setPrice] = useState<AveragePrice | null>(null);
   const [type, setType] = useState<RecipeType | null>(null);
+  const [vegetarian, setVegetarian] = useState(false);
   const [seed, setSeed] = useState(0);
   const [visible, setVisible] = useState<number>(12);
-  // Server renders with a stable order; client shuffles after hydration to avoid SSR/CSR mismatch
-  const [displayed, setDisplayed] = useState(recipes);
-
-  // Initial client-side shuffle (only after hydration)
-  useEffect(() => {
-    setDisplayed(shuffle(recipes));
+ const [hydrated, setHydrated] = useState(false);
+console.log('RECIPES', recipes.length)
+useEffect(() => {
+    setHydrated(true);
   }, []);
-
-  // Re-shuffle on seed change (client only)
-  useEffect(() => {
-    setDisplayed(shuffle(recipes));
-  }, [seed]);
+  const shuffled = useMemo(
+    () => (hydrated ? shuffle(recipes) : recipes),
+    [seed, hydrated],
+  );
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return displayed.filter((r) => {
+   
+    return shuffled.filter((r) => {
       if (season && r.season !== season) return false;
       if (difficulty && r.difficulty !== difficulty) return false;
       if (price && r.averagePrice !== price) return false;
       if (type && r.type !== type) return false;
+      if (vegetarian && !r.isVegetarian) return false;
       if (q) {
         const loc = localizeRecipe(r, lang);
         const inName =
@@ -84,9 +84,9 @@ function HomePage() {
       }
       return true;
     });
-  }, [displayed, search, season, difficulty, price, type, lang]);
-
-  const hasFilters = search || season || difficulty || price || type;
+  }, [shuffled, search, season, difficulty, price, type, vegetarian, lang]);
+console.log('RECIPES', recipes.length)
+  const hasFilters = search || season || difficulty || price || type || vegetarian;
 
   const reset = () => {
     setSearch("");
@@ -94,6 +94,7 @@ function HomePage() {
     setDifficulty(null);
     setPrice(null);
     setType(null);
+    setVegetarian(false);
   };
 
   const countLabel =
@@ -169,6 +170,9 @@ function HomePage() {
                     {t.type[tp]}
                   </Pill>
                 ))}
+                <Pill active={vegetarian} onClick={() => setVegetarian((v) => !v)}>
+                  {t.home.vegetarian}
+                </Pill>
               </FilterGroup>
 
               <FilterGroup label={t.home.filterSeason}>

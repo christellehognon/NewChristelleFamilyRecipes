@@ -10,7 +10,6 @@ export type RecipeType =
   | "Dessert"
   | "Apéritif"
   | "Salade"
-  | "Végétarien"
 
 export type Chief = {
   name: string;
@@ -1207,8 +1206,7 @@ export const recipeTypes: RecipeType[] = [
   "Plat",
   "Dessert",
   "Apéritif",
-  "Salade",
-  "Végétarien"
+  "Salade"
 ];
 
 // English translations for selected recipes (by slug).
