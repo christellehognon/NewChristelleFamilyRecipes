@@ -95,7 +95,9 @@ function ContactPage() {
           botcheck: "",
         }),
       });
+      console.log('RESPONSE', res);
       const data = (await res.json()) as { success?: boolean; message?: string };
+      console.log('RESPONSE DATA', data);
       if (data.success) {
         setSent(true);
         form.reset();

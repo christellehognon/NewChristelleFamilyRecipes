@@ -65,7 +65,13 @@ useEffect(() => {
   );
 
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const normalize = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+    const q = normalize(search);
    
     return shuffled.filter((r) => {
       if (season && r.season !== season) return false;
@@ -76,10 +82,12 @@ useEffect(() => {
       if (q) {
         const loc = localizeRecipe(r, lang);
         const inName =
-          loc.name.toLowerCase().includes(q) || r.name.toLowerCase().includes(q);
-        const inIng =
-          loc.ingredients.some((i) => i.toLowerCase().includes(q)) ||
-          r.ingredients.some((i) => i.toLowerCase().includes(q));
+  normalize(loc.name).includes(q) ||
+  normalize(r.name).includes(q);
+
+const inIng =
+  loc.ingredients.some((i) => normalize(i).includes(q)) ||
+  r.ingredients.some((i) => normalize(i).includes(q));
         if (!inName && !inIng) return false;
       }
       return true;
