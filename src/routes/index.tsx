@@ -85,7 +85,7 @@ useEffect(() => {
       return true;
     });
   }, [shuffled, search, season, difficulty, price, type, vegetarian, lang]);
-console.log('RECIPES', recipes.length)
+
   const hasFilters = search || season || difficulty || price || type || vegetarian;
 
   const reset = () => {

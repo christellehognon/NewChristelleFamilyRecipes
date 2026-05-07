@@ -16,7 +16,6 @@ import { dictionaries, type Dict } from "@/i18n/dictionaries";
 const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
-// Web3Forms public access key — fill this in once you've signed up at https://web3forms.com
 const WEB3FORMS_ACCESS_KEY = "1bf09f60-7773-4f83-a15c-1fdcec794ee3";
 
 const buildSchema = (t: Dict) =>
