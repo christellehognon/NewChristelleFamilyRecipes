@@ -134,7 +134,8 @@ function ContactPage() {
         </section>
 
         <section className="mx-auto grid max-w-5xl gap-10 px-4 py-12 md:grid-cols-[1fr_1.3fr] md:px-6 md:py-16">
-          <div className="space-y-5">
+          <div className="space-y-8">
+          <div className="mb-8">
             <InfoCard
               icon={<Mail className="size-5" />}
               title={t.contact.byEmail}
@@ -142,6 +143,8 @@ function ContactPage() {
             >
               {EMAIL}
             </InfoCard>
+          </div>
+          <div className="mb-8">
             <InfoCard
               icon={<Instagram className="size-5" />}
               title={t.contact.onInstagram}
@@ -149,11 +152,13 @@ function ContactPage() {
             >
               @{INSTAGRAM_HANDLE}
             </InfoCard>
+          </div>
+          <div className="mb-8">
             <InfoCard icon={<MessageCircle className="size-5" />} title={t.contact.wordTitle}>
               {t.contact.word}
             </InfoCard>
           </div>
-
+          </div>
           {sent ? (
             <div className="flex flex-col items-center justify-center rounded-3xl bg-card p-10 text-center shadow-[var(--shadow-card)]">
               <CheckCircle2 className="size-14 text-primary" />
