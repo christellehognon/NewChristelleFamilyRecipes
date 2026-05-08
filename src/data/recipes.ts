@@ -186,7 +186,7 @@ export const recipes: Recipe[] = [{
     isVegetarian: true,
     name_en: "Chocolate Supreme",
     description_en: "Separate the egg whites from the yolks. Whisk the yolks and sugar until pale and fluffy. Place the 250g of chopped chocolate in a saucepan. Melt over a double boiler. Add to the yolks and mix. Add the ground almonds, baking powder, cornstarch, and softened butter. Then fold in the 3 egg whites beaten to stiff peaks with a pinch of salt. Mix gently. Pour into a buttered pan and sprinkle with granulated sugar. Fill only 3/4 full, and bake in a preheated oven at 210°C (320°F). Bake quickly to keep the center of the cake creamy (25 min). Let cool slightly in the pan. Turn out onto a wire rack and let cool completely. Decorate as desired with whipped cream and candied cherries.",
-    ingredients_en: ["250 g butter","250 g dark chocolate","250 g sugar","200 g almonds, ground","3 eggs","Flour"],
+    ingredients_en: ["3 tablespoons of cornstarch", "2 packets of vanilla sugar", "1/2 packet of baking powder", "6 eggs", "250g of sugar", "250g of chocolate", "100g of ground almonds", "250g of butter"],
     timeToCook_en: "30 minutes + 25 minutes cooking time",
     ingredients: ["3 cuillères à soupe de Maïzena", "2 sachets de sucre vanillé", "1/2 sachet de levure", "6 oeufs", "250g de sucre", "250g de chocolat", "100g d’amandes en poudre", "250g de beurre"],
     description: "Séparer les blancs et les jaunes des oeufs. Fouetter les jaunes et le sucre jusque’à ce qu’ils blanchissent. Mettre les 250g de chocolat brisés dans une casserole. Faire fondre au bain-marie. Ajouter aux jaunes, mélanger. Ajouter la poudre d'amandes avec la levure, la maïzena et le beurre ramolli. Puis 3 blancs d'oeufs battus en neige avec la pincée de sel. Mélanger délicatement. Verser dans le moule beurré et saupoudrer de sucre semoule. Ne remplir qu'aux 3/4, et mettre à four chaud 210°C (th. 6-7). Cuire rapidement pour conserver le milieu de la pâte crémeuse (25 min). Laisser tiédir dans le moule. Démouler sur une grille et laisser refroidir - Décorer à volonté de chantilly et de cerises confites."
@@ -205,7 +205,7 @@ export const recipes: Recipe[] = [{
     isVegetarian: true,
     name_en: "Apple granita",
     description_en: "For the granita, use a fork to mix the flour and sugar until smooth (no lumps), then add the butter, cinnamon, and vanilla sugar. Make a crumb mixture. Cut the apples into thin slices. Sauté them in a skillet in a sugar syrup (water and 100g of sugar). Sauté them quickly. Let cool. Place the apples in a 26 cm baking dish and spread the crumble mixture over them. Bake at 210°C for about 25 minutes. Serve warm with very cold pastry cream.",
-    ingredients_en: ["4 apples", "1 tsp cinnamon", "sugar to taste"],
+    ingredients_en: ["75 g flour", "1 level teaspoon cinnamon", "1 pinch of salt", "25 g granulated sugar", "50 g softened butter", "4 large apples", "50 g sugar", "50 g water"],
     timeToCook_en: "30 minutes + 25 minutes cooking time",
     ingredients: ["75g de farine", "1 cuillère à café rase de canelle", "1 pincée de sel", "25g de sucre en poudre", "50g de beurre ramolli", "4 grosses pommes", "50g de sucre", "50g d'eau"],
     description: "Pour le granité, mélanger à la fourchette pour être bien fluide (pas de grumeaux) la farine, le sucre puis le beurre la canelle et le sucre vanillé. Faire un sable. Couper les pommes en tranches fines. Les faire sauter dans une poêle dans un sirop de sucre (eau et 100g de sucre). Les faire revenir rapidement. Laisser refroidir. Mettre les pommes dans un moule de 26 cm environ et répendre le sable. Mettre au four à 210°C environ 25’. Servir tiède avec une crème pâtissière très froide."
@@ -224,7 +224,7 @@ export const recipes: Recipe[] = [{
     isVegetarian: true,
     name_en: "Custard",
     description_en: "Bring the milk to a boil with the split vanilla bean. In a mixing bowl, beat the egg yolks with the sugar until pale, then add the flour. Gradually pour the hot milk over the mixture and return everything to the saucepan. Cook over low heat until thickened. Then transfer to a baking sheet and cover with plastic wrap, making sure it touches the surface. Set aside.",
-    ingredients_en: ["Milk", "Egg yolks", "Sugar", "Vanilla", "Flour"],
+    ingredients_en: ["1/2l of milk", "4 eggs (3 yolks)", "1 pinch of salt", "100g of sugar", "1 vanilla bean", "40g of flour"],
     timeToCook_en: "30 minutes",
     ingredients: ["1/2l de lait", "4 oeufs dont 3 jaunes", "1 pincée de sel", "100g de sucre", "1 gousse  de vanille", "40g de farine"],
     description: "Faire bouillir le lait avec la gousse de vanille fendue. Dans un cul-de-poule, blanchir les jaunes d'oeufs avec le sucre, puis ajouter la farine. Verser le lait chaud dessus petit à petit et remettre le tout dans la casserole. Cuire à feu doux et faire épaissir. Débarrasser ensuite sur une plaque et recouvrir d'un papier film au contact. Réserver."
@@ -1600,43 +1600,19 @@ export const englishTranslationsExtra: Record<string, { name_en: string; descrip
  * when an English translation is not available.
  */
 export function localizeRecipe(recipe: Recipe, lang: "fr" | "en") {
-  if (lang === "en") {
-    const t = englishTranslations[recipe.slug] ?? englishTranslationsExtra[recipe.slug as string];
-    const baseName = recipe.name_en ?? recipe.name;
-    const baseDesc = recipe.description_en ?? recipe.description;
-    const baseIngs = recipe.ingredients_en ?? recipe.ingredients;
-    const baseTime = recipe.timeToCook_en ?? recipe.timeToCook;
-    // First, try translations from the dictionaries
-    if (t) {
-      return {
-        name: t.name_en ?? baseName,
-        description: t.description_en ?? baseDesc,
-        ingredients: t.ingredients_en ?? baseIngs,
-        timeToCook: t.timeToCook_en ?? baseTime,
-      };
-    }
-    // Fallback: use English fields on the recipe if provided
-    if (recipe.name_en || recipe.description_en || recipe.ingredients_en || recipe.timeToCook_en) {
-      return {
-        name: recipe.name_en ?? baseName,
-        description: recipe.description_en ?? baseDesc,
-        ingredients: recipe.ingredients_en ?? baseIngs,
-        timeToCook: recipe.timeToCook_en ?? baseTime,
-      };
-    }
-    // Last resort: French fields
-    return {
-      name: baseName,
-      description: baseDesc,
-      ingredients: baseIngs,
-      timeToCook: baseTime,
-    };
-  }
+  const isEn = lang === "en";
+
   return {
-    name: recipe.name,
-    description: recipe.description,
-    ingredients: recipe.ingredients,
-    timeToCook: recipe.timeToCook,
+    name: isEn ? recipe.name_en ?? recipe.name : recipe.name,
+    description: isEn
+      ? recipe.description_en ?? recipe.description
+      : recipe.description,
+    ingredients: isEn
+      ? recipe.ingredients_en ?? recipe.ingredients
+      : recipe.ingredients,
+    timeToCook: isEn
+      ? recipe.timeToCook_en ?? recipe.timeToCook
+      : recipe.timeToCook,
   };
 }
 
