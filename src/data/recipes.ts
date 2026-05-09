@@ -1,5 +1,3 @@
-import { truncate } from "fs/promises";
-
 // english translations removed; translations are now stored inline on each recipe via *_en fields
 export type Season =
   | "Printemps"
@@ -2547,7 +2545,7 @@ export const englishTranslations: Record<
     timeToCook_en: "50 minutes",
   },
   "olives-a-la-niçoise": {
-    name_en: "Niçoise Olives",
+    name_en: "Olives à la niçoise",
     description_en:
       "Olives marinated with garlic, herbs and olive oil. Simple and flavorful starter.",
     ingredients_en: [
@@ -2630,7 +2628,7 @@ export const englishTranslationsExtra: Record<
     timeToCook_en: "15 minutes",
   },
   "pate-lorrain": {
-    name_en: "Pâté Lorraine",
+    name_en: "Pâté Lorrain",
     description_en: "Traditional Lorraine meat pie",
     ingredients_en: ["Pork", "Veal", "Puff pastry"],
     timeToCook_en: "60 minutes",
