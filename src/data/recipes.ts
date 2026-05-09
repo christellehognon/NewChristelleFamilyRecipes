@@ -2544,7 +2544,7 @@ export const englishTranslations: Record<
     ],
     timeToCook_en: "50 minutes",
   },
-  "olives-a-la-niçoise": {
+  "olives-a-la-nicoise": {
     name_en: "Olives à la niçoise",
     description_en:
       "Olives marinated with garlic, herbs and olive oil. Simple and flavorful starter.",
