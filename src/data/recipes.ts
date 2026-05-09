@@ -2231,6 +2231,7 @@ export const recipes: Recipe[] = [
       "white balsamic vinegar",
     ],
     timeToCook_en: "15 minutes",
+    isVegetarian: false,
   },
   /*{
         image: "", 
