@@ -202,7 +202,7 @@ export const recipes: Recipe[] = [
     averagePrice: "€",
     difficulty: "Facile",
     isVegetarian: true,
-    name_en: "Niçoise Olives",
+    name_en: "Olives à la niçoise",
     description_en:
       "Rinse the olives several times under running water. Place all the ingredients in a 1-liter jar and cover with olive oil. Let them marinate for about four weeks before serving.",
     ingredients_en: ["Olives", "Garlic", "Herbs", "Olive oil"],
