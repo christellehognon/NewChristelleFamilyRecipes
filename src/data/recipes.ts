@@ -2217,10 +2217,10 @@ export const recipes: Recipe[] = [
       "vinaigre balsamique blanc",
     ],
     description:
-      "Laver la salade. Faire cuire les oeufs mollets dans l'eau bouillante (6 minutes). Égoutter les asperges. Égoutter la ventrèche. Couper l'avocat en tranches. Pour le vinaigre de mangue. Mixer la mangue bien égouttée. Ajouter 5cl de vinaigre balsamique blanc. Saler et poivrer.",
+      "Laver la salade. Faire cuire les oeufs mollets dans l'eau bouillante (6 minutes). Égoutter les asperges. Égoutter la ventrèche. Couper l'avocat en tranches. Pour le vinaigre de mangue, mixer la mangue bien égouttée. Ajouter 5cl de vinaigre balsamique blanc. Saler et poivrer.",
     name_en: "Summer salad",
     description_en:
-      "Wash the lettuce. Cook the soft-boiled eggs in boiling water (6 minutes). Drain the asparagus. Drain the tuna belly. Slice the avocado. For the mango vinaigrette: blend the well-drained mango. Add 5 cl of white balsamic vinegar. Season with salt and pepper.",
+      "Wash the lettuce. Cook the soft-boiled eggs in boiling water (6 minutes). Drain the asparagus. Drain the tuna belly. Slice the avocado. For the mango vinaigrette, blend the well-drained mango. Add 5 cl of white balsamic vinegar. Season with salt and pepper.",
     ingredients_en: [
       "Arugula",
       "1 jar of tuna belly in oil",
