@@ -54,9 +54,9 @@ function HomePage() {
   const [vegetarian, setVegetarian] = useState(false);
   const [seed, setSeed] = useState(0);
   const [visible, setVisible] = useState<number>(12);
- const [hydrated, setHydrated] = useState(false);
-console.log('RECIPES', recipes.length)
-useEffect(() => {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
     setHydrated(true);
   }, []);
   const shuffled = useMemo(
@@ -66,13 +66,13 @@ useEffect(() => {
 
   const filtered = useMemo(() => {
     const normalize = (value: string) =>
-  value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim();
+      value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
     const q = normalize(search);
-   
+
     return shuffled.filter((r) => {
       if (season && r.season !== season) return false;
       if (difficulty && r.difficulty !== difficulty) return false;
@@ -82,19 +82,19 @@ useEffect(() => {
       if (q) {
         const loc = localizeRecipe(r, lang);
         const inName =
-  normalize(loc.name).includes(q) ||
-  normalize(r.name).includes(q);
+          normalize(loc.name).includes(q) || normalize(r.name).includes(q);
 
-const inIng =
-  loc.ingredients.some((i) => normalize(i).includes(q)) ||
-  r.ingredients.some((i) => normalize(i).includes(q));
+        const inIng =
+          loc.ingredients.some((i) => normalize(i).includes(q)) ||
+          r.ingredients.some((i) => normalize(i).includes(q));
         if (!inName && !inIng) return false;
       }
       return true;
     });
   }, [shuffled, search, season, difficulty, price, type, vegetarian, lang]);
 
-  const hasFilters = search || season || difficulty || price || type || vegetarian;
+  const hasFilters =
+    search || season || difficulty || price || type || vegetarian;
 
   const reset = () => {
     setSearch("");
@@ -131,11 +131,13 @@ const inIng =
               <br />
               <span className="italic text-primary-deep">{t.home.titleB}</span>
             </h1>
-            <p className="mt-5 max-w-xl text-base text-foreground/75 md:text-lg">{t.home.lead}</p>
+            <p className="mt-5 max-w-xl text-base text-foreground/75 md:text-lg">
+              {t.home.lead}
+            </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button
                 onClick={() => setSeed((s) => s + 1)}
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary-deep h-11 px-6 shadow-[var(--shadow-card)]"
+                className="rounded-full bg-primary text-primary-foreground hover:bg-primary-deep h-11 px-6 shadow-[var(--shadow-card)] cursor-pointer"
               >
                 <Shuffle className="size-4" />
                 {t.home.shuffle}
@@ -160,7 +162,7 @@ const inIng =
                   <button
                     type="button"
                     onClick={() => setSearch("")}
-                    className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-secondary"
+                    className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-secondary cursor-pointer"
                     aria-label={t.home.clearSearch}
                   >
                     <X className="size-4" />
@@ -178,7 +180,10 @@ const inIng =
                     {t.type[tp]}
                   </Pill>
                 ))}
-                <Pill active={vegetarian} onClick={() => setVegetarian((v) => !v)}>
+                <Pill
+                  active={vegetarian}
+                  onClick={() => setVegetarian((v) => !v)}
+                >
                   {t.home.vegetarian}
                 </Pill>
               </FilterGroup>
@@ -220,7 +225,7 @@ const inIng =
                 {hasFilters && (
                   <button
                     onClick={reset}
-                    className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+                    className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer"
                   >
                     <RefreshCw className="size-3.5" />
                     {t.home.reset}
@@ -234,11 +239,26 @@ const inIng =
                 {t.home.legendTitle}
               </p>
               <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-foreground/75">
-                <LegendItem icon={<Leaf className="size-3.5" />} label={t.home.legendSeason} />
-                <LegendItem icon={<ChefHat className="size-3.5" />} label={t.home.legendDifficulty} />
-                <LegendItem icon={<Coins className="size-3.5" />} label={t.home.legendPrice} />
-                <LegendItem icon={<Clock className="size-3.5" />} label={t.home.legendPrep} />
-                <LegendItem icon={<CookingPot className="size-3.5" />} label={t.home.legendCook} />
+                <LegendItem
+                  icon={<Leaf className="size-3.5" />}
+                  label={t.home.legendSeason}
+                />
+                <LegendItem
+                  icon={<ChefHat className="size-3.5" />}
+                  label={t.home.legendDifficulty}
+                />
+                <LegendItem
+                  icon={<Coins className="size-3.5" />}
+                  label={t.home.legendPrice}
+                />
+                <LegendItem
+                  icon={<Clock className="size-3.5" />}
+                  label={t.home.legendPrep}
+                />
+                <LegendItem
+                  icon={<CookingPot className="size-3.5" />}
+                  label={t.home.legendCook}
+                />
               </div>
             </div>
           </div>
@@ -247,7 +267,9 @@ const inIng =
         {/* Grid */}
         <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">{countLabel}</h2>
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
+              {countLabel}
+            </h2>
           </div>
 
           {filtered.length > 0 ? (
@@ -258,8 +280,12 @@ const inIng =
             </div>
           ) : (
             <div className="rounded-3xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
-              <p className="font-display text-2xl text-foreground">{t.home.emptyTitle}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{t.home.emptyDesc}</p>
+              <p className="font-display text-2xl text-foreground">
+                {t.home.emptyTitle}
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {t.home.emptyDesc}
+              </p>
               <Button
                 onClick={reset}
                 variant="outline"
@@ -272,7 +298,9 @@ const inIng =
           {filtered.length > visible && (
             <div className="mt-6 flex justify-center">
               <button
-                onClick={() => setVisible((v) => Math.min(v + 12, filtered.length))}
+                onClick={() =>
+                  setVisible((v) => Math.min(v + 12, filtered.length))
+                }
                 className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border"
               >
                 Afficher plus
@@ -287,7 +315,13 @@ const inIng =
   );
 }
 
-function FilterGroup({ label, children }: { label: string; children: React.ReactNode }) {
+function FilterGroup({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
