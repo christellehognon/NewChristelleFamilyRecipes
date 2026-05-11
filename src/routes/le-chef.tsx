@@ -42,7 +42,6 @@ function ChefAvatar({ src, alt }: { src: string; alt: string }) {
 function ChefPage() {
   const { t, lang } = useI18n();
   const lead = chiefs[0];
-  const leadLoc = localizeChief(lead, lang);
   const others = chiefs.slice(1);
 
   return (
