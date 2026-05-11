@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Leaf, ChefHat, Coins, Clock, CookingPot } from "lucide-react";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { RefreshCw, Search, Shuffle, X } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
