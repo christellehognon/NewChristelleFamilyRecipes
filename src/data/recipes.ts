@@ -76,6 +76,12 @@ export const chiefs: Chief[] = [
     description_en:
       "My heart-mother, who taught me everything about south-western French cooking!",
   },
+  {
+    name: "Éponine",
+    img: "/img/top-chiefs/img_6.jpg",
+    description: "Une future top-chef!",
+    description_en: "Une future top-chef!",
+  },
 ];
 
 export const recipes: Recipe[] = [

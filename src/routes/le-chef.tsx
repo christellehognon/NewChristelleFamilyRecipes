@@ -59,9 +59,12 @@ function ChefPage() {
               {t.chef.badge}
             </span>
             <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight md:text-5xl">
-              {t.chef.hello} <span className="italic text-primary-deep">{lead.name}</span>.
+              {t.chef.hello}{" "}
+              <span className="italic text-primary-deep">{lead.name}</span>.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg text-foreground/75">{t.chef.lead}</p>
+            <p className="mt-5 max-w-2xl text-lg text-foreground/75">
+              {t.chef.lead}
+            </p>
             <div className="mt-6 flex justify-center">
               <ChefAvatar src={lead.img} alt={lead.name} />
             </div>
@@ -71,11 +74,11 @@ function ChefPage() {
           <h2 className="mt-14 font-display text-2xl font-semibold md:text-3xl">
             {t.chef.family}
           </h2>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 flex flex-wrap justify-center gap-5">
             {others.map((c) => (
               <div
                 key={c.name}
-                className="flex flex-col items-center rounded-2xl bg-card p-5 text-center shadow-sm"
+                className="flex w-full flex-col items-center rounded-2xl bg-card p-5 text-center shadow-sm sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
               >
                 <div className="size-20 overflow-hidden rounded-full bg-secondary ring-2 ring-primary/20">
                   {c.img ? (
@@ -84,7 +87,8 @@ function ChefPage() {
                       alt={c.name}
                       className="size-full object-cover"
                       onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                        (e.currentTarget as HTMLImageElement).style.display =
+                          "none";
                       }}
                     />
                   ) : (
@@ -93,7 +97,9 @@ function ChefPage() {
                     </div>
                   )}
                 </div>
-                <p className="mt-3 font-display text-lg font-semibold">{c.name}</p>
+                <p className="mt-3 font-display text-lg font-semibold">
+                  {c.name}
+                </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   {localizeChief(c, lang).description}
                 </p>
