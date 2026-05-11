@@ -52,17 +52,37 @@ function HomePage() {
   const [price, setPrice] = useState<AveragePrice | null>(null);
   const [type, setType] = useState<RecipeType | null>(null);
   const [vegetarian, setVegetarian] = useState(false);
-  const [seed, setSeed] = useState(0);
-  const [visible, setVisible] = useState<number>(12);
-  const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-  const shuffled = useMemo(
-    () => (hydrated ? shuffle(recipes) : recipes),
-    [seed, hydrated],
-  );
+  const [shuffled, setShuffled] = useState(() => {
+    const stored = sessionStorage.getItem("recipe-order");
+    if (stored) {
+      try {
+        const order: string[] = JSON.parse(stored);
+        return order
+          .map((slug) => recipes.find((r) => r.slug === slug)!)
+          .filter(Boolean);
+      } catch {
+        throw new Error("Could not find recipe order");
+      }
+    }
+    const initial = shuffle(recipes);
+    sessionStorage.setItem(
+      "recipe-order",
+      JSON.stringify(initial.map((r) => r.slug)),
+    );
+    return initial;
+  });
+  const [visible, setVisible] = useState<number>(12);
+
+  const handleShuffle = () => {
+    const next = shuffle([...recipes]);
+    sessionStorage.setItem(
+      "recipe-order",
+      JSON.stringify(next.map((r) => r.slug)),
+    );
+    setShuffled(next);
+    setVisible(12);
+  };
 
   const filtered = useMemo(() => {
     const normalize = (value: string) =>
@@ -136,7 +156,7 @@ function HomePage() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button
-                onClick={() => setSeed((s) => s + 1)}
+                onClick={handleShuffle}
                 className="rounded-full bg-primary text-primary-foreground hover:bg-primary-deep h-11 px-6 shadow-[var(--shadow-card)] cursor-pointer"
               >
                 <Shuffle className="size-4" />
