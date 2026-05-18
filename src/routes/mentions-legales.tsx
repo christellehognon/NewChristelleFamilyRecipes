@@ -24,7 +24,8 @@ const content = {
           <p>
             <strong>Christelle's Family Recipes</strong>
             <br />
-            Site personnel à but non commercial dédié au partage de recettes de famille.
+            Site personnel à but non commercial dédié au partage de recettes de
+            famille.
           </p>
           <p>
             Contact :{" "}
@@ -42,16 +43,15 @@ const content = {
       title: "Hébergement",
       body: (
         <p>
-          Ce site est hébergé par <strong>Lovable</strong>
+          This site is hosted by <strong>OVH</strong>
           <br />
           <a
-            href="https://lovable.dev"
+            href="https://www.ovh.com"
             target="_blank"
             rel="noreferrer"
             className="text-primary-deep underline underline-offset-2"
-          >
-            https://lovable.dev
-          </a>
+          ></a>
+          https://www.ovh.com
         </p>
       ),
     },
@@ -60,21 +60,17 @@ const content = {
       body: (
         <>
           <p>
-            Les recettes publiées sur ce site sont des recettes de famille partagées avec amour.
-            Vous êtes libres de les reproduire pour un usage personnel et familial. Toute
-            reproduction commerciale est interdite sans autorisation écrite préalable.
+            Les recettes publiées sur ce site sont des recettes de famille
+            partagées avec amour. Vous êtes libres de les reproduire pour un
+            usage personnel et familial. Toute reproduction commerciale est
+            interdite sans autorisation écrite préalable.
           </p>
           <p>
-            Les photographies illustrant les recettes proviennent de{" "}
-            <a
-              href="https://unsplash.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-primary-deep underline underline-offset-2"
-            >
-              Unsplash
-            </a>{" "}
-            et sont utilisées sous licence libre.
+            Les photographies illustrant les recettes sont la propriété
+            exclusive de l'autrice du site et sont protégées par le droit
+            d'auteur. Toute reproduction, utilisation ou diffusion, même
+            partielle, est strictement interdite sans autorisation écrite
+            préalable.
           </p>
         </>
       ),
@@ -84,7 +80,10 @@ const content = {
       body: (
         <p>
           Pour toute information sur le traitement de vos données, consultez la{" "}
-          <Link to="/confidentialite" className="text-primary-deep underline underline-offset-2">
+          <Link
+            to="/confidentialite"
+            className="text-primary-deep underline underline-offset-2"
+          >
             politique de confidentialité
           </Link>
           .
@@ -95,9 +94,10 @@ const content = {
       title: "Limitation de responsabilité",
       body: (
         <p>
-          Les recettes sont partagées à titre informatif. En cas d'allergie, d'intolérance ou de
-          régime alimentaire particulier, vérifiez les ingrédients avant consommation. L'éditeur
-          ne saurait être tenu responsable d'éventuels désagréments liés à la préparation ou
+          Les recettes sont partagées à titre informatif. En cas d'allergie,
+          d'intolérance ou de régime alimentaire particulier, vérifiez les
+          ingrédients avant consommation. L'éditeur ne saurait être tenu
+          responsable d'éventuels désagréments liés à la préparation ou
           consommation des recettes.
         </p>
       ),
@@ -147,9 +147,10 @@ const content = {
       body: (
         <>
           <p>
-            Recipes published on this site are family recipes shared with love. You are free to
-            reproduce them for personal and family use. Any commercial reproduction is forbidden
-            without prior written authorization.
+            Recipes published on this site are family recipes shared with love.
+            You are free to reproduce them for personal and family use. Any
+            commercial reproduction is forbidden without prior written
+            authorization.
           </p>
           <p>
             Recipe photographs come from{" "}
@@ -171,7 +172,10 @@ const content = {
       body: (
         <p>
           For information about how your data is processed, see the{" "}
-          <Link to="/confidentialite" className="text-primary-deep underline underline-offset-2">
+          <Link
+            to="/confidentialite"
+            className="text-primary-deep underline underline-offset-2"
+          >
             privacy policy
           </Link>
           .
@@ -182,10 +186,11 @@ const content = {
       title: "Limitation of liability",
       body: (
         <p>
-          Recipes are shared for informational purposes. In case of allergies, intolerances or
-          a specific diet, please check ingredients before consumption. The editor cannot be
-          held responsible for any inconvenience related to the preparation or consumption of
-          the recipes.
+          Recipes are shared for informational purposes. In case of allergies,
+          intolerances or a specific diet, please check ingredients before
+          consumption. The editor cannot be held responsible for any
+          inconvenience related to the preparation or consumption of the
+          recipes.
         </p>
       ),
     },
@@ -224,10 +229,18 @@ function LegalPage() {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section>
-      <h2 className="font-display text-2xl font-semibold text-foreground">{title}</h2>
+      <h2 className="font-display text-2xl font-semibold text-foreground">
+        {title}
+      </h2>
       <div className="mt-3 space-y-3 text-base leading-relaxed">{children}</div>
     </section>
   );
