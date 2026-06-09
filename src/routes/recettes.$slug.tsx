@@ -7,7 +7,7 @@ import {
   PricePastille,
   SeasonPastille,
 } from "@/components/RecipePastilles";
-import { localizeRecipe, recipes, splitCookingTime } from "@/data/recipes";
+import { type Recipe, type RecipeType, localizeRecipe, recipes, splitCookingTime } from "@/data/recipes";
 // translationsEn removed; translations are stored inline in Recipe via *_en fields
 import { useI18n } from "@/i18n/I18nProvider";
 
@@ -26,7 +26,8 @@ export const Route = createFileRoute("/recettes/$slug")({
     return { recipe: enriched };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Recette — Christelle's Family Recipes" }] };
+    if (!loaderData)
+      return { meta: [{ title: "Recette — Christelle's Family Recipes" }] };
     const { recipe } = loaderData;
     const desc = recipe.description.slice(0, 155);
     return {
@@ -54,7 +55,9 @@ function NotFoundView() {
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
       <main className="mx-auto flex max-w-3xl flex-1 flex-col items-center justify-center px-4 py-20 text-center">
-        <h1 className="font-display text-3xl font-semibold">{t.recipe.notFoundTitle}</h1>
+        <h1 className="font-display text-3xl font-semibold">
+          {t.recipe.notFoundTitle}
+        </h1>
         <p className="mt-2 text-muted-foreground">{t.recipe.notFoundDesc}</p>
         <Link
           to="/"
@@ -70,9 +73,10 @@ function NotFoundView() {
 
 function RecipePage() {
   const { t, lang } = useI18n();
-  const { recipe } = Route.useLoaderData();
+  const { recipe } = Route.useLoaderData() as { recipe: Recipe };
   const loc = localizeRecipe(recipe, lang);
   const { prep, cook } = splitCookingTime(loc.timeToCook);
+  const recipeType = recipe.type as RecipeType;
   // Split description into sentences for nicer step-like display
   const steps = loc.description
     .split(/(?<=[.!?])\s+/)
@@ -111,7 +115,7 @@ function RecipePage() {
 
           <header className="mt-8">
             <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-              {t.type[recipe.type]}
+              {t.type[recipeType]}
             </span>
             <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
               {loc.name}
@@ -125,7 +129,8 @@ function RecipePage() {
               </span>
               {cook && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                  <CookingPot className="size-3.5" />{cook}
+                  <CookingPot className="size-3.5" />
+                  {cook}
                 </span>
               )}
             </div>
@@ -149,7 +154,9 @@ function RecipePage() {
 
           <div className="mt-10 grid gap-10 md:grid-cols-[1fr_1.4fr]">
             <section>
-              <h2 className="font-display text-2xl font-semibold">{t.recipe.ingredients}</h2>
+              <h2 className="font-display text-2xl font-semibold">
+                {t.recipe.ingredients}
+              </h2>
               <ul className="mt-4 space-y-2.5">
                 {loc.ingredients.map((ing: string) => (
                   <li
@@ -164,14 +171,18 @@ function RecipePage() {
             </section>
 
             <section>
-              <h2 className="font-display text-2xl font-semibold">{t.recipe.preparation}</h2>
+              <h2 className="font-display text-2xl font-semibold">
+                {t.recipe.preparation}
+              </h2>
               <ol className="mt-4 space-y-4">
                 {steps.map((step: string, i: number) => (
                   <li key={i} className="flex gap-4">
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-display text-base font-semibold text-primary-foreground shadow-sm">
                       {i + 1}
                     </span>
-                    <p className="pt-1.5 text-sm leading-relaxed text-foreground/85">{step}</p>
+                    <p className="pt-1.5 text-sm leading-relaxed text-foreground/85">
+                      {step}
+                    </p>
                   </li>
                 ))}
               </ol>

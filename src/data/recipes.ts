@@ -1292,7 +1292,7 @@ export const recipes: Recipe[] = [
     image: "/img/gallery/img_32.jpg",
     authorImg: "/img/top-chiefs/img_5.jpg",
     name: "Poulet au vin jaune",
-    authorName: "Christelle",
+    authorName: "La Mémette",
     slug: "poulet-au-vin-jaune",
     season: "Hiver",
     type: "Plat",

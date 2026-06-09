@@ -18,7 +18,9 @@ import {
   recipeTypes,
   recipes,
   seasons,
+  chiefs,
 } from "@/data/recipes";
+import { ChefPill } from "@/components/ChefPill";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { dictionaries } from "@/i18n/dictionaries";
@@ -52,6 +54,7 @@ function HomePage() {
   const [price, setPrice] = useState<AveragePrice | null>(null);
   const [type, setType] = useState<RecipeType | null>(null);
   const [vegetarian, setVegetarian] = useState(false);
+  const [chef, setChef] = useState<string | null>(null);
 
   const [shuffled, setShuffled] = useState(() => {
     const stored = sessionStorage.getItem("recipe-order");
@@ -99,6 +102,7 @@ function HomePage() {
       if (price && r.averagePrice !== price) return false;
       if (type && r.type !== type) return false;
       if (vegetarian && !r.isVegetarian) return false;
+      if (chef && r.authorName !== chef) return false;
       if (q) {
         const loc = localizeRecipe(r, lang);
         const inName =
@@ -111,10 +115,20 @@ function HomePage() {
       }
       return true;
     });
-  }, [shuffled, search, season, difficulty, price, type, vegetarian, lang]);
+  }, [
+    shuffled,
+    search,
+    season,
+    difficulty,
+    price,
+    type,
+    vegetarian,
+    chef,
+    lang,
+  ]);
 
   const hasFilters =
-    search || season || difficulty || price || type || vegetarian;
+    search || season || difficulty || price || type || vegetarian || chef;
 
   const reset = () => {
     setSearch("");
@@ -251,6 +265,20 @@ function HomePage() {
                     {t.home.reset}
                   </button>
                 )}
+              </FilterGroup>
+
+              <FilterGroup label={(t.home as any).filterChef ?? "Chef"}>
+                <div className="flex flex-wrap gap-2">
+                  {chiefs.map((c) => (
+                    <ChefPill
+                      key={c.name}
+                      name={c.name}
+                      img={c.img}
+                      active={chef === c.name}
+                      onClick={() => setChef(chef === c.name ? null : c.name)}
+                    />
+                  ))}
+                </div>
               </FilterGroup>
             </div>
             {/* Légende des icônes */}

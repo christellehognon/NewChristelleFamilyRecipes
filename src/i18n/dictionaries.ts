@@ -1,14 +1,16 @@
-import type {
-  AveragePrice,
-  Difficulty,
-  RecipeType,
-  Season,
-} from "@/data/recipes";
+/* eslint-disable */
+import type { AveragePrice, Difficulty, RecipeType, Season } from "@/data/recipes";
 
 export type Lang = "fr" | "en";
 
 type Dictionary = {
-  nav: { home: string; chef: string; contact: string; openMenu: string; langLabel: string };
+  nav: {
+    home: string;
+    chef: string;
+    contact: string;
+    openMenu: string;
+    langLabel: string;
+  };
   footer: {
     brand: string;
     cookedWith: string;
@@ -26,6 +28,7 @@ type Dictionary = {
     searchPlaceholder: string;
     clearSearch: string;
     filterType: string;
+    filterChef: string;
     filterSeason: string;
     filterDifficulty: string;
     filterPrice: string;
@@ -117,7 +120,12 @@ type Dictionary = {
     metaTitle: string;
     metaDesc: string;
   };
-  legal: { title: string; backHome: string; metaTitle: string; metaDesc: string };
+  legal: {
+    title: string;
+    backHome: string;
+    metaTitle: string;
+    metaDesc: string;
+  };
   season: Record<Season, string>;
   difficulty: Record<Difficulty, string>;
   type: Record<RecipeType, string>;
@@ -154,6 +162,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       filterSeason: "Saison",
       filterDifficulty: "Difficulté",
       filterPrice: "Prix",
+      filterChef: "Cheffe",
       reset: "Réinitialiser",
       countOne: (n: number) => `${n} recette à découvrir`,
       countMany: (n: number) => `${n} recettes à découvrir`,
@@ -307,6 +316,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       filterSeason: "Season",
       filterDifficulty: "Difficulty",
       filterPrice: "Price",
+      filterChef: "Chef",
       reset: "Reset",
       countOne: (n: number) => `${n} recipe to discover`,
       countMany: (n: number) => `${n} recipes to discover`,
