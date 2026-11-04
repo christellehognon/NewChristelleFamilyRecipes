@@ -22,8 +22,8 @@ import { dictionaries, type Dict } from "@/i18n/dictionaries";
 const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
-// Clé publique Web3Forms (variable VITE_*, donc visible dans le bundle) : voir .env.example.
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as
+// Clé publique Web3Forms (variable exposée par envPrefix, donc visible dans le bundle) : voir .env.example.
+const WEB3FORMS_ACCESS_KEY = import.meta.env.WEB3FORMS_ACCESS_KEY as
   string | undefined;
 
 const buildSchema = (t: Dict) =>
