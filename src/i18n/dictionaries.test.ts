@@ -27,7 +27,10 @@ function leafTypes(value: unknown, prefix = ""): Record<string, string> {
 function valueAt(root: unknown, dotted: string): unknown {
   return dotted
     .split(".")
-    .reduce<unknown>((acc, part) => (acc as Record<string, unknown>)[part], root);
+    .reduce<unknown>(
+      (acc, part) => (acc as Record<string, unknown>)[part],
+      root,
+    );
 }
 
 describe("dictionnaires i18n", () => {

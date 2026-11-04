@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Instagram, Mail, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import {
+  Instagram,
+  Mail,
+  MessageCircle,
+  Loader2,
+  CheckCircle2,
+} from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -17,7 +23,8 @@ const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
 // Clé publique Web3Forms (variable VITE_*, donc visible dans le bundle) : voir .env.example.
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as
+  string | undefined;
 
 const buildSchema = (t: Dict) =>
   z.object({
@@ -71,7 +78,8 @@ function ContactPage() {
     });
 
     if (!parsed.success) {
-      const firstError = parsed.error.issues[0]?.message ?? t.contact.errInvalid;
+      const firstError =
+        parsed.error.issues[0]?.message ?? t.contact.errInvalid;
       toast.error(firstError);
       return;
     }
@@ -85,7 +93,10 @@ function ContactPage() {
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           access_key: WEB3FORMS_ACCESS_KEY,
           subject: t.contact.subject(parsed.data.name),
@@ -133,43 +144,54 @@ function ContactPage() {
             </span>
             <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight md:text-5xl">
               {t.contact.titleA}{" "}
-              <span className="italic text-primary-deep">{t.contact.titleB}</span>
+              <span className="italic text-primary-deep">
+                {t.contact.titleB}
+              </span>
             </h1>
-            <p className="mt-5 max-w-2xl text-lg text-foreground/75">{t.contact.lead}</p>
+            <p className="mt-5 max-w-2xl text-lg text-foreground/75">
+              {t.contact.lead}
+            </p>
           </div>
         </section>
 
         <section className="mx-auto grid max-w-5xl gap-10 px-4 py-12 md:grid-cols-[1fr_1.3fr] md:px-6 md:py-16">
           <div className="space-y-8">
-          <div className="mb-8">
-            <InfoCard
-              icon={<Mail className="size-5" />}
-              title={t.contact.byEmail}
-              href={`mailto:${EMAIL}`}
-            >
-              {EMAIL}
-            </InfoCard>
-          </div>
-          <div className="mb-8">
-            <InfoCard
-              icon={<Instagram className="size-5" />}
-              title={t.contact.onInstagram}
-              href={`https://instagram.com/${INSTAGRAM_HANDLE}`}
-            >
-              @{INSTAGRAM_HANDLE}
-            </InfoCard>
-          </div>
-          <div className="mb-8">
-            <InfoCard icon={<MessageCircle className="size-5" />} title={t.contact.wordTitle}>
-              {t.contact.word}
-            </InfoCard>
-          </div>
+            <div className="mb-8">
+              <InfoCard
+                icon={<Mail className="size-5" />}
+                title={t.contact.byEmail}
+                href={`mailto:${EMAIL}`}
+              >
+                {EMAIL}
+              </InfoCard>
+            </div>
+            <div className="mb-8">
+              <InfoCard
+                icon={<Instagram className="size-5" />}
+                title={t.contact.onInstagram}
+                href={`https://instagram.com/${INSTAGRAM_HANDLE}`}
+              >
+                @{INSTAGRAM_HANDLE}
+              </InfoCard>
+            </div>
+            <div className="mb-8">
+              <InfoCard
+                icon={<MessageCircle className="size-5" />}
+                title={t.contact.wordTitle}
+              >
+                {t.contact.word}
+              </InfoCard>
+            </div>
           </div>
           {sent ? (
             <div className="flex flex-col items-center justify-center rounded-3xl bg-card p-10 text-center shadow-[var(--shadow-card)]">
               <CheckCircle2 className="size-14 text-primary" />
-              <h2 className="mt-4 font-display text-2xl font-semibold">{t.contact.sentTitle}</h2>
-              <p className="mt-2 max-w-sm text-sm text-muted-foreground">{t.contact.sentDesc}</p>
+              <h2 className="mt-4 font-display text-2xl font-semibold">
+                {t.contact.sentTitle}
+              </h2>
+              <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+                {t.contact.sentDesc}
+              </p>
               <Button
                 onClick={() => setSent(false)}
                 variant="outline"
@@ -221,7 +243,12 @@ function ContactPage() {
                 </div>
 
                 <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-secondary/50 p-3 text-sm">
-                  <Checkbox name="consent" id="consent" className="mt-0.5" required />
+                  <Checkbox
+                    name="consent"
+                    id="consent"
+                    className="mt-0.5"
+                    required
+                  />
                   <span className="text-foreground/80">
                     {t.contact.consent}{" "}
                     <Link
@@ -276,14 +303,22 @@ function InfoCard({
         {icon}
       </span>
       <div>
-        <p className="text-xs uppercase tracking-wider text-muted-foreground">{title}</p>
-        <p className="mt-1 text-sm font-medium text-foreground break-all">{children}</p>
+        <p className="text-xs uppercase tracking-wider text-muted-foreground">
+          {title}
+        </p>
+        <p className="mt-1 text-sm font-medium text-foreground break-all">
+          {children}
+        </p>
       </div>
     </div>
   );
   if (href) {
     return (
-      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel="noreferrer"
+      >
         {content}
       </a>
     );

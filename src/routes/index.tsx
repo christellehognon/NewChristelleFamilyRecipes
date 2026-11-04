@@ -67,7 +67,8 @@ function loadOrder(): typeof recipes {
       if (Array.isArray(parsed)) {
         const bySlug = new Map(recipes.map((r) => [r.slug, r]));
         const ordered = parsed.flatMap((slug) => {
-          const recipe = typeof slug === "string" ? bySlug.get(slug) : undefined;
+          const recipe =
+            typeof slug === "string" ? bySlug.get(slug) : undefined;
           return recipe ? [recipe] : [];
         });
         // Recettes ajoutées depuis la sauvegarde : on les place à la fin.
@@ -282,7 +283,7 @@ function HomePage() {
                 )}
               </FilterGroup>
 
-              <FilterGroup label={(t.home as any).filterChef ?? "Chef"}>
+              <FilterGroup label={t.home.filterChef}>
                 <div className="flex flex-wrap gap-2">
                   {chiefs.map((c) => (
                     <ChefPill
