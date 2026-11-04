@@ -1,1 +1,12 @@
 node_modules
+
+# Documents privés : ne jamais publier
+*.pdf
+.idea
+.wrangler
+dist
+build
+.env*
+!.env.example
+.DS_Store
+*.log

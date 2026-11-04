@@ -1,6 +1,7 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -22,6 +23,7 @@ export const Route = createRootRoute({
   component: () => (
     <I18nProvider>
       <Outlet />
+      <Toaster richColors position="top-center" />
       <Analytics />
     </I18nProvider>
   ),

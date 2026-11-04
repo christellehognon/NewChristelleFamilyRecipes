@@ -16,7 +16,8 @@ import { dictionaries, type Dict } from "@/i18n/dictionaries";
 const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
-const WEB3FORMS_ACCESS_KEY = "1bf09f60-7773-4f83-a15c-1fdcec794ee3";
+// Clé publique Web3Forms (variable VITE_*, donc visible dans le bundle) : voir .env.example.
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
 const buildSchema = (t: Dict) =>
   z.object({
@@ -94,18 +95,23 @@ function ContactPage() {
           message: parsed.data.message,
           botcheck: "",
         }),
+        signal: AbortSignal.timeout(10_000),
       });
-      console.log('RESPONSE', res);
-      const data = (await res.json()) as { success?: boolean; message?: string };
-      console.log('RESPONSE DATA', data);
-      if (data.success) {
+      // Une réponse non-JSON (page d'erreur 5xx, blocage) ne doit pas passer
+      // pour une erreur réseau.
+      const data = (await res.json().catch(() => null)) as {
+        success?: boolean;
+        message?: string;
+      } | null;
+      if (res.ok && data?.success) {
         setSent(true);
         form.reset();
         toast.success(t.contact.toastSuccess);
       } else {
-        toast.error(data.message ?? t.contact.toastError);
+        toast.error(data?.message ?? t.contact.toastError);
       }
-    } catch {
+    } catch (e) {
+      console.error("Échec de l'envoi du formulaire de contact", e);
       toast.error(t.contact.toastNetwork);
     } finally {
       setSubmitting(false);

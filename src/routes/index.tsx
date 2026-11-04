@@ -46,6 +46,42 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+const ORDER_KEY = "recipe-order";
+
+// sessionStorage peut être indisponible ou corrompu (navigation privée,
+// quota, valeur modifiée) : on ne doit jamais casser la page pour ça.
+function saveOrder(list: typeof recipes): typeof recipes {
+  try {
+    sessionStorage.setItem(ORDER_KEY, JSON.stringify(list.map((r) => r.slug)));
+  } catch (e) {
+    console.warn("Impossible de mémoriser l'ordre des recettes", e);
+  }
+  return list;
+}
+
+function loadOrder(): typeof recipes {
+  try {
+    const stored = sessionStorage.getItem(ORDER_KEY);
+    if (stored) {
+      const parsed: unknown = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        const bySlug = new Map(recipes.map((r) => [r.slug, r]));
+        const ordered = parsed.flatMap((slug) => {
+          const recipe = typeof slug === "string" ? bySlug.get(slug) : undefined;
+          return recipe ? [recipe] : [];
+        });
+        // Recettes ajoutées depuis la sauvegarde : on les place à la fin.
+        const known = new Set(ordered.map((r) => r.slug));
+        const missing = recipes.filter((r) => !known.has(r.slug));
+        if (ordered.length > 0) return [...ordered, ...missing];
+      }
+    }
+  } catch (e) {
+    console.warn("Ordre des recettes illisible, nouveau mélange", e);
+  }
+  return saveOrder(shuffle(recipes));
+}
+
 function HomePage() {
   const { t, lang } = useI18n();
   const [search, setSearch] = useState("");
@@ -56,34 +92,11 @@ function HomePage() {
   const [vegetarian, setVegetarian] = useState(false);
   const [chef, setChef] = useState<string | null>(null);
 
-  const [shuffled, setShuffled] = useState(() => {
-    const stored = sessionStorage.getItem("recipe-order");
-    if (stored) {
-      try {
-        const order: string[] = JSON.parse(stored);
-        return order
-          .map((slug) => recipes.find((r) => r.slug === slug)!)
-          .filter(Boolean);
-      } catch {
-        throw new Error("Could not find recipe order");
-      }
-    }
-    const initial = shuffle(recipes);
-    sessionStorage.setItem(
-      "recipe-order",
-      JSON.stringify(initial.map((r) => r.slug)),
-    );
-    return initial;
-  });
+  const [shuffled, setShuffled] = useState(loadOrder);
   const [visible, setVisible] = useState<number>(12);
 
   const handleShuffle = () => {
-    const next = shuffle([...recipes]);
-    sessionStorage.setItem(
-      "recipe-order",
-      JSON.stringify(next.map((r) => r.slug)),
-    );
-    setShuffled(next);
+    setShuffled(saveOrder(shuffle(recipes)));
     setVisible(12);
   };
 
@@ -137,6 +150,8 @@ function HomePage() {
     setPrice(null);
     setType(null);
     setVegetarian(false);
+    setChef(null);
+    setVisible(12);
   };
 
   const countLabel =
