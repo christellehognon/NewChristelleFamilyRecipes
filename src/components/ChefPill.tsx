@@ -1,4 +1,3 @@
-import React from "react";
 import { cn } from "@/lib/utils";
 
 export function ChefPill({
@@ -27,7 +26,9 @@ export function ChefPill({
       {img ? (
         <img
           src={img}
-          alt={name}
+          alt=""
+          loading="lazy"
+          decoding="async"
           className="size-6 rounded-full object-cover"
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).style.display = "none";

@@ -7,9 +7,15 @@ import {
   PricePastille,
   SeasonPastille,
 } from "@/components/RecipePastilles";
-import { type Recipe, type RecipeType, localizeRecipe, recipes, splitCookingTime } from "@/data/recipes";
-// translationsEn removed; translations are stored inline in Recipe via *_en fields
+import {
+  type Recipe,
+  type RecipeType,
+  localizeRecipe,
+  recipes,
+  splitCookingTime,
+} from "@/data/recipes";
 import { useI18n } from "@/i18n/I18nProvider";
+import { usePageMeta } from "@/i18n/usePageMeta";
 
 export const Route = createFileRoute("/recettes/$slug")({
   loader: ({ params }) => {
@@ -25,36 +31,20 @@ export const Route = createFileRoute("/recettes/$slug")({
     };
     return { recipe: enriched };
   },
-  head: ({ loaderData }) => {
-    if (!loaderData)
-      return { meta: [{ title: "Recette — Christelle's Family Recipes" }] };
-    const { recipe } = loaderData;
-    const desc = recipe.description.slice(0, 155);
-    return {
-      meta: [
-        { title: `${recipe.name} — Christelle's Family Recipes` },
-        { name: "description", content: desc },
-        { property: "og:title", content: recipe.name },
-        { property: "og:description", content: desc },
-        ...(recipe.image
-          ? [
-              { property: "og:image", content: recipe.image },
-              { name: "twitter:image", content: recipe.image },
-            ]
-          : []),
-      ],
-    };
-  },
   notFoundComponent: NotFoundView,
   component: RecipePage,
 });
 
 function NotFoundView() {
   const { t } = useI18n();
+  usePageMeta(`${t.recipe.notFoundTitle} — Christelle's Family Recipes`);
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="mx-auto flex max-w-3xl flex-1 flex-col items-center justify-center px-4 py-20 text-center">
+      <main
+        id="main"
+        className="mx-auto flex max-w-3xl flex-1 flex-col items-center justify-center px-4 py-20 text-center"
+      >
         <h1 className="font-display text-3xl font-semibold">
           {t.recipe.notFoundTitle}
         </h1>
@@ -75,6 +65,10 @@ function RecipePage() {
   const { t, lang } = useI18n();
   const { recipe } = Route.useLoaderData() as { recipe: Recipe };
   const loc = localizeRecipe(recipe, lang);
+  usePageMeta(
+    `${loc.name} — Christelle's Family Recipes`,
+    loc.description.slice(0, 155),
+  );
   const { prep, cook } = splitCookingTime(loc.timeToCook);
   const recipeType = recipe.type as RecipeType;
   // Split description into sentences for nicer step-like display
@@ -87,7 +81,7 @@ function RecipePage() {
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <div className="mx-auto max-w-4xl px-4 pt-6 md:px-6">
           <Link
             to="/"
@@ -104,6 +98,8 @@ function RecipePage() {
               <img
                 src={recipe.image}
                 alt={loc.name}
+                fetchPriority="high"
+                decoding="async"
                 className="aspect-[16/10] w-full object-cover"
               />
             ) : (
@@ -139,7 +135,9 @@ function RecipePage() {
           <section className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm">
             <img
               src={recipe.authorImg}
-              alt={recipe.authorName ?? "Chef"}
+              alt=""
+              loading="lazy"
+              decoding="async"
               className="size-14 rounded-full object-cover ring-2 ring-primary/30"
             />
             <div className="flex-1">

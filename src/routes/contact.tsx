@@ -17,7 +17,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useI18n } from "@/i18n/I18nProvider";
-import { dictionaries, type Dict } from "@/i18n/dictionaries";
+import { usePageMeta } from "@/i18n/usePageMeta";
+import type { Dict } from "@/i18n/dictionaries";
 
 const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
@@ -49,19 +50,12 @@ const buildSchema = (t: Dict) =>
   });
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: dictionaries.fr.contact.metaTitle },
-      { name: "description", content: dictionaries.fr.contact.metaDesc },
-      { property: "og:title", content: dictionaries.fr.contact.metaTitle },
-      { property: "og:description", content: dictionaries.fr.contact.metaDesc },
-    ],
-  }),
   component: ContactPage,
 });
 
 function ContactPage() {
   const { t } = useI18n();
+  usePageMeta(t.contact.metaTitle, t.contact.metaDesc);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -86,6 +80,15 @@ function ContactPage() {
 
     if (!WEB3FORMS_ACCESS_KEY) {
       toast.error(t.contact.toastNotConfigured);
+      return;
+    }
+
+    // Champ piège (honeypot) : invisible pour les humains, coché par les robots.
+    // On simule un succès sans rien envoyer, pour ne pas renseigner le robot.
+    const isBot = formData.get("botcheck") === "on";
+    if (isBot) {
+      setSent(true);
+      form.reset();
       return;
     }
 
@@ -133,7 +136,7 @@ function ContactPage() {
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section
           className="border-b border-border/60"
           style={{ background: "var(--gradient-hero)" }}
@@ -206,11 +209,23 @@ function ContactPage() {
               className="rounded-3xl bg-card p-6 shadow-[var(--shadow-card)] md:p-8"
             >
               <div className="grid gap-4">
+                <div
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                >
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 <div>
                   <Label htmlFor="name">{t.contact.labelName}</Label>
                   <Input
                     id="name"
                     name="name"
+                    autoComplete="name"
                     placeholder={t.contact.placeholderName}
                     className="mt-1.5 h-11"
                     maxLength={80}
@@ -222,6 +237,7 @@ function ContactPage() {
                   <Input
                     id="email"
                     name="email"
+                    autoComplete="email"
                     type="email"
                     placeholder={t.contact.placeholderEmail}
                     className="mt-1.5 h-11"

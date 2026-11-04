@@ -4,17 +4,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { chiefs, localizeChief } from "@/data/recipes";
 import { useI18n } from "@/i18n/I18nProvider";
-import { dictionaries } from "@/i18n/dictionaries";
+import { usePageMeta } from "@/i18n/usePageMeta";
 
 export const Route = createFileRoute("/le-chef")({
-  head: () => ({
-    meta: [
-      { title: dictionaries.fr.chef.metaTitle },
-      { name: "description", content: dictionaries.fr.chef.metaDesc },
-      { property: "og:title", content: dictionaries.fr.chef.metaTitle },
-      { property: "og:description", content: dictionaries.fr.chef.metaDesc },
-    ],
-  }),
   component: ChefPage,
 });
 
@@ -41,14 +33,16 @@ function ChefAvatar({ src, alt }: { src: string; alt: string }) {
 
 function ChefPage() {
   const { t, lang } = useI18n();
+  usePageMeta(t.chef.metaTitle, t.chef.metaDesc);
   const lead = chiefs[0];
   const others = chiefs.slice(1);
+  if (!lead) return null;
 
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section
           className="border-b border-border/60"
           style={{ background: "var(--gradient-hero)" }}
@@ -83,7 +77,9 @@ function ChefPage() {
                   {c.img ? (
                     <img
                       src={c.img}
-                      alt={c.name}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
                       className="size-full object-cover"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).style.display =

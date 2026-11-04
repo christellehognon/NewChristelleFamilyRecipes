@@ -17,8 +17,18 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+      >
+        {t.nav.skipToContent}
+      </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-        <Link to="/" className="flex items-center gap-2 group" onClick={() => setOpen(false)}>
+        <Link
+          to="/"
+          className="flex items-center gap-2 group"
+          onClick={() => setOpen(false)}
+        >
           <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm transition-transform group-hover:rotate-6">
             <UtensilsCrossed className="size-5" />
           </span>
@@ -33,13 +43,15 @@ export function SiteHeader() {
         </Link>
 
         <div className="hidden items-center gap-3 md:flex">
-          <nav className="flex items-center gap-1">
+          <nav aria-label={t.nav.mainNav} className="flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: true }}
-                activeProps={{ className: "bg-secondary text-secondary-foreground" }}
+                activeProps={{
+                  className: "bg-secondary text-secondary-foreground",
+                }}
                 className={cn(
                   "rounded-full px-4 py-2 text-sm font-medium text-foreground/75 transition-colors hover:bg-secondary/70 hover:text-foreground",
                 )}
@@ -57,7 +69,9 @@ export function SiteHeader() {
             type="button"
             onClick={() => setOpen((v) => !v)}
             className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground"
-            aria-label={t.nav.openMenu}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -65,7 +79,11 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-border/60 bg-background md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label={t.nav.mainNav}
+          className="border-t border-border/60 bg-background md:hidden"
+        >
           <div className="mx-auto flex max-w-6xl flex-col px-4 py-2">
             {navItems.map((item) => (
               <Link

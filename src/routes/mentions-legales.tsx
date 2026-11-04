@@ -2,16 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { useI18n } from "@/i18n/I18nProvider";
+import { usePageMeta } from "@/i18n/usePageMeta";
 import { dictionaries } from "@/i18n/dictionaries";
 
 export const Route = createFileRoute("/mentions-legales")({
-  head: () => ({
-    meta: [
-      { title: dictionaries.fr.legal.metaTitle },
-      { name: "description", content: dictionaries.fr.legal.metaDesc },
-      { name: "robots", content: "index,follow" },
-    ],
-  }),
   component: LegalPage,
 });
 
@@ -198,11 +192,15 @@ const content = {
 };
 
 function LegalPage() {
+  usePageMeta(dictionaries.fr.legal.metaTitle, dictionaries.fr.legal.metaDesc);
   const { t, lang } = useI18n();
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 md:px-6 md:py-16">
+      <main
+        id="main"
+        className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 md:px-6 md:py-16"
+      >
         <h1 className="font-display text-4xl font-semibold tracking-tight md:text-5xl">
           {t.legal.title}
         </h1>

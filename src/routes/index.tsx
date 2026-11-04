@@ -23,17 +23,9 @@ import {
 import { ChefPill } from "@/components/ChefPill";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
-import { dictionaries } from "@/i18n/dictionaries";
+import { usePageMeta } from "@/i18n/usePageMeta";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: dictionaries.fr.home.metaTitle },
-      { name: "description", content: dictionaries.fr.home.metaDesc },
-      { property: "og:title", content: "Christelle's Family Recipes" },
-      { property: "og:description", content: dictionaries.fr.home.metaDesc },
-    ],
-  }),
   component: HomePage,
 });
 
@@ -41,7 +33,10 @@ function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    // i et j sont toujours dans les bornes du tableau.
+    const tmp = a[i] as T;
+    a[i] = a[j] as T;
+    a[j] = tmp;
   }
   return a;
 }
@@ -85,6 +80,7 @@ function loadOrder(): typeof recipes {
 
 function HomePage() {
   const { t, lang } = useI18n();
+  usePageMeta(t.home.metaTitle, t.home.metaDesc);
   const [search, setSearch] = useState("");
   const [season, setSeason] = useState<Season | null>(null);
   const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
@@ -166,7 +162,7 @@ function HomePage() {
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
 
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* Hero */}
         <section
           className="border-b border-border/60"
@@ -200,12 +196,13 @@ function HomePage() {
         <section className="border-b border-border/60 bg-background/60">
           <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
             <div className="flex flex-col gap-4">
-              <div className="relative">
+              <div role="search" className="relative">
                 <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder={t.home.searchPlaceholder}
+                  aria-label={t.home.searchPlaceholder}
                   className="h-12 rounded-full border-border bg-card pl-11 pr-12 text-base shadow-sm focus-visible:ring-primary"
                 />
                 {search && (
@@ -334,6 +331,9 @@ function HomePage() {
             <h2 className="font-display text-2xl font-semibold md:text-3xl">
               {countLabel}
             </h2>
+            <p role="status" className="sr-only">
+              {countLabel}
+            </p>
           </div>
 
           {filtered.length > 0 ? (
@@ -408,6 +408,7 @@ function Pill({
   return (
     <button
       type="button"
+      aria-pressed={active}
       onClick={onClick}
       className={cn(
         "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",

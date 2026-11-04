@@ -22,6 +22,8 @@ export function LangSwitcher({ className }: { className?: string }) {
             type="button"
             onClick={() => setLang(l)}
             aria-pressed={active}
+            aria-label={l === "fr" ? "Français" : "English"}
+            lang={l}
             className={cn(
               "rounded-full px-2.5 py-1 uppercase tracking-wide transition-colors",
               active

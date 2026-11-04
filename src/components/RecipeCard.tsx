@@ -1,11 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { CookingPot, Clock, UtensilsCrossed } from "lucide-react";
 import { localizeRecipe, type Recipe, splitCookingTime } from "@/data/recipes";
-import { LazyImage } from "./LazyImage";
-import { DifficultyPastille, PricePastille, SeasonPastille } from "./RecipePastilles";
+import { RecipeImage } from "./RecipeImage";
+import {
+  DifficultyPastille,
+  PricePastille,
+  SeasonPastille,
+} from "./RecipePastilles";
 import { useI18n } from "@/i18n/I18nProvider";
 
-export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: number }) {
+export function RecipeCard({
+  recipe,
+  index = 0,
+}: {
+  recipe: Recipe;
+  index?: number;
+}) {
   const { t, lang } = useI18n();
   const loc = localizeRecipe(recipe, lang);
   const { prep, cook } = splitCookingTime(loc.timeToCook);
@@ -14,13 +24,17 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
       to="/recettes/$slug"
       params={{ slug: recipe.slug }}
       className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] animate-in fade-in slide-in-from-bottom-4"
-      style={{ animationDelay: `${Math.min(index * 60, 400)}ms`, animationFillMode: "backwards" }}
+      style={{
+        animationDelay: `${Math.min(index * 60, 400)}ms`,
+        animationFillMode: "backwards",
+      }}
     >
-        <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+      <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         {recipe.image ? (
-          <LazyImage
+          <RecipeImage
             src={recipe.image}
-            alt={loc.name}
+            alt=""
+            priority={index < 3}
             className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
@@ -32,11 +46,15 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
         <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-background/95 py-1 pl-1 pr-3 shadow-md backdrop-blur">
           <img
             src={recipe.authorImg}
-            alt={recipe.authorName ?? "Chef"}
+            alt=""
+            loading="lazy"
+            decoding="async"
             className="size-9 rounded-full object-cover ring-2 ring-card"
           />
           {recipe.authorName && (
-            <span className="text-xs font-semibold text-foreground">{recipe.authorName}</span>
+            <span className="text-xs font-semibold text-foreground">
+              {recipe.authorName}
+            </span>
           )}
         </div>
         <span className="absolute top-3 right-3 rounded-full bg-background/95 px-2.5 py-1 text-[11px] font-semibold text-primary-deep shadow-sm backdrop-blur">
@@ -58,12 +76,14 @@ export function RecipeCard({ recipe, index = 0 }: { recipe: Recipe; index?: numb
         <div className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
           <Clock className="size-3.5" />
           <span>
-              <span className="font-medium text-foreground/70">{prep}</span>
-            </span>
-            {cook && (
+            <span className="sr-only">{t.home.legendPrep} : </span>
+            <span className="font-medium text-foreground/70">{prep}</span>
+          </span>
+          {cook && (
             <span className="inline-flex items-center gap-1.5">
               <CookingPot className="size-3.5" />
               <span>
+                <span className="sr-only">{t.home.legendCook} : </span>
                 <span className="font-medium text-foreground/70">{cook}</span>
               </span>
             </span>
