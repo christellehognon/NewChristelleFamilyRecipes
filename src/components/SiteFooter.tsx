@@ -10,9 +10,12 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-border/60 bg-background">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-muted-foreground md:flex-row md:px-6">
-        <p className="font-display text-base text-foreground">{t.footer.brand}</p>
+        <p className="font-display text-base text-foreground">
+          {t.footer.brand}
+        </p>
         <p className="flex items-center gap-1.5">
-          {t.footer.cookedWith} <Heart className="size-3.5 fill-primary text-primary" />{" "}
+          {t.footer.cookedWith}{" "}
+          <Heart className="size-3.5 fill-primary text-primary" />{" "}
         </p>
         <div className="flex items-center gap-3">
           <a

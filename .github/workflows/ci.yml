@@ -30,8 +30,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Non bloquant pour l'instant : ~740 erreurs de formatage Prettier
-      # préexistantes. Retirer `continue-on-error` après `npm run format`.
       - name: Lint
         run: npm run lint
-        continue-on-error: true

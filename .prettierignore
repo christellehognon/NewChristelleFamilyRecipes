@@ -1,0 +1,7 @@
+package-lock.json
+AUDIT.md
+public
+dist
+build
+.idea
+src/routeTree.gen.ts
