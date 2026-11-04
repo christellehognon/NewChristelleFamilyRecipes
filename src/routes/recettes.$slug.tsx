@@ -8,8 +8,8 @@ import {
   SeasonPastille,
 } from "@/components/RecipePastilles";
 import {
-  type Recipe,
   type RecipeType,
+  localizeDescription,
   localizeRecipe,
   recipes,
   splitCookingTime,
@@ -18,18 +18,15 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 
 export const Route = createFileRoute("/recettes/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const recipe = recipes.find((r) => r.slug === params.slug);
     if (!recipe) throw notFound();
-    // Build enriched with inline English fields if present
-    const enriched = {
-      ...recipe,
-      name_en: recipe.name_en ?? recipe.name,
-      description_en: recipe.description_en ?? recipe.description,
-      ingredients_en: recipe.ingredients_en ?? recipe.ingredients,
-      timeToCook_en: recipe.timeToCook_en ?? recipe.timeToCook,
-    };
-    return { recipe: enriched };
+    // Les textes de préparation sont chargés à la demande (fichier séparé),
+    // pour ne pas alourdir le premier chargement du site.
+    const { recipeDescriptions } = await import("@/data/recipe-descriptions");
+    const text = recipeDescriptions[recipe.slug];
+    if (!text) throw notFound();
+    return { recipe, text };
   },
   notFoundComponent: NotFoundView,
   component: RecipePage,
@@ -63,16 +60,17 @@ function NotFoundView() {
 
 function RecipePage() {
   const { t, lang } = useI18n();
-  const { recipe } = Route.useLoaderData() as { recipe: Recipe };
+  const { recipe, text } = Route.useLoaderData();
   const loc = localizeRecipe(recipe, lang);
+  const description = localizeDescription(text, lang);
   usePageMeta(
     `${loc.name} — Christelle's Family Recipes`,
-    loc.description.slice(0, 155),
+    description.slice(0, 155),
   );
   const { prep, cook } = splitCookingTime(loc.timeToCook);
   const recipeType = recipe.type as RecipeType;
   // Split description into sentences for nicer step-like display
-  const steps = loc.description
+  const steps = description
     .split(/(?<=[.!?])\s+/)
     .map((s: string) => s.trim())
     .filter(Boolean);

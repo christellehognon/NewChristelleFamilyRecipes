@@ -1,16 +1,20 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { recipeDescriptions } from "./recipe-descriptions";
 import {
   averagePrices,
+  chiefNames,
   chiefs,
   difficulties,
+  localizeDescription,
   localizeRecipe,
   recipeTypes,
   recipes,
   seasons,
   splitCookingTime,
   type Recipe,
+  type RecipeDescription,
 } from "./recipes";
 
 const publicDir = path.resolve(__dirname, "../../public");
@@ -63,13 +67,27 @@ describe("données des recettes", () => {
       .filter(
         (r) =>
           !r.name.trim() ||
-          !r.description.trim() ||
           !r.timeToCook.trim() ||
           r.ingredients.length === 0 ||
           r.ingredients.some((i) => !i.trim()),
       )
       .map((r) => r.slug);
     expect(incomplete).toEqual(KNOWN_INCOMPLETE_RECIPES);
+  });
+
+  it("a un texte de préparation pour chaque recette, et inversement", () => {
+    const slugs = recipes.map((r) => r.slug);
+    const missing = slugs.filter(
+      (s) => !recipeDescriptions[s]?.description.trim(),
+    );
+    const orphans = Object.keys(recipeDescriptions).filter(
+      (s) => !slugs.includes(s),
+    );
+    expect({ missing, orphans }).toEqual({ missing: [], orphans: [] });
+  });
+
+  it("garde la liste des noms de chefs alignée sur les chefs", () => {
+    expect(chiefs.map((c) => c.name)).toEqual([...chiefNames]);
   });
 
   it("n'utilise que des valeurs de filtre connues", () => {
@@ -128,7 +146,6 @@ describe("localizeRecipe", () => {
     averagePrice: "€",
     difficulty: "Facile",
     ingredients: ["riz", "lait"],
-    description: "Un dessert",
   };
 
   it("renvoie le français tel quel", () => {
@@ -142,7 +159,6 @@ describe("localizeRecipe", () => {
       {
         ...base,
         name_en: "Rice pudding",
-        description_en: "A dessert",
         ingredients_en: ["rice", "milk"],
         timeToCook_en: "10 min + 20 min cooking time",
       },
@@ -150,7 +166,6 @@ describe("localizeRecipe", () => {
     );
     expect(loc).toEqual({
       name: "Rice pudding",
-      description: "A dessert",
       ingredients: ["rice", "milk"],
       timeToCook: "10 min + 20 min cooking time",
     });
@@ -161,6 +176,24 @@ describe("localizeRecipe", () => {
     expect(loc.name).toBe("Riz au lait");
     expect(loc.ingredients).toEqual(["riz", "lait"]);
     expect(loc.timeToCook).toBe(base.timeToCook);
+  });
+});
+
+describe("localizeDescription", () => {
+  const text: RecipeDescription = {
+    description: "Un dessert",
+    description_en: "A dessert",
+  };
+
+  it("renvoie le français ou l'anglais selon la langue", () => {
+    expect(localizeDescription(text, "fr")).toBe("Un dessert");
+    expect(localizeDescription(text, "en")).toBe("A dessert");
+  });
+
+  it("retombe sur le français quand la traduction manque", () => {
+    expect(localizeDescription({ description: "Un dessert" }, "en")).toBe(
+      "Un dessert",
+    );
   });
 });
 
