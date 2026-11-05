@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import { ChefPhoto } from "./ChefPhoto";
+import { FilterPill } from "./FilterPill";
 
 export function ChefPill({
   name,
@@ -13,16 +13,10 @@ export function ChefPill({
   onClick: () => void;
 }) {
   return (
-    <button
-      type="button"
+    <FilterPill
+      active={active}
       onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all pointer-coarse:min-h-11 pointer-coarse:px-4",
-        active
-          ? "border-primary bg-primary text-primary-foreground shadow-sm"
-          : "border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-foreground",
-      )}
+      className="inline-flex items-center gap-2 px-3"
     >
       <ChefPhoto
         src={img}
@@ -31,6 +25,6 @@ export function ChefPill({
         iconClassName="size-3.5"
       />
       <span>{name}</span>
-    </button>
+    </FilterPill>
   );
 }

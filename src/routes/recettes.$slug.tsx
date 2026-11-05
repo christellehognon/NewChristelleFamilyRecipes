@@ -1,5 +1,6 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CookingPot, Clock, UtensilsCrossed } from "lucide-react";
+import { RecipeImage } from "@/components/RecipeImage";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import {
@@ -15,6 +16,7 @@ import {
   recipes,
   splitCookingTime,
 } from "@/data/recipes";
+import { isLandscapePhoto } from "@/data/image-orientation";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 
@@ -94,62 +96,72 @@ function RecipePage() {
         </div>
 
         <article className="mx-auto max-w-4xl px-4 py-6 md:px-6 md:py-10">
-          <div className="overflow-hidden rounded-3xl bg-secondary shadow-[var(--shadow-card)]">
-            {recipe.image ? (
-              <img
-                src={recipe.image}
-                alt={loc.name}
-                fetchPriority="high"
-                decoding="async"
-                className="aspect-[16/10] w-full object-cover"
-              />
-            ) : (
-              <div className="grid aspect-[16/10] w-full place-items-center text-muted-foreground">
-                <UtensilsCrossed className="size-20 opacity-40" />
-              </div>
-            )}
-          </div>
-
-          <header className="mt-8">
-            <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-              {t.type[recipe.type]}
-            </span>
-            <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              {loc.name}
-            </h1>
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              <SeasonPastille season={recipe.season} />
-              <DifficultyPastille difficulty={recipe.difficulty} />
-              <PricePastille price={recipe.averagePrice} />
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                <Clock className="size-3.5" /> {prep}
-              </span>
-              {cook && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                  <CookingPot className="size-3.5" />
-                  {cook}
-                </span>
+          {/* Photo à côté du titre : cadre 4:5 pour les portraits, 4:3 pour les
+              paysages, afin de ne pas couper le plat. */}
+          <div className="grid gap-8 md:grid-cols-[2fr_3fr] md:items-center md:gap-10">
+            <div
+              className={`overflow-hidden rounded-3xl bg-secondary shadow-[var(--shadow-card)] ${
+                isLandscapePhoto(recipe.image) ? "aspect-[4/3]" : "aspect-[4/5]"
+              }`}
+            >
+              {recipe.image ? (
+                <RecipeImage
+                  src={recipe.image}
+                  alt={loc.name}
+                  priority
+                  sizes="(min-width: 768px) 340px, calc(100vw - 32px)"
+                  className="size-full object-cover"
+                />
+              ) : (
+                <div className="grid size-full place-items-center text-muted-foreground">
+                  <UtensilsCrossed className="size-20 opacity-40" />
+                </div>
               )}
             </div>
-          </header>
 
-          <section className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm">
-            <img
-              src={recipe.authorImg}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="size-14 rounded-full object-cover ring-2 ring-primary/30"
-            />
-            <div className="flex-1">
-              <p className="font-display text-xl font-semibold leading-snug text-foreground">
-                {t.recipe.sharedBy(recipe.authorName ?? t.recipe.family)}
-              </p>
-              <p className="mt-1 text-base text-muted-foreground">
-                {t.recipe.tagline}
-              </p>
+            <div>
+              <header>
+                <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                  {t.type[recipe.type]}
+                </span>
+                <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
+                  {loc.name}
+                </h1>
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <SeasonPastille season={recipe.season} />
+                  <DifficultyPastille difficulty={recipe.difficulty} />
+                  <PricePastille price={recipe.averagePrice} />
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                    <Clock className="size-3.5" /> {prep}
+                  </span>
+                  {cook && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
+                      <CookingPot className="size-3.5" />
+                      {cook}
+                    </span>
+                  )}
+                </div>
+              </header>
+
+              <section className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm">
+                <img
+                  src={recipe.authorImg}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="size-14 rounded-full object-cover ring-2 ring-primary/30"
+                />
+                <div className="flex-1">
+                  <p className="font-display text-xl font-semibold leading-snug text-foreground">
+                    {t.recipe.sharedBy(recipe.authorName ?? t.recipe.family)}
+                  </p>
+                  <p className="mt-1 text-base text-muted-foreground">
+                    {t.recipe.tagline}
+                  </p>
+                </div>
+              </section>
             </div>
-          </section>
+          </div>
 
           <div className="mt-10 grid gap-10 md:grid-cols-[1fr_1.4fr]">
             <section>

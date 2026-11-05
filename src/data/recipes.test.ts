@@ -1,6 +1,7 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { LANDSCAPE_PHOTOS } from "./image-orientation";
 import { recipeDescriptions } from "./recipe-descriptions";
 import {
   averagePrices,
@@ -127,6 +128,38 @@ describe("données des recettes", () => {
           .filter((v) => !existsSync(path.join(publicDir, v))),
       );
     expect(missing).toEqual([]);
+  });
+
+  it("liste exactement les photos paysage de la galerie", () => {
+    // Dimensions lues dans l'en-tête JPEG (marqueur SOF), sans dépendance.
+    const size = (file: string) => {
+      const buf = readFileSync(file);
+      let i = 2;
+      while (i < buf.length) {
+        if (buf[i] !== 0xff) {
+          i += 1;
+          continue;
+        }
+        const marker = buf[i + 1] ?? 0;
+        if (
+          marker >= 0xc0 &&
+          marker <= 0xcf &&
+          ![0xc4, 0xc8, 0xcc].includes(marker)
+        ) {
+          return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+        }
+        i += 2 + buf.readUInt16BE(i + 2);
+      }
+      throw new Error(`Dimensions introuvables : ${file}`);
+    };
+    const actual = [...new Set(recipes.map((r) => r.image))]
+      .filter((p) => /^\/img\/gallery\/[^/]+\.jpg$/i.test(p))
+      .filter((p) => {
+        const { w, h } = size(path.join(publicDir, p));
+        return w > h;
+      })
+      .sort();
+    expect(actual).toEqual([...LANDSCAPE_PHOTOS].sort());
   });
 
   it("garde la même longueur d'ingrédients en français et en anglais", () => {

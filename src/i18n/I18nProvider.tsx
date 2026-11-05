@@ -31,12 +31,10 @@ function detectInitialLang(): Lang {
 }
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("fr");
-
-  // Hydrate after mount to keep SSR output stable (defaults to fr).
-  useEffect(() => {
-    setLangState(detectInitialLang());
-  }, []);
+  // L'application est rendue côté client uniquement : on lit la langue dès le
+  // premier rendu, sans passer par le français (ce qui faisait clignoter le
+  // français puis l'anglais pour les visiteurs anglophones).
+  const [lang, setLangState] = useState<Lang>(detectInitialLang);
 
   useEffect(() => {
     if (typeof document !== "undefined") {

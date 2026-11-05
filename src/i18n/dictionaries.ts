@@ -16,6 +16,8 @@ type Dictionary = {
     openMenu: string;
     closeMenu: string;
     skipToContent: string;
+    /** Ajouté au nom accessible d'un lien qui s'ouvre dans un nouvel onglet. */
+    newTab: string;
     mainNav: string;
     langLabel: string;
   };
@@ -41,6 +43,8 @@ type Dictionary = {
     titleB: string;
     lead: string;
     shuffle: string;
+    /** Annoncé aux lecteurs d'écran après « Mélanger ». */
+    shuffled: string;
     showMore: string;
     searchPlaceholder: string;
     clearSearch: string;
@@ -58,10 +62,8 @@ type Dictionary = {
     emptyReset: string;
     metaTitle: string;
     metaDesc: string;
-    legendTitle: string;
-    legendSeason: string;
-    legendDifficulty: string;
-    legendPrice: string;
+    /** Bouton qui déplie les filtres sur mobile. */
+    filters: string;
     legendPrep: string;
     legendCook: string;
     vegetarian: string;
@@ -74,12 +76,6 @@ type Dictionary = {
     family: string;
     metaTitle: string;
     metaDesc: string;
-    legendTitle: string;
-    legendSeason: string;
-    legendDifficulty: string;
-    legendPrice: string;
-    legendPrep: string;
-    legendCook: string;
   };
   contact: {
     badge: string;
@@ -162,6 +158,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       openMenu: "Ouvrir le menu",
       closeMenu: "Fermer le menu",
       skipToContent: "Aller au contenu",
+      newTab: "nouvel onglet",
       mainNav: "Navigation principale",
       langLabel: "Langue",
     },
@@ -187,6 +184,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       titleB: "adore vraiment.",
       lead: "Carnet de cuisine partagé entre les générations — des classiques de la cuisine française aux expérimentations gourmandes des plus jeunes.",
       shuffle: "Mélanger les recettes",
+      shuffled: "Recettes mélangées",
       showMore: "Afficher plus",
       searchPlaceholder: "Recherche par recette ou ingrédient…",
       clearSearch: "Effacer la recherche",
@@ -205,10 +203,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "Christelle's Family Recipes — Recettes de famille",
       metaDesc:
         "Les recettes que tout le monde adore, partagées avec amour. Découvrez chaque jour de nouvelles inspirations cuisine.",
-      legendTitle: "Légende des icônes",
-      legendSeason: "Saison",
-      legendDifficulty: "Difficulté",
-      legendPrice: "Prix moyen",
+      filters: "Filtres",
       legendPrep: "Temps de préparation",
       legendCook: "Temps de cuisson",
       vegetarian: "Végétarien",
@@ -222,12 +217,6 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "Le chef — Christelle's Family Recipes",
       metaDesc:
         "Christelle, la cheffe de famille derrière le carnet, et toute la tribu qui partage la passion de la cuisine.",
-      legendTitle: "Icon legend",
-      legendSeason: "Saison",
-      legendDifficulty: "Difficulté",
-      legendPrice: "Prix moyen",
-      legendPrep: "Temps de préparation",
-      legendCook: "Temps de cuisson",
     },
     contact: {
       badge: "✉️ Contact",
@@ -338,6 +327,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       openMenu: "Open menu",
       closeMenu: "Close menu",
       skipToContent: "Skip to content",
+      newTab: "opens in a new tab",
       mainNav: "Main navigation",
       langLabel: "Language",
     },
@@ -364,6 +354,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       titleB: "truly loves.",
       lead: "A cooking notebook shared across generations — from French culinary classics to the youngest's tasty experiments.",
       shuffle: "Shuffle recipes",
+      shuffled: "Recipes shuffled",
       showMore: "Show more",
       searchPlaceholder: "Search by recipe or ingredient…",
       clearSearch: "Clear search",
@@ -382,10 +373,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "Christelle's Family Recipes — Family recipes",
       metaDesc:
         "The recipes my family loves, shared with love. Discover new cooking inspiration every day.",
-      legendTitle: "Icon legend",
-      legendSeason: "Season",
-      legendDifficulty: "Difficulty",
-      legendPrice: "Average price",
+      filters: "Filters",
       legendPrep: "Prep time",
       legendCook: "Cooking time",
       vegetarian: "Vegetarian",
@@ -399,12 +387,6 @@ export const dictionaries: Record<Lang, Dictionary> = {
       metaTitle: "The chef — Christelle's Family Recipes",
       metaDesc:
         "Christelle, the family chef behind the notebook, and the whole tribe sharing a passion for cooking.",
-      legendTitle: "Icon legend",
-      legendSeason: "Season",
-      legendDifficulty: "Difficulty",
-      legendPrice: "Average price",
-      legendPrep: "Prep time",
-      legendCook: "Cooking time",
     },
     contact: {
       badge: "✉️ Contact",

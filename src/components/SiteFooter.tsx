@@ -29,7 +29,7 @@ export function SiteFooter() {
             href={`https://instagram.com/${INSTAGRAM_HANDLE}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label={`Instagram (${t.nav.newTab})`}
             className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground pointer-coarse:size-11"
           >
             <Instagram className="size-4" />

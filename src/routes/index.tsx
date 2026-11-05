@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Leaf, ChefHat, Coins, Clock, CookingPot } from "lucide-react";
-import { useId, useMemo, useState } from "react";
-import { RefreshCw, Search, Shuffle, X } from "lucide-react";
+import { Clock, CookingPot } from "lucide-react";
+import { useEffect, useId, useMemo, useState } from "react";
+import {
+  ChevronDown,
+  RefreshCw,
+  Search,
+  Shuffle,
+  SlidersHorizontal,
+  X,
+} from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RecipeCard } from "@/components/RecipeCard";
@@ -21,6 +28,7 @@ import {
   chiefs,
 } from "@/data/recipes";
 import { ChefPill } from "@/components/ChefPill";
+import { FilterPill } from "@/components/FilterPill";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
@@ -89,13 +97,37 @@ function HomePage() {
   const [vegetarian, setVegetarian] = useState(false);
   const [chef, setChef] = useState<string | null>(null);
 
+  // Mobile : les groupes de filtres sont repliés tant qu'on ne les ouvre pas.
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
   const [shuffled, setShuffled] = useState(loadOrder);
   const [visible, setVisible] = useState<number>(12);
+
+  // Message lu par les lecteurs d'écran après « Mélanger » : la liste change
+  // d'ordre sans que le nombre de recettes bouge, donc rien n'était annoncé.
+  const [announce, setAnnounce] = useState("");
 
   const handleShuffle = () => {
     setShuffled(saveOrder(shuffle(recipes)));
     setVisible(12);
+    setAnnounce(t.home.shuffled);
   };
+
+  // Après « Voir plus », le focus passe à la première nouvelle carte pour que
+  // la navigation au clavier continue là où la liste s'est allongée.
+  const handleShowMore = () => {
+    const previous = visible;
+    setVisible((v) => v + 12);
+    requestAnimationFrame(() => {
+      document
+        .querySelectorAll<HTMLElement>("#recipe-grid > a")
+        [previous]?.focus({ preventScroll: true });
+    });
+  };
+
+  useEffect(() => {
+    setAnnounce("");
+  }, [search, season, difficulty, price, type, vegetarian, chef]);
 
   const filtered = useMemo(() => {
     const normalize = (value: string) =>
@@ -139,6 +171,15 @@ function HomePage() {
 
   const hasFilters =
     search || season || difficulty || price || type || vegetarian || chef;
+  // Nombre de filtres actifs (hors recherche), affiché sur le bouton replié.
+  const activeCount = [
+    season,
+    difficulty,
+    price,
+    type,
+    vegetarian,
+    chef,
+  ].filter(Boolean).length;
 
   const reset = () => {
     setSearch("");
@@ -217,99 +258,140 @@ function HomePage() {
                 )}
               </div>
 
-              <FilterGroup label={t.home.filterType}>
-                {recipeTypes.map((tp) => (
-                  <Pill
-                    key={tp}
-                    active={type === tp}
-                    onClick={() => setType(type === tp ? null : tp)}
-                  >
-                    {t.type[tp]}
-                  </Pill>
-                ))}
-                <Pill
-                  active={vegetarian}
-                  onClick={() => setVegetarian((v) => !v)}
+              {/* Mobile : un bouton déplie les filtres ; le bureau les montre tous. */}
+              <div className="flex items-center gap-2 md:hidden">
+                <button
+                  type="button"
+                  aria-expanded={filtersOpen}
+                  aria-controls="filters-panel"
+                  onClick={() => setFiltersOpen((v) => !v)}
+                  className={cn(
+                    "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors",
+                    activeCount > 0
+                      ? "border-primary bg-secondary text-secondary-foreground"
+                      : "border-border bg-card text-foreground/80",
+                  )}
                 >
-                  {t.home.vegetarian}
-                </Pill>
-              </FilterGroup>
-
-              <FilterGroup label={t.home.filterSeason}>
-                {seasons.map((s) => (
-                  <Pill
-                    key={s}
-                    active={season === s}
-                    onClick={() => setSeason(season === s ? null : s)}
-                  >
-                    {t.season[s]}
-                  </Pill>
-                ))}
-              </FilterGroup>
-
-              <FilterGroup label={t.home.filterDifficulty}>
-                {difficulties.map((d) => (
-                  <Pill
-                    key={d}
-                    active={difficulty === d}
-                    onClick={() => setDifficulty(difficulty === d ? null : d)}
-                  >
-                    {t.difficulty[d]}
-                  </Pill>
-                ))}
-              </FilterGroup>
-
-              <FilterGroup label={t.home.filterPrice}>
-                {averagePrices.map((p) => (
-                  <Pill
-                    key={p}
-                    active={price === p}
-                    onClick={() => setPrice(price === p ? null : p)}
-                  >
-                    {t.price[p]}
-                  </Pill>
-                ))}
-                {hasFilters && (
-                  <button
-                    onClick={reset}
-                    className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer pointer-coarse:min-h-11 pointer-coarse:px-4"
-                  >
-                    <RefreshCw className="size-3.5" />
-                    {t.home.reset}
-                  </button>
-                )}
-              </FilterGroup>
-
-              <FilterGroup label={t.home.filterChef}>
-                {chiefs.map((c) => (
-                  <ChefPill
-                    key={c.name}
-                    name={c.name}
-                    img={c.img}
-                    active={chef === c.name}
-                    onClick={() => setChef(chef === c.name ? null : c.name)}
+                  <SlidersHorizontal className="size-4" aria-hidden="true" />
+                  {t.home.filters}
+                  {activeCount > 0 && (
+                    <span className="grid min-w-5 place-items-center rounded-full bg-primary px-1.5 text-xs text-primary-foreground">
+                      {activeCount}
+                    </span>
+                  )}
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={cn(
+                      "size-4 transition-transform",
+                      filtersOpen && "rotate-180",
+                    )}
                   />
-                ))}
-              </FilterGroup>
+                </button>
+                {hasFilters && (
+                  <ResetButton
+                    onClick={reset}
+                    label={t.home.reset}
+                    className="ml-auto"
+                  />
+                )}
+              </div>
+
+              <div
+                id="filters-panel"
+                className={cn(
+                  "flex-col gap-4 md:flex",
+                  filtersOpen ? "flex" : "hidden",
+                )}
+              >
+                <FilterGroup label={t.home.filterType}>
+                  {recipeTypes.map((tp) => (
+                    <FilterPill
+                      key={tp}
+                      active={type === tp}
+                      onClick={() => setType(type === tp ? null : tp)}
+                    >
+                      {t.type[tp]}
+                    </FilterPill>
+                  ))}
+                  <FilterPill
+                    active={vegetarian}
+                    onClick={() => setVegetarian((v) => !v)}
+                  >
+                    {t.home.vegetarian}
+                  </FilterPill>
+                </FilterGroup>
+
+                <FilterGroup label={t.home.filterSeason}>
+                  {seasons.map((s) => (
+                    <FilterPill
+                      key={s}
+                      active={season === s}
+                      onClick={() => setSeason(season === s ? null : s)}
+                    >
+                      {t.season[s]}
+                    </FilterPill>
+                  ))}
+                </FilterGroup>
+
+                <FilterGroup label={t.home.filterDifficulty}>
+                  {difficulties.map((d) => (
+                    <FilterPill
+                      key={d}
+                      active={difficulty === d}
+                      onClick={() => setDifficulty(difficulty === d ? null : d)}
+                    >
+                      {t.difficulty[d]}
+                    </FilterPill>
+                  ))}
+                </FilterGroup>
+
+                <FilterGroup label={t.home.filterPrice}>
+                  {averagePrices.map((p) => (
+                    <FilterPill
+                      key={p}
+                      active={price === p}
+                      onClick={() => setPrice(price === p ? null : p)}
+                    >
+                      {t.price[p]}
+                    </FilterPill>
+                  ))}
+                  {hasFilters && (
+                    <ResetButton
+                      onClick={reset}
+                      label={t.home.reset}
+                      className="ml-auto hidden md:inline-flex"
+                    />
+                  )}
+                </FilterGroup>
+
+                <FilterGroup label={t.home.filterChef}>
+                  {chiefs.map((c) => (
+                    <ChefPill
+                      key={c.name}
+                      name={c.name}
+                      img={c.img}
+                      active={chef === c.name}
+                      onClick={() => setChef(chef === c.name ? null : c.name)}
+                    />
+                  ))}
+                </FilterGroup>
+              </div>
             </div>
-            {/* Légende des icônes */}
-            <div className="mt-5 rounded-2xl border border-border/70 bg-card/60 px-4 py-3">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {t.home.legendTitle}
-              </p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-foreground/75">
-                <LegendItem
-                  icon={<Leaf className="size-3.5" />}
-                  label={t.home.legendSeason}
-                />
-                <LegendItem
-                  icon={<ChefHat className="size-3.5" />}
-                  label={t.home.legendDifficulty}
-                />
-                <LegendItem
-                  icon={<Coins className="size-3.5" />}
-                  label={t.home.legendPrice}
-                />
+          </div>
+        </section>
+
+        {/* Grid */}
+        <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">
+              {countLabel}
+            </h2>
+            <p role="status" className="sr-only">
+              {announce ? `${announce}. ${countLabel}` : countLabel}
+            </p>
+            {/* Seules les icônes de durée n'ont pas de libellé sur les cartes. */}
+            {filtered.length > 0 && (
+              <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
                 <LegendItem
                   icon={<Clock className="size-3.5" />}
                   label={t.home.legendPrep}
@@ -319,23 +401,14 @@ function HomePage() {
                   label={t.home.legendCook}
                 />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Grid */}
-        <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
-          <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">
-              {countLabel}
-            </h2>
-            <p role="status" className="sr-only">
-              {countLabel}
-            </p>
+            )}
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              id="recipe-grid"
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
               {filtered.slice(0, visible).map((recipe, i) => (
                 <RecipeCard key={recipe.slug} recipe={recipe} index={i} />
               ))}
@@ -360,10 +433,9 @@ function HomePage() {
           {filtered.length > visible && (
             <div className="mt-6 flex justify-center">
               <button
-                onClick={() =>
-                  setVisible((v) => Math.min(v + 12, filtered.length))
-                }
-                className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border pointer-coarse:min-h-11 pointer-coarse:px-6"
+                type="button"
+                onClick={handleShowMore}
+                className="rounded-full border border-border px-4 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-6"
               >
                 {t.home.showMore}
               </button>
@@ -402,28 +474,26 @@ function FilterGroup({
   );
 }
 
-function Pill({
-  active,
+function ResetButton({
   onClick,
-  children,
+  label,
+  className,
 }: {
-  active: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  label: string;
+  className?: string;
 }) {
   return (
     <button
       type="button"
-      aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all pointer-coarse:min-h-11 pointer-coarse:min-w-11 pointer-coarse:px-4",
-        active
-          ? "border-primary bg-primary text-primary-foreground shadow-sm"
-          : "border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-foreground",
+        "inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-4",
+        className,
       )}
     >
-      {children}
+      <RefreshCw className="size-3.5" aria-hidden="true" />
+      {label}
     </button>
   );
 }

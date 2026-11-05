@@ -192,7 +192,7 @@ function ContactPage() {
 
         <section className="mx-auto grid max-w-5xl gap-10 px-4 py-12 md:grid-cols-[1fr_1.3fr] md:px-6 md:py-16">
           <div className="space-y-8">
-            <div className="mb-8">
+            <div>
               <InfoCard
                 icon={<Mail className="size-5" />}
                 title={t.contact.byEmail}
@@ -201,16 +201,17 @@ function ContactPage() {
                 {CONTACT_EMAIL}
               </InfoCard>
             </div>
-            <div className="mb-8">
+            <div>
               <InfoCard
                 icon={<Instagram className="size-5" />}
                 title={t.contact.onInstagram}
                 href={`https://instagram.com/${INSTAGRAM_HANDLE}`}
+                newTabLabel={t.nav.newTab}
               >
                 @{INSTAGRAM_HANDLE}
               </InfoCard>
             </div>
-            <div className="mb-8">
+            <div>
               <InfoCard
                 icon={<MessageCircle className="size-5" />}
                 title={t.contact.wordTitle}
@@ -367,11 +368,14 @@ function InfoCard({
   title,
   children,
   href,
+  newTabLabel,
 }: {
   icon: React.ReactNode;
   title: string;
   children: React.ReactNode;
   href?: string;
+  /** Texte annoncé pour un lien externe qui s'ouvre dans un nouvel onglet. */
+  newTabLabel?: string;
 }) {
   const content = (
     <div className="flex items-start gap-4 rounded-2xl bg-card p-5 shadow-sm transition-shadow hover:shadow-md">
@@ -396,6 +400,9 @@ function InfoCard({
         rel="noreferrer"
       >
         {content}
+        {newTabLabel && href.startsWith("http") && (
+          <span className="sr-only"> ({newTabLabel})</span>
+        )}
       </a>
     );
   }

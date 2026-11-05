@@ -29,7 +29,7 @@ export function SiteHeader() {
           className="flex items-center gap-2 group"
           onClick={() => setOpen(false)}
         >
-          <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm transition-transform group-hover:rotate-6">
+          <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm transition-transform group-hover:rotate-6 motion-reduce:transition-none motion-reduce:group-hover:rotate-0">
             <UtensilsCrossed className="size-5" />
           </span>
           <span className="flex flex-col leading-none">
