@@ -22,7 +22,7 @@ const priceBg: Record<AveragePrice, string> = {
 };
 
 const pastille =
-  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/85 shadow-sm";
+  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-pastille-foreground shadow-sm";
 
 export function SeasonPastille({ season }: { season: Season }) {
   const { t } = useI18n();

@@ -5,7 +5,10 @@
 @import "tw-animate-css";
 @source "../src";
 
-@custom-variant dark (&:is(.dark *));
+/* Le mode sombre suit le réglage clair/sombre de l'appareil (pas de bouton).
+   Pas de script pour poser une classe : la CSP du site interdit les scripts
+   inline, et un script n'aurait de toute façon pas fini avant l'affichage. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 /*
  * Christelle's Family Recipes — Design system
@@ -60,6 +63,15 @@
   --color-cost-mid: var(--cost-mid);
   --color-cost-high: var(--cost-high);
 
+  --color-pastille-foreground: var(--pastille-foreground);
+}
+
+:root {
+  --radius: 0.875rem;
+  color-scheme: light;
+
+  /* Ombres et dégradé du bandeau : définis ici (et non dans @theme) pour
+     pouvoir changer en mode sombre. */
   --shadow-card: 0 6px 24px -12px oklch(0.55 0.12 195 / 0.35);
   --shadow-card-hover: 0 18px 40px -16px oklch(0.55 0.14 195 / 0.45);
   --gradient-hero: linear-gradient(
@@ -67,10 +79,10 @@
     oklch(0.95 0.04 195),
     oklch(0.97 0.025 80)
   );
-}
 
-:root {
-  --radius: 0.875rem;
+  /* Texte des pastilles (saison, difficulté, prix) : sombre dans les deux modes,
+     car leurs fonds pastel restent clairs. Contraste 7:1 à 11:1. */
+  --pastille-foreground: oklch(0.25 0.03 220);
 
   /* Warm cream background */
   --background: oklch(0.985 0.012 90);
@@ -122,27 +134,41 @@
   --cost-high: oklch(0.78 0.15 35);
 }
 
-.dark {
-  --background: oklch(0.2 0.03 220);
-  --foreground: oklch(0.97 0.01 90);
-  --card: oklch(0.25 0.04 220);
-  --card-foreground: oklch(0.97 0.01 90);
-  --popover: oklch(0.25 0.04 220);
-  --popover-foreground: oklch(0.97 0.01 90);
-  --primary: oklch(0.78 0.12 195);
-  --primary-foreground: oklch(0.2 0.03 220);
-  --primary-deep: oklch(0.6 0.13 200);
-  --secondary: oklch(0.3 0.05 200);
-  --secondary-foreground: oklch(0.97 0.01 90);
-  --muted: oklch(0.3 0.03 220);
-  --muted-foreground: oklch(0.75 0.02 90);
-  --accent: oklch(0.4 0.08 200);
-  --accent-foreground: oklch(0.97 0.01 90);
-  --destructive: oklch(0.7 0.19 22);
-  --destructive-foreground: oklch(0.97 0.01 90);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(0.6 0.02 220);
-  --ring: oklch(0.6 0.1 195);
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: oklch(0.2 0.03 220);
+    --foreground: oklch(0.97 0.01 90);
+    --card: oklch(0.25 0.04 220);
+    --card-foreground: oklch(0.97 0.01 90);
+    --popover: oklch(0.25 0.04 220);
+    --popover-foreground: oklch(0.97 0.01 90);
+    --primary: oklch(0.78 0.12 195);
+    --primary-foreground: oklch(0.2 0.03 220);
+    /* Éclairci (0,6 → 0,68) : en texte d'accent sur les cartes, 0,6 ne donnait
+     que 4,4:1 ; à 0,68 : 5,8:1 sur les cartes, 6,6:1 sur le fond. */
+    --primary-deep: oklch(0.68 0.13 200);
+    --secondary: oklch(0.3 0.05 200);
+    --secondary-foreground: oklch(0.97 0.01 90);
+    --muted: oklch(0.3 0.03 220);
+    --muted-foreground: oklch(0.75 0.02 90);
+    --accent: oklch(0.4 0.08 200);
+    --accent-foreground: oklch(0.97 0.01 90);
+    --destructive: oklch(0.7 0.19 22);
+    --destructive-foreground: oklch(0.97 0.01 90);
+    --border: oklch(1 0 0 / 12%);
+    --input: oklch(0.6 0.02 220);
+    --ring: oklch(0.6 0.1 195);
+
+    /* Sur fond sombre, une ombre teintée de turquoise ne se voit plus : noire. */
+    --shadow-card: 0 6px 24px -12px oklch(0 0 0 / 0.5);
+    --shadow-card-hover: 0 18px 40px -16px oklch(0 0 0 / 0.6);
+    --gradient-hero: linear-gradient(
+      135deg,
+      oklch(0.27 0.05 200),
+      oklch(0.24 0.03 80)
+    );
+  }
 }
 
 @layer base {
