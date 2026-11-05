@@ -125,8 +125,9 @@ type Dictionary = {
     ingredients: string;
     preparation: string;
     sharedBy: (n: string) => string;
+    /** Signature du carnet, affichée sans guillemets (ce n'est pas une parole de la cheffe). */
+    tagline: string;
     family: string;
-    quote: string;
     notFoundTitle: string;
     notFoundDesc: string;
     backHome: string;
@@ -278,8 +279,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
       ingredients: "Ingrédients",
       preparation: "Préparation",
       sharedBy: (n: string) => `Recette partagée par ${n}`,
+      tagline: "Une recette à transmettre, à partager, à savourer.",
       family: "la famille",
-      quote: "« Une recette à transmettre, à partager, à savourer. »",
       notFoundTitle: "Recette introuvable",
       notFoundDesc: "Cette recette n'existe pas ou a été retirée du carnet.",
       backHome: "Retour à l'accueil",
@@ -454,8 +455,8 @@ export const dictionaries: Record<Lang, Dictionary> = {
       ingredients: "Ingredients",
       preparation: "Preparation",
       sharedBy: (n: string) => `Recipe shared by ${n}`,
+      tagline: "A recipe to pass on, to share, to savor.",
       family: "the family",
-      quote: "“A recipe to pass on, to share, to savor.”",
       notFoundTitle: "Recipe not found",
       notFoundDesc:
         "This recipe does not exist or has been removed from the notebook.",

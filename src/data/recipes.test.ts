@@ -29,17 +29,13 @@ const KNOWN_NON_STANDARD_SLUGS = [
   "olives-a-la-niçoise",
   "panacotta-coulis de framboises",
 ];
-const KNOWN_INCOMPLETE_RECIPES = [
-  "magret-de-canard-sauce-au-poivre-vert", // un ingrédient vide (7e)
-  "merlu-roti-aux-cepes", // timeToCook vide
-];
+const KNOWN_INCOMPLETE_RECIPES: string[] = [];
 const KNOWN_INGREDIENT_COUNT_MISMATCHES = [
   "tian-de-courgettes-au-riz", // fr 9 / en 4
   "olives-a-la-niçoise", // fr 5 / en 4
   "la-frita", // fr 10 / en 6
   "macarons", // fr 6 / en 11
   "gelee-de-framboises-et-feve-de-tonka", // fr 3 / en 4
-  "magret-de-canard-sauce-au-poivre-vert", // fr 7 / en 6
 ];
 
 describe("données des recettes", () => {

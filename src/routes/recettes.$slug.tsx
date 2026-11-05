@@ -142,11 +142,11 @@ function RecipePage() {
               className="size-14 rounded-full object-cover ring-2 ring-primary/30"
             />
             <div className="flex-1">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              <p className="font-display text-xl font-semibold leading-snug text-foreground">
                 {t.recipe.sharedBy(recipe.authorName ?? t.recipe.family)}
               </p>
-              <p className="mt-1 font-display text-base italic text-foreground">
-                {t.recipe.quote}
+              <p className="mt-1 text-base text-muted-foreground">
+                {t.recipe.tagline}
               </p>
             </div>
           </section>
@@ -163,7 +163,9 @@ function RecipePage() {
                     className="flex items-start gap-3 rounded-xl bg-card px-4 py-2.5 shadow-sm"
                   >
                     <span className="mt-1.5 inline-block size-2 shrink-0 rounded-full bg-primary" />
-                    <span className="text-sm text-foreground/85">{ing}</span>
+                    <span className="text-base leading-snug text-foreground/85">
+                      {ing}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -179,7 +181,7 @@ function RecipePage() {
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-display text-base font-semibold text-primary-foreground shadow-sm">
                       {i + 1}
                     </span>
-                    <p className="pt-1.5 text-sm leading-relaxed text-foreground/85">
+                    <p className="pt-1 text-base leading-relaxed text-foreground/85 md:text-lg">
                       {step}
                     </p>
                   </li>

@@ -74,7 +74,7 @@ export const RecipeCard = memo(function RecipeCard({
           <PricePastille price={recipe.averagePrice} />
         </div>
 
-        <div className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
+        <div className="mt-auto flex items-center gap-1.5 text-sm text-muted-foreground">
           <Clock className="size-3.5" />
           <span>
             <span className="sr-only">{t.home.legendPrep} : </span>

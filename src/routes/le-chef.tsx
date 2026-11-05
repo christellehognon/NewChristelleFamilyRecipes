@@ -76,7 +76,7 @@ function ChefPage() {
                 <p className="mt-3 font-display text-lg font-semibold">
                   {c.name}
                 </p>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="mt-2 text-base leading-relaxed text-muted-foreground">
                   {localizeChief(c, lang).description}
                 </p>
               </div>
