@@ -1,5 +1,6 @@
 @import "@fontsource-variable/fraunces/opsz.css";
 @import "@fontsource-variable/nunito/index.css";
+@import "sonner/dist/styles.css";
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
 @source "../src";
