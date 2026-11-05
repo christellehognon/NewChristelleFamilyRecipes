@@ -209,7 +209,7 @@ function HomePage() {
                   <button
                     type="button"
                     onClick={() => setSearch("")}
-                    className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-secondary cursor-pointer"
+                    className="absolute right-3 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-secondary cursor-pointer pointer-coarse:right-1 pointer-coarse:size-11"
                     aria-label={t.home.clearSearch}
                   >
                     <X className="size-4" />
@@ -272,7 +272,7 @@ function HomePage() {
                 {hasFilters && (
                   <button
                     onClick={reset}
-                    className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer"
+                    className="ml-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground cursor-pointer pointer-coarse:min-h-11 pointer-coarse:px-4"
                   >
                     <RefreshCw className="size-3.5" />
                     {t.home.reset}
@@ -363,7 +363,7 @@ function HomePage() {
                 onClick={() =>
                   setVisible((v) => Math.min(v + 12, filtered.length))
                 }
-                className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border"
+                className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border pointer-coarse:min-h-11 pointer-coarse:px-6"
               >
                 {t.home.showMore}
               </button>
@@ -417,7 +417,7 @@ function Pill({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",
+        "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all pointer-coarse:min-h-11 pointer-coarse:min-w-11 pointer-coarse:px-4",
         active
           ? "border-primary bg-primary text-primary-foreground shadow-sm"
           : "border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-foreground",

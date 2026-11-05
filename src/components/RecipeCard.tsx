@@ -36,6 +36,7 @@ export const RecipeCard = memo(function RecipeCard({
             src={recipe.image}
             alt=""
             priority={index < 3}
+            sizes="(min-width: 1024px) 368px, (min-width: 640px) calc(50vw - 28px), calc(100vw - 32px)"
             className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

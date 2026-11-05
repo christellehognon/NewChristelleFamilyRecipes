@@ -118,6 +118,17 @@ describe("données des recettes", () => {
     expect(missing).toEqual([]);
   });
 
+  it("a les variantes WebP 480 et 800 px de chaque photo de galerie", () => {
+    const missing = [...new Set(recipes.map((r) => r.image))]
+      .filter((p) => /^\/img\/gallery\/[^/]+\.jpg$/i.test(p))
+      .flatMap((p) =>
+        [480, 800]
+          .map((w) => p.replace(/\.jpg$/i, `-${w}.webp`))
+          .filter((v) => !existsSync(path.join(publicDir, v))),
+      );
+    expect(missing).toEqual([]);
+  });
+
   it("garde la même longueur d'ingrédients en français et en anglais", () => {
     const mismatched = recipes
       .filter(

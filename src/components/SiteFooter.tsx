@@ -21,7 +21,7 @@ export function SiteFooter() {
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             aria-label={t.footer.sendEmail}
-            className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground pointer-coarse:size-11"
           >
             <Mail className="size-4" />
           </a>
@@ -30,7 +30,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground pointer-coarse:size-11"
           >
             <Instagram className="size-4" />
           </a>
@@ -38,11 +38,17 @@ export function SiteFooter() {
       </div>
       <div className="flex flex-col items-center gap-2 pb-6 text-center text-xs text-muted-foreground">
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <Link to="/confidentialite" className="hover:text-foreground">
+          <Link
+            to="/confidentialite"
+            className="hover:text-foreground pointer-coarse:py-3.5"
+          >
             {t.footer.privacy}
           </Link>
           <span aria-hidden>·</span>
-          <Link to="/mentions-legales" className="hover:text-foreground">
+          <Link
+            to="/mentions-legales"
+            className="hover:text-foreground pointer-coarse:py-3.5"
+          >
             {t.footer.legal}
           </Link>
         </div>

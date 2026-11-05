@@ -68,7 +68,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground"
+            className="grid size-10 place-items-center rounded-full border border-border bg-card text-foreground pointer-coarse:size-11"
             aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={open}
             aria-controls="mobile-nav"

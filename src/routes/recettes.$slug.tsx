@@ -86,7 +86,7 @@ function RecipePage() {
         <div className="mx-auto max-w-4xl px-4 pt-6 md:px-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground pointer-coarse:min-h-11"
           >
             <ArrowLeft className="size-4" />
             {t.recipe.back}
