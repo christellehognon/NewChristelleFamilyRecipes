@@ -47,15 +47,41 @@ const buildSchema = (t: Dict) =>
     consent: z.literal(true, { error: t.contact.errConsent }),
   });
 
+// Ordre des champs dans la page : sert à placer le focus sur le premier en erreur.
+const FIELDS = ["name", "email", "message", "consent"] as const;
+type Field = (typeof FIELDS)[number];
+type FieldErrors = Partial<Record<Field, string>>;
+const isField = (value: unknown): value is Field =>
+  (FIELDS as readonly unknown[]).includes(value);
+
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
+
+/** Message d'erreur placé sous son champ ; relié au champ par aria-describedby. */
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={id} className="mt-1.5 text-sm font-medium text-destructive">
+      {message}
+    </p>
+  );
+}
 
 function ContactPage() {
   const { t } = useI18n();
   usePageMeta(t.contact.metaTitle, t.contact.metaDesc);
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [errors, setErrors] = useState<FieldErrors>({});
+
+  // L'erreur d'un champ disparaît dès que la personne le corrige.
+  const clearError = (field: Field) =>
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const { [field]: _removed, ...rest } = prev;
+      return rest;
+    });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,11 +96,20 @@ function ContactPage() {
     });
 
     if (!parsed.success) {
-      const firstError =
-        parsed.error.issues[0]?.message ?? t.contact.errInvalid;
-      toast.error(firstError);
+      // Une erreur par champ (la première rencontrée), affichée sous le champ.
+      const next: FieldErrors = {};
+      for (const issue of parsed.error.issues) {
+        const field = issue.path[0];
+        if (isField(field) && !next[field]) next[field] = issue.message;
+      }
+      setErrors(next);
+      // Le focus va sur le premier champ en erreur, dans l'ordre de la page.
+      const first = FIELDS.find((f) => next[f]);
+      if (first) document.getElementById(first)?.focus();
+      else toast.error(t.contact.errInvalid);
       return;
     }
+    setErrors({});
 
     if (!WEB3FORMS_ACCESS_KEY) {
       toast.error(t.contact.toastNotConfigured);
@@ -204,8 +239,16 @@ function ContactPage() {
           ) : (
             <form
               onSubmit={handleSubmit}
+              onInput={(e) => {
+                const name = (e.target as HTMLInputElement).name;
+                if (isField(name)) clearError(name);
+              }}
+              noValidate
               className="rounded-3xl bg-card p-6 shadow-[var(--shadow-card)] md:p-8"
             >
+              <p className="mb-4 text-sm text-muted-foreground">
+                {t.contact.requiredNote}
+              </p>
               <div className="grid gap-4">
                 <div
                   aria-hidden="true"
@@ -225,10 +268,13 @@ function ContactPage() {
                     name="name"
                     autoComplete="name"
                     placeholder={t.contact.placeholderName}
-                    className="mt-1.5 h-11"
+                    className="mt-1.5 h-11 aria-[invalid=true]:border-destructive"
                     maxLength={80}
                     required
+                    aria-invalid={errors.name ? true : undefined}
+                    aria-describedby={errors.name ? "name-error" : undefined}
                   />
+                  <FieldError id="name-error" message={errors.name} />
                 </div>
                 <div>
                   <Label htmlFor="email">{t.contact.labelEmail}</Label>
@@ -238,10 +284,13 @@ function ContactPage() {
                     autoComplete="email"
                     type="email"
                     placeholder={t.contact.placeholderEmail}
-                    className="mt-1.5 h-11"
+                    className="mt-1.5 h-11 aria-[invalid=true]:border-destructive"
                     maxLength={255}
                     required
+                    aria-invalid={errors.email ? true : undefined}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
+                  <FieldError id="email-error" message={errors.email} />
                 </div>
                 <div>
                   <Label htmlFor="message">{t.contact.labelMessage}</Label>
@@ -250,30 +299,43 @@ function ContactPage() {
                     name="message"
                     rows={5}
                     placeholder={t.contact.placeholderMessage}
-                    className="mt-1.5"
+                    className="mt-1.5 aria-[invalid=true]:border-destructive"
                     maxLength={2000}
                     required
+                    aria-invalid={errors.message ? true : undefined}
+                    aria-describedby={
+                      errors.message ? "message-error" : undefined
+                    }
                   />
+                  <FieldError id="message-error" message={errors.message} />
                 </div>
 
-                <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-secondary/50 p-3 text-sm">
-                  <Checkbox
-                    name="consent"
-                    id="consent"
-                    className="mt-0.5"
-                    required
-                  />
-                  <span className="text-foreground/80">
-                    {t.contact.consent}{" "}
-                    <Link
-                      to="/confidentialite"
-                      className="font-medium text-primary-deep underline underline-offset-2 hover:text-primary"
-                    >
-                      {t.contact.consentLink}
-                    </Link>
-                    .
-                  </span>
-                </label>
+                <div>
+                  <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-secondary/50 p-3 text-sm">
+                    <Checkbox
+                      name="consent"
+                      id="consent"
+                      className="mt-0.5 aria-[invalid=true]:border-destructive aria-[invalid=true]:border-2"
+                      required
+                      onCheckedChange={() => clearError("consent")}
+                      aria-invalid={errors.consent ? true : undefined}
+                      aria-describedby={
+                        errors.consent ? "consent-error" : undefined
+                      }
+                    />
+                    <span className="text-foreground/80">
+                      {t.contact.consent}{" "}
+                      <Link
+                        to="/confidentialite"
+                        className="font-medium text-primary-deep underline underline-offset-2 hover:text-primary"
+                      >
+                        {t.contact.consentLink}
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                  <FieldError id="consent-error" message={errors.consent} />
+                </div>
 
                 <Button
                   type="submit"

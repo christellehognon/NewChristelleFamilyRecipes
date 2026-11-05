@@ -1545,7 +1545,6 @@ export const recipes: Recipe[] = [
       "20cl de cognac",
       "60cl d'eau chaude",
       "4 cuillères à soupe de fond de veau",
-      "",
     ],
     name_en: "Duck Breast with Green Peppercorn Sauce",
     ingredients_en: [
@@ -2021,7 +2020,7 @@ export const recipes: Recipe[] = [
     slug: "merlu-roti-aux-cepes",
     season: "Hiver",
     type: "Plat",
-    timeToCook: "",
+    timeToCook: "30 minutes",
     averagePrice: "€€",
     difficulty: "Technique",
     ingredients: [

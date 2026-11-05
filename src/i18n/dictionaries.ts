@@ -115,6 +115,7 @@ type Dictionary = {
     errMessageLong: string;
     errConsent: string;
     errInvalid: string;
+    requiredNote: string;
     subject: (name: string) => string;
     metaTitle: string;
     metaDesc: string;
@@ -265,6 +266,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       errMessageLong: "Votre message est trop long (max 2000 caractères)",
       errConsent: "Vous devez accepter pour envoyer le message",
       errInvalid: "Formulaire invalide",
+      requiredNote: "Tous les champs sont obligatoires.",
       subject: (name: string) =>
         `Nouveau message de ${name} — Christelle's Family Recipes`,
       metaTitle: "Contact — Christelle's Family Recipes",
@@ -440,6 +442,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       errMessageLong: "Your message is too long (max 2000 characters)",
       errConsent: "You must accept to send the message",
       errInvalid: "Invalid form",
+      requiredNote: "All fields are required.",
       subject: (name: string) =>
         `New message from ${name} — Christelle's Family Recipes`,
       metaTitle: "Contact — Christelle's Family Recipes",

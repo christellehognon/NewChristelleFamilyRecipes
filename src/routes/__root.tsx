@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
 import {
+  Link,
   Outlet,
   createRootRoute,
   useRouterState,
 } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { usePageMeta } from "@/i18n/usePageMeta";
 import { I18nProvider, useI18n } from "@/i18n/I18nProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -13,20 +17,31 @@ function NotFoundComponent() {
   const { t } = useI18n();
   usePageMeta(`404 — Christelle's Family Recipes`);
   return (
-    <main
-      id="main"
-      className="flex min-h-screen items-center justify-center bg-background px-4"
-    >
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">
-          {t.errorPage.notFoundTitle}
-        </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {t.errorPage.notFoundText}
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader />
+      <main
+        id="main"
+        className="mx-auto flex max-w-3xl flex-1 flex-col items-center justify-center px-4 py-20 text-center"
+      >
+        <p
+          aria-hidden="true"
+          className="font-display text-7xl font-semibold text-primary-deep"
+        >
+          404
         </p>
-      </div>
-    </main>
+        <h1 className="mt-4 font-display text-3xl font-semibold text-foreground">
+          {t.errorPage.notFoundTitle}
+        </h1>
+        <p className="mt-2 text-muted-foreground">{t.errorPage.notFoundText}</p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-deep"
+        >
+          <ArrowLeft className="size-4" /> {t.errorPage.home}
+        </Link>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }
 

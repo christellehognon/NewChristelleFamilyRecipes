@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Leaf, ChefHat, Coins, Clock, CookingPot } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { RefreshCw, Search, Shuffle, X } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -281,17 +281,15 @@ function HomePage() {
               </FilterGroup>
 
               <FilterGroup label={t.home.filterChef}>
-                <div className="flex flex-wrap gap-2">
-                  {chiefs.map((c) => (
-                    <ChefPill
-                      key={c.name}
-                      name={c.name}
-                      img={c.img}
-                      active={chef === c.name}
-                      onClick={() => setChef(chef === c.name ? null : c.name)}
-                    />
-                  ))}
-                </div>
+                {chiefs.map((c) => (
+                  <ChefPill
+                    key={c.name}
+                    name={c.name}
+                    img={c.img}
+                    active={chef === c.name}
+                    onClick={() => setChef(chef === c.name ? null : c.name)}
+                  />
+                ))}
               </FilterGroup>
             </div>
             {/* Légende des icônes */}
@@ -386,9 +384,17 @@ function FilterGroup({
   label: string;
   children: React.ReactNode;
 }) {
+  const labelId = useId();
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="mr-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+    <div
+      role="group"
+      aria-labelledby={labelId}
+      className="flex flex-wrap items-center gap-2"
+    >
+      <span
+        id={labelId}
+        className="mr-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+      >
         {label}
       </span>
       {children}

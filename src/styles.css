@@ -98,7 +98,8 @@
   --accent: oklch(0.88 0.08 195);
   --accent-foreground: oklch(0.25 0.06 200);
 
-  --destructive: oklch(0.6 0.22 27);
+  /* Texte d'erreur : 5,4:1 sur blanc, 5,2:1 sur le fond crème (AA). */
+  --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.99 0 0);
 
   --border: oklch(0.9 0.02 195);
