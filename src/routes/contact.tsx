@@ -6,7 +6,7 @@ import {
   Loader2,
   CheckCircle2,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -74,6 +74,17 @@ function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+
+  // Le bouton qui avait le focus disparaît quand le formulaire est remplacé par
+  // le message de succès (et inversement) : on déplace donc le focus à la main,
+  // sinon il retombe sur <body> et la personne au clavier repart du haut.
+  const successRef = useRef<HTMLHeadingElement>(null);
+  const wasSent = useRef(false);
+  useEffect(() => {
+    if (sent) successRef.current?.focus();
+    else if (wasSent.current) document.getElementById("name")?.focus();
+    wasSent.current = sent;
+  }, [sent]);
 
   // L'erreur d'un champ disparaît dès que la personne le corrige.
   const clearError = (field: Field) =>
@@ -223,7 +234,11 @@ function ContactPage() {
           {sent ? (
             <div className="flex flex-col items-center justify-center rounded-3xl bg-card p-10 text-center shadow-[var(--shadow-card)]">
               <CheckCircle2 className="size-14 text-primary" />
-              <h2 className="mt-4 font-display text-2xl font-semibold">
+              <h2
+                ref={successRef}
+                tabIndex={-1}
+                className="mt-4 font-display text-2xl font-semibold"
+              >
                 {t.contact.sentTitle}
               </h2>
               <p className="mt-2 max-w-sm text-sm text-muted-foreground">
