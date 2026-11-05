@@ -25,7 +25,7 @@ export function LangSwitcher({ className }: { className?: string }) {
             aria-label={l === "fr" ? "Français" : "English"}
             lang={l}
             className={cn(
-              "rounded-full px-2.5 py-1 uppercase tracking-wide transition-colors",
+              "min-h-7 min-w-9 rounded-full px-3 py-1 uppercase tracking-wide transition-colors",
               active
                 ? "bg-primary text-primary-foreground shadow-sm"
                 : "text-foreground/70 hover:text-foreground",

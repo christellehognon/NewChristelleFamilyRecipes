@@ -57,7 +57,7 @@ export function RecipeCard({
             </span>
           )}
         </div>
-        <span className="absolute top-3 right-3 rounded-full bg-background/95 px-2.5 py-1 text-[11px] font-semibold text-primary-deep shadow-sm backdrop-blur">
+        <span className="absolute top-3 right-3 rounded-full bg-background/95 px-2.5 py-1 text-xs font-semibold text-primary-deep shadow-sm backdrop-blur">
           {t.type[recipe.type]}
         </span>
       </div>

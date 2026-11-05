@@ -139,6 +139,7 @@ type Dictionary = {
   difficulty: Record<Difficulty, string>;
   type: Record<RecipeType, string>;
   price: Record<AveragePrice, string>;
+  priceLabel: Record<AveragePrice, string>;
   locale: string;
 };
 
@@ -303,6 +304,11 @@ export const dictionaries: Record<Lang, Dictionary> = {
       "€€": "€€",
       "€€€": "€€€",
     } as Record<AveragePrice, string>,
+    priceLabel: {
+      "€": "Prix économique",
+      "€€": "Prix moyen",
+      "€€€": "Prix élevé",
+    } as Record<AveragePrice, string>,
     locale: "fr-FR",
   },
   en: {
@@ -463,7 +469,12 @@ export const dictionaries: Record<Lang, Dictionary> = {
     price: {
       "€": "$",
       "€€": "$$",
-      "€€€": "$$$",
+      "€€€": "$$",
+    } as Record<AveragePrice, string>,
+    priceLabel: {
+      "€": "Low price",
+      "€€": "Medium price",
+      "€€€": "High price",
     } as Record<AveragePrice, string>,
     locale: "en-US",
   },

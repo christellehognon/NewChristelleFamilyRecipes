@@ -12,7 +12,7 @@ const seasonBg: Record<Season, string> = {
 
 const difficultyBg: Record<Difficulty, string> = {
   Facile: "bg-difficulty-easy",
-  Technique: "bg-difficulty-technical",
+  Technique: "bg-difficulty-hard",
 };
 
 const priceBg: Record<AveragePrice, string> = {
@@ -22,7 +22,7 @@ const priceBg: Record<AveragePrice, string> = {
 };
 
 const pastille =
-  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold text-foreground/85 shadow-sm";
+  "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/85 shadow-sm";
 
 export function SeasonPastille({ season }: { season: Season }) {
   const { t } = useI18n();
@@ -49,7 +49,8 @@ export function PricePastille({ price }: { price: AveragePrice }) {
   return (
     <span className={`${pastille} ${priceBg[price]}`}>
       <Coins className="size-3" />
-      {t.price[price]}
+      <span aria-hidden="true">{t.price[price]}</span>
+      <span className="sr-only">{t.priceLabel[price]}</span>
     </span>
   );
 }

@@ -8,7 +8,8 @@ import {
   SeasonPastille,
 } from "@/components/RecipePastilles";
 import {
-  type RecipeType,
+  type Recipe,
+  type RecipeDescription,
   localizeDescription,
   localizeRecipe,
   recipes,
@@ -60,7 +61,10 @@ function NotFoundView() {
 
 function RecipePage() {
   const { t, lang } = useI18n();
-  const { recipe, text } = Route.useLoaderData();
+  // Annotation explicite : TypeScript perd le type du loader à cause de la
+  // référence circulaire entre `Route` et `RecipePage`.
+  const { recipe, text }: { recipe: Recipe; text: RecipeDescription } =
+    Route.useLoaderData();
   const loc = localizeRecipe(recipe, lang);
   const description = localizeDescription(text, lang);
   usePageMeta(
@@ -68,7 +72,6 @@ function RecipePage() {
     description.slice(0, 155),
   );
   const { prep, cook } = splitCookingTime(loc.timeToCook);
-  const recipeType = recipe.type as RecipeType;
   // Split description into sentences for nicer step-like display
   const steps = description
     .split(/(?<=[.!?])\s+/)
@@ -109,7 +112,7 @@ function RecipePage() {
 
           <header className="mt-8">
             <span className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-              {t.type[recipeType]}
+              {t.type[recipe.type]}
             </span>
             <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
               {loc.name}
@@ -154,9 +157,9 @@ function RecipePage() {
                 {t.recipe.ingredients}
               </h2>
               <ul className="mt-4 space-y-2.5">
-                {loc.ingredients.map((ing: string) => (
+                {loc.ingredients.map((ing, i) => (
                   <li
-                    key={ing}
+                    key={`${i}-${ing}`}
                     className="flex items-start gap-3 rounded-xl bg-card px-4 py-2.5 shadow-sm"
                   >
                     <span className="mt-1.5 inline-block size-2 shrink-0 rounded-full bg-primary" />
