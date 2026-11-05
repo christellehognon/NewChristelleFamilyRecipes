@@ -1,15 +1,11 @@
 import { useEffect } from "react";
 import { createRouter, useRouter } from "@tanstack/react-router";
+import { I18nProvider, useI18n } from "@/i18n/I18nProvider";
 import { routeTree } from "./routeTree.gen";
 
-function DefaultErrorComponent({
-  error,
-  reset,
-}: {
-  error: unknown;
-  reset: () => void;
-}) {
+function ErrorScreen({ error, reset }: { error: unknown; reset: () => void }) {
   const router = useRouter();
+  const { t } = useI18n();
   const message = error instanceof Error ? error.message : undefined;
 
   useEffect(() => {
@@ -39,10 +35,10 @@ function DefaultErrorComponent({
           </svg>
         </div>
         <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Something went wrong
+          {t.errorPage.errorTitle}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          An unexpected error occurred. Please try again.
+          {t.errorPage.errorText}
         </p>
         {import.meta.env.DEV && message && (
           <pre className="mt-4 max-h-40 overflow-auto rounded-md bg-muted p-3 text-left font-mono text-xs text-destructive">
@@ -57,17 +53,27 @@ function DefaultErrorComponent({
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            {t.errorPage.retry}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            {t.errorPage.home}
           </a>
         </div>
       </div>
     </main>
+  );
+}
+
+// Fournisseur de langue propre à l'écran d'erreur : il reste utilisable même si
+// l'erreur vient du layout racine, hors du fournisseur principal.
+function DefaultErrorComponent(props: { error: unknown; reset: () => void }) {
+  return (
+    <I18nProvider>
+      <ErrorScreen {...props} />
+    </I18nProvider>
   );
 }
 

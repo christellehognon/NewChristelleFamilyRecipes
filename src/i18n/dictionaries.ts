@@ -27,6 +27,14 @@ type Dictionary = {
     legal: string;
     rights: string;
   };
+  errorPage: {
+    notFoundTitle: string;
+    notFoundText: string;
+    errorTitle: string;
+    errorText: string;
+    retry: string;
+    home: string;
+  };
   home: {
     badge: string;
     titleA: string;
@@ -162,6 +170,14 @@ export const dictionaries: Record<Lang, Dictionary> = {
       privacy: "Politique de confidentialité",
       legal: "Mentions légales",
       rights: "Tous droits réservés",
+    },
+    errorPage: {
+      notFoundTitle: "Page introuvable",
+      notFoundText: "La page que vous cherchez n'existe pas ou a été déplacée.",
+      errorTitle: "Une erreur est survenue",
+      errorText: "Un problème inattendu s'est produit. Veuillez réessayer.",
+      retry: "Réessayer",
+      home: "Retour à l'accueil",
     },
     home: {
       badge: "✨ Cuisine de famille",
@@ -329,6 +345,15 @@ export const dictionaries: Record<Lang, Dictionary> = {
       privacy: "Privacy policy",
       legal: "Legal notice",
       rights: "All rights reserved",
+    },
+    errorPage: {
+      notFoundTitle: "Page not found",
+      notFoundText:
+        "The page you're looking for doesn't exist or has been moved.",
+      errorTitle: "Something went wrong",
+      errorText: "An unexpected error occurred. Please try again.",
+      retry: "Try again",
+      home: "Back to home",
     },
     home: {
       badge: "✨ Family cooking",

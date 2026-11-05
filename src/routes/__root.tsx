@@ -5,24 +5,28 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { usePageMeta } from "@/i18n/usePageMeta";
-import { I18nProvider } from "@/i18n/I18nProvider";
+import { I18nProvider, useI18n } from "@/i18n/I18nProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
-  usePageMeta("404 — Christelle's Family Recipes");
+  const { t } = useI18n();
+  usePageMeta(`404 — Christelle's Family Recipes`);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <main
+      id="main"
+      className="flex min-h-screen items-center justify-center bg-background px-4"
+    >
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">
-          Page not found
+          {t.errorPage.notFoundTitle}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          {t.errorPage.notFoundText}
         </p>
       </div>
-    </div>
+    </main>
   );
 }
 

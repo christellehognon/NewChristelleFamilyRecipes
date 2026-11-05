@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "@tanstack/react-router";
 import { CookingPot, Clock, UtensilsCrossed } from "lucide-react";
 import { localizeRecipe, type Recipe, splitCookingTime } from "@/data/recipes";
@@ -9,7 +10,7 @@ import {
 } from "./RecipePastilles";
 import { useI18n } from "@/i18n/I18nProvider";
 
-export function RecipeCard({
+export const RecipeCard = memo(function RecipeCard({
   recipe,
   index = 0,
 }: {
@@ -43,7 +44,7 @@ export function RecipeCard({
           </div>
         )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
-        <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-background/95 py-1 pl-1 pr-3 shadow-md backdrop-blur">
+        <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-background/95 py-1 pl-1 pr-3 shadow-md">
           <img
             src={recipe.authorImg}
             alt=""
@@ -57,7 +58,7 @@ export function RecipeCard({
             </span>
           )}
         </div>
-        <span className="absolute top-3 right-3 rounded-full bg-background/95 px-2.5 py-1 text-xs font-semibold text-primary-deep shadow-sm backdrop-blur">
+        <span className="absolute top-3 right-3 rounded-full bg-background/95 px-2.5 py-1 text-xs font-semibold text-primary-deep shadow-sm">
           {t.type[recipe.type]}
         </span>
       </div>
@@ -92,4 +93,4 @@ export function RecipeCard({
       </div>
     </Link>
   );
-}
+});
