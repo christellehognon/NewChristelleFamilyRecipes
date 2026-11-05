@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createRouter, useRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
@@ -11,8 +12,15 @@ function DefaultErrorComponent({
   const router = useRouter();
   const message = error instanceof Error ? error.message : undefined;
 
+  useEffect(() => {
+    console.error("Erreur de rendu :", error);
+  }, [error]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <main
+      id="main"
+      className="flex min-h-screen items-center justify-center bg-background px-4"
+    >
       <div className="max-w-md text-center">
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
           <svg
@@ -59,7 +67,7 @@ function DefaultErrorComponent({
           </a>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

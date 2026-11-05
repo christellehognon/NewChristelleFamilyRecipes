@@ -23,8 +23,8 @@ function detectInitialLang(): Lang {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "fr" || stored === "en") return stored;
-  } catch {
-    // ignore
+  } catch (e) {
+    if (import.meta.env.DEV) console.warn("localStorage indisponible", e);
   }
   const nav = window.navigator?.language?.toLowerCase() ?? "";
   return nav.startsWith("en") ? "en" : "fr";
@@ -48,8 +48,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     setLangState(l);
     try {
       window.localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      // ignore
+    } catch (e) {
+      if (import.meta.env.DEV) console.warn("localStorage indisponible", e);
     }
   }, []);
 

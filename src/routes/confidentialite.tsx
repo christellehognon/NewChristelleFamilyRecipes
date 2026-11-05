@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 import { dictionaries } from "@/i18n/dictionaries";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const Route = createFileRoute("/confidentialite")({
   component: PrivacyPage,
@@ -44,7 +45,7 @@ const content = {
               <a
                 href="https://web3forms.com/legal/privacy-policy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="text-primary-deep underline underline-offset-2"
               >
                 Web3Forms
@@ -72,7 +73,7 @@ const content = {
             Les emails reçus sont conservés dans la boîte mail personnelle de
             Christelle (
             <code className="rounded bg-secondary px-1.5 py-0.5 text-sm">
-              christellefamilyrecipes@gmail.com
+              {CONTACT_EMAIL}
             </code>
             ) le temps nécessaire pour vous répondre, puis archivés ou
             supprimés.
@@ -89,10 +90,10 @@ const content = {
               suppression et d'opposition concernant vos données. Pour exercer
               ces droits, écrivez à :{" "}
               <a
-                href="mailto:christellefamilyrecipes@gmail.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-primary-deep underline underline-offset-2"
               >
-                christellefamilyrecipes@gmail.com
+                {CONTACT_EMAIL}
               </a>
               .
             </p>
@@ -101,7 +102,7 @@ const content = {
               <a
                 href="https://www.cnil.fr"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="text-primary-deep underline underline-offset-2"
               >
                 CNIL
@@ -169,7 +170,7 @@ const content = {
               <a
                 href="https://web3forms.com/legal/privacy-policy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="text-primary-deep underline underline-offset-2"
               >
                 Web3Forms
@@ -195,7 +196,7 @@ const content = {
           <p>
             Emails received are kept in Christelle's personal mailbox (
             <code className="rounded bg-secondary px-1.5 py-0.5 text-sm">
-              christellefamilyrecipes@gmail.com
+              {CONTACT_EMAIL}
             </code>
             ) for as long as needed to reply, then archived or deleted.
           </p>
@@ -210,10 +211,10 @@ const content = {
               right to access, rectify, delete and object to the processing of
               your data. To exercise these rights, write to:{" "}
               <a
-                href="mailto:christellefamilyrecipes@gmail.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-primary-deep underline underline-offset-2"
               >
-                christellefamilyrecipes@gmail.com
+                {CONTACT_EMAIL}
               </a>
               .
             </p>
@@ -222,7 +223,7 @@ const content = {
               <a
                 href="https://www.cnil.fr"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="text-primary-deep underline underline-offset-2"
               >
                 CNIL

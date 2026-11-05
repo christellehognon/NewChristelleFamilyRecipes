@@ -1,8 +1,8 @@
 import { Heart, Instagram, Mail } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n/I18nProvider";
+import { CONTACT_EMAIL } from "@/lib/site";
 
-const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
 export function SiteFooter() {
@@ -19,7 +19,7 @@ export function SiteFooter() {
         </p>
         <div className="flex items-center gap-3">
           <a
-            href={`mailto:${EMAIL}`}
+            href={`mailto:${CONTACT_EMAIL}`}
             aria-label={t.footer.sendEmail}
             className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground"
           >
@@ -28,7 +28,7 @@ export function SiteFooter() {
           <a
             href={`https://instagram.com/${INSTAGRAM_HANDLE}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="Instagram"
             className="grid size-9 place-items-center rounded-full bg-secondary text-foreground/70 transition-colors hover:bg-primary hover:text-primary-foreground"
           >

@@ -367,7 +367,7 @@ function HomePage() {
                 }
                 className="rounded-full px-4 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground border border-border"
               >
-                Afficher plus
+                {t.home.showMore}
               </button>
             </div>
           )}

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { ChefPhoto } from "./ChefPhoto";
 
 export function ChefPill({
   name,
@@ -23,20 +24,12 @@ export function ChefPill({
           : "border-border bg-card text-foreground/75 hover:border-primary/40 hover:text-foreground",
       )}
     >
-      {img ? (
-        <img
-          src={img}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="size-6 rounded-full object-cover"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
-      ) : (
-        <span className="inline-block size-6 rounded-full bg-secondary" />
-      )}
+      <ChefPhoto
+        src={img}
+        lazy
+        className="size-6 rounded-full object-cover"
+        iconClassName="size-3.5"
+      />
       <span>{name}</span>
     </button>
   );

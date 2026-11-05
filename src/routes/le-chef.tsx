@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { UserRound } from "lucide-react";
+import { ChefPhoto } from "@/components/ChefPhoto";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { chiefs, localizeChief } from "@/data/recipes";
@@ -13,20 +13,12 @@ export const Route = createFileRoute("/le-chef")({
 function ChefAvatar({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="size-32 overflow-hidden rounded-full bg-secondary ring-4 ring-primary/30">
-      {src ? (
-        <img
-          src={src}
-          alt={alt}
-          className="size-full object-cover"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
-      ) : (
-        <div className="grid size-full place-items-center text-muted-foreground">
-          <UserRound className="size-12" />
-        </div>
-      )}
+      <ChefPhoto
+        src={src}
+        alt={alt}
+        className="size-full object-cover"
+        iconClassName="size-12"
+      />
     </div>
   );
 }
@@ -74,23 +66,12 @@ function ChefPage() {
                 className="flex w-full flex-col items-center rounded-2xl bg-card p-5 text-center shadow-sm sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
               >
                 <div className="size-20 overflow-hidden rounded-full bg-secondary ring-2 ring-primary/20">
-                  {c.img ? (
-                    <img
-                      src={c.img}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      className="size-full object-cover"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display =
-                          "none";
-                      }}
-                    />
-                  ) : (
-                    <div className="grid size-full place-items-center text-muted-foreground">
-                      <UserRound className="size-8" />
-                    </div>
-                  )}
+                  <ChefPhoto
+                    src={c.img}
+                    lazy
+                    className="size-full object-cover"
+                    iconClassName="size-8"
+                  />
                 </div>
                 <p className="mt-3 font-display text-lg font-semibold">
                   {c.name}

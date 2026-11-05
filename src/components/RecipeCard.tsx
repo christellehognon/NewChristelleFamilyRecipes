@@ -23,7 +23,7 @@ export function RecipeCard({
     <Link
       to="/recettes/$slug"
       params={{ slug: recipe.slug }}
-      className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] animate-in fade-in slide-in-from-bottom-4"
+      className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] animate-in fade-in slide-in-from-bottom-4 motion-reduce:animate-none motion-reduce:transition-none motion-reduce:hover:translate-y-0"
       style={{
         animationDelay: `${Math.min(index * 60, 400)}ms`,
         animationFillMode: "backwards",

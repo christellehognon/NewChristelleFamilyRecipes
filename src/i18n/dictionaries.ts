@@ -33,6 +33,7 @@ type Dictionary = {
     titleB: string;
     lead: string;
     shuffle: string;
+    showMore: string;
     searchPlaceholder: string;
     clearSearch: string;
     filterType: string;
@@ -167,6 +168,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       titleB: "adore vraiment.",
       lead: "Carnet de cuisine partagé entre les générations — des classiques de la cuisine française aux expérimentations gourmandes des plus jeunes.",
       shuffle: "Mélanger les recettes",
+      showMore: "Afficher plus",
       searchPlaceholder: "Recherche par recette ou ingrédient…",
       clearSearch: "Effacer la recherche",
       filterType: "Type",
@@ -328,6 +330,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       titleB: "truly loves.",
       lead: "A cooking notebook shared across generations — from French culinary classics to the youngest's tasty experiments.",
       shuffle: "Shuffle recipes",
+      showMore: "Show more",
       searchPlaceholder: "Search by recipe or ingredient…",
       clearSearch: "Clear search",
       filterType: "Type",

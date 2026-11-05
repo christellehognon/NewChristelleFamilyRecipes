@@ -19,8 +19,8 @@ import { toast } from "sonner";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 import type { Dict } from "@/i18n/dictionaries";
+import { CONTACT_EMAIL } from "@/lib/site";
 
-const EMAIL = "christellefamilyrecipes@gmail.com";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
 // Clé publique Web3Forms (variable exposée par envPrefix, donc visible dans le bundle) : voir .env.example.
@@ -163,9 +163,9 @@ function ContactPage() {
               <InfoCard
                 icon={<Mail className="size-5" />}
                 title={t.contact.byEmail}
-                href={`mailto:${EMAIL}`}
+                href={`mailto:${CONTACT_EMAIL}`}
               >
-                {EMAIL}
+                {CONTACT_EMAIL}
               </InfoCard>
             </div>
             <div className="mb-8">

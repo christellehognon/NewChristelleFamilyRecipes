@@ -42,7 +42,7 @@ const content = {
           <a
             href="https://www.ovh.com"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="text-primary-deep underline underline-offset-2"
           ></a>
           https://www.ovh.com
@@ -128,7 +128,7 @@ const content = {
           <a
             href="https://lovable.dev"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="text-primary-deep underline underline-offset-2"
           >
             https://lovable.dev
@@ -151,7 +151,7 @@ const content = {
             <a
               href="https://unsplash.com"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-primary-deep underline underline-offset-2"
             >
               Unsplash
