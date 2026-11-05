@@ -44,9 +44,7 @@ const buildSchema = (t: Dict) =>
       .trim()
       .min(10, { message: t.contact.errMessage })
       .max(2000, { message: t.contact.errMessageLong }),
-    consent: z.literal(true, {
-      errorMap: () => ({ message: t.contact.errConsent }),
-    }),
+    consent: z.literal(true, { error: t.contact.errConsent }),
   });
 
 export const Route = createFileRoute("/contact")({
