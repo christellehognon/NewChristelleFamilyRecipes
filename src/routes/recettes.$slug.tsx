@@ -17,6 +17,7 @@ import {
   splitCookingTime,
 } from "@/data/recipes";
 import { isLandscapePhoto } from "@/data/image-orientation";
+import { splitSteps } from "@/lib/steps";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 
@@ -74,11 +75,8 @@ function RecipePage() {
     description.slice(0, 155),
   );
   const { prep, cook } = splitCookingTime(loc.timeToCook);
-  // Split description into sentences for nicer step-like display
-  const steps = description
-    .split(/(?<=[.!?])\s+/)
-    .map((s: string) => s.trim())
-    .filter(Boolean);
+  // Une étape par phrase (voir splitSteps pour les abréviations).
+  const steps = splitSteps(description);
 
   return (
     <div className="min-h-screen flex flex-col">

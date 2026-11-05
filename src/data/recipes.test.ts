@@ -130,6 +130,15 @@ describe("données des recettes", () => {
     expect(missing).toEqual([]);
   });
 
+  it("a le JPEG de partage carré de chaque photo de galerie", () => {
+    // Utilisé par les aperçus de liens (public/img/share, même nom de fichier).
+    const missing = [...new Set(recipes.map((r) => r.image))]
+      .filter((p) => /^\/img\/gallery\/[^/]+\.jpg$/i.test(p))
+      .map((p) => p.replace("/img/gallery/", "/img/share/"))
+      .filter((p) => !existsSync(path.join(publicDir, p)));
+    expect(missing).toEqual([]);
+  });
+
   it("liste exactement les photos paysage de la galerie", () => {
     // Dimensions lues dans l'en-tête JPEG (marqueur SOF), sans dépendance.
     const size = (file: string) => {
