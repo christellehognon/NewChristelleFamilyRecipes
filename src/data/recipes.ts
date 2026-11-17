@@ -2094,6 +2094,19 @@ export function localizeRecipe(recipe: Recipe, lang: "fr" | "en") {
   };
 }
 
+/**
+ * Langue réelle d'un texte affiché : quand la traduction anglaise manque, le
+ * texte français s'affiche dans l'interface anglaise et doit être déclaré
+ * `lang="fr"` (WCAG 3.1.2). Renvoie `undefined` quand la langue du document
+ * suffit, pour ne pas ajouter d'attribut inutile.
+ */
+export function fallbackLang(
+  translated: unknown,
+  lang: "fr" | "en",
+): "fr" | undefined {
+  return lang === "en" && translated == null ? "fr" : undefined;
+}
+
 export function localizeDescription(
   text: RecipeDescription,
   lang: "fr" | "en",

@@ -383,11 +383,17 @@ function HomePage() {
         {/* Grid */}
         <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">
+            {/* Le titre est lui-même la zone annoncée quand le nombre change :
+                plus de second texte caché qui répète le compteur. */}
+            <h2
+              aria-live="polite"
+              aria-atomic="true"
+              className="font-display text-2xl font-semibold md:text-3xl"
+            >
               {countLabel}
             </h2>
             <p role="status" className="sr-only">
-              {announce ? `${announce}. ${countLabel}` : countLabel}
+              {announce}
             </p>
             {/* Seules les icônes de durée n'ont pas de libellé sur les cartes. */}
             {filtered.length > 0 && (

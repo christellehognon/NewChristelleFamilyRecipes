@@ -8,6 +8,7 @@ import {
   chiefNames,
   chiefs,
   difficulties,
+  fallbackLang,
   localizeDescription,
   localizeRecipe,
   recipeTypes,
@@ -225,6 +226,17 @@ describe("localizeRecipe", () => {
     expect(loc.name).toBe("Riz au lait");
     expect(loc.ingredients).toEqual(["riz", "lait"]);
     expect(loc.timeToCook).toBe(base.timeToCook);
+  });
+});
+
+describe("fallbackLang", () => {
+  it("déclare le français quand la traduction anglaise manque", () => {
+    expect(fallbackLang(undefined, "en")).toBe("fr");
+  });
+
+  it("ne renvoie rien quand la traduction existe ou en français", () => {
+    expect(fallbackLang("Rice pudding", "en")).toBeUndefined();
+    expect(fallbackLang(undefined, "fr")).toBeUndefined();
   });
 });
 

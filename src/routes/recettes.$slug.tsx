@@ -11,6 +11,7 @@ import {
 import {
   type Recipe,
   type RecipeDescription,
+  fallbackLang,
   localizeDescription,
   localizeRecipe,
   recipes,
@@ -123,7 +124,9 @@ function RecipePage() {
                   {t.type[recipe.type]}
                 </span>
                 <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
-                  {loc.name}
+                  <span lang={fallbackLang(recipe.name_en, lang)}>
+                    {loc.name}
+                  </span>
                 </h1>
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   <SeasonPastille season={recipe.season} />
@@ -166,7 +169,10 @@ function RecipePage() {
               <h2 className="font-display text-2xl font-semibold">
                 {t.recipe.ingredients}
               </h2>
-              <ul className="mt-4 space-y-2.5">
+              <ul
+                className="mt-4 space-y-2.5"
+                lang={fallbackLang(recipe.ingredients_en, lang)}
+              >
                 {loc.ingredients.map((ing, i) => (
                   <li
                     key={`${i}-${ing}`}
@@ -185,7 +191,10 @@ function RecipePage() {
               <h2 className="font-display text-2xl font-semibold">
                 {t.recipe.preparation}
               </h2>
-              <ol className="mt-4 space-y-4">
+              <ol
+                className="mt-4 space-y-4"
+                lang={fallbackLang(text.description_en, lang)}
+              >
                 {steps.map((step: string, i: number) => (
                   <li key={i} className="flex gap-4">
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-primary font-display text-base font-semibold text-primary-foreground shadow-sm">

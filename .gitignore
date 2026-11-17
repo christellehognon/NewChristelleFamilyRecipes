@@ -10,5 +10,6 @@ build
 !.env.example
 .DS_Store
 *.log
-*.github
+.github/hooks/
+.tanstack/
 *.claude

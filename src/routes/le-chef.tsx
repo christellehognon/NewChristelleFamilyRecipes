@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ChefPhoto } from "@/components/ChefPhoto";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { chiefs, localizeChief } from "@/data/recipes";
+import { chiefs, fallbackLang, localizeChief } from "@/data/recipes";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 
@@ -76,7 +76,10 @@ function ChefPage() {
                 <p className="mt-3 font-display text-lg font-semibold">
                   {c.name}
                 </p>
-                <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                <p
+                  className="mt-2 text-base leading-relaxed text-muted-foreground"
+                  lang={fallbackLang(c.description_en, lang)}
+                >
                   {localizeChief(c, lang).description}
                 </p>
               </div>

@@ -1,7 +1,12 @@
 import { memo, useId } from "react";
 import { Link } from "@tanstack/react-router";
 import { CookingPot, Clock, UtensilsCrossed } from "lucide-react";
-import { localizeRecipe, type Recipe, splitCookingTime } from "@/data/recipes";
+import {
+  fallbackLang,
+  localizeRecipe,
+  type Recipe,
+  splitCookingTime,
+} from "@/data/recipes";
 import { RecipeImage } from "./RecipeImage";
 import {
   DifficultyPastille,
@@ -80,7 +85,7 @@ export const RecipeCard = memo(function RecipeCard({
           id={`${id}-title`}
           className="font-display text-xl font-semibold leading-tight text-foreground transition-colors group-hover:text-primary-deep"
         >
-          {loc.name}
+          <span lang={fallbackLang(recipe.name_en, lang)}>{loc.name}</span>
         </h3>
 
         <div id={`${id}-tags`} className="flex flex-wrap gap-1.5">
