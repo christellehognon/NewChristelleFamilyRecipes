@@ -5,6 +5,31 @@
 @import "tw-animate-css";
 @source "../src";
 
+/* Polices de repli aux métriques de Fraunces et de Nunito : pendant le
+   chargement, le texte occupe presque la même place, donc le titre d'accueil
+   ne saute plus quand la vraie police arrive. Valeurs mesurées dans le
+   navigateur (largeur d'un texte français de 200 caractères, semi-gras pour
+   Fraunces, normal pour Nunito) : Fraunces 83,9 % / Georgia gras 110,0 %,
+   Nunito 95,8 % / Arial 96,1 %. À recalculer si les polices changent. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia Bold"), local("Georgia-Bold");
+  font-weight: 600;
+  size-adjust: 76.3%;
+  ascent-override: 128.4%;
+  descent-override: 34.1%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Nunito Fallback";
+  src: local("Arial");
+  size-adjust: 99.6%;
+  ascent-override: 101.4%;
+  descent-override: 35.1%;
+  line-gap-override: 0%;
+}
+
 /* Le mode sombre suit le réglage clair/sombre de l'appareil (pas de bouton).
    Pas de script pour poser une classe : la CSP du site interdit les scripts
    inline, et un script n'aurait de toute façon pas fini avant l'affichage. */
@@ -25,8 +50,10 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
-  --font-sans: "Nunito Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Fraunces Variable", "Fraunces Fallback", ui-serif, Georgia, serif;
+  --font-sans:
+    "Nunito Variable", "Nunito Fallback", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

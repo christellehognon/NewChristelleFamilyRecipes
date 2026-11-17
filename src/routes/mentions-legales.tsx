@@ -205,7 +205,7 @@ function LegalPage() {
           {t.legal.title}
         </h1>
 
-        <div className="mt-8 space-y-6 text-foreground/85">
+        <div className="mt-8 max-w-prose space-y-6 text-foreground/85">
           {content[lang].map((s) => (
             <Section key={s.title} title={s.title}>
               {s.body}

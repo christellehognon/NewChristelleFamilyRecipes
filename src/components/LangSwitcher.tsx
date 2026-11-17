@@ -10,7 +10,7 @@ export function LangSwitcher({ className }: { className?: string }) {
       role="group"
       aria-label={t.nav.langLabel}
       className={cn(
-        "inline-flex items-center rounded-full border border-border bg-card p-0.5 text-xs font-semibold",
+        "inline-flex items-center rounded-full border border-border bg-card p-0.5 text-sm font-semibold",
         className,
       )}
     >

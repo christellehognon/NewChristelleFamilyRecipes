@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-11-17T18:36:40.878Z",
+        "reason": "Fraunces est la police de titres établie du projet, déclarée dans PRODUCT.md (stack: Fraunces et Nunito) ; le finding est apparu parce que les polices de repli et le préchargement la citent, pas parce qu'elle a été introduite."
+      }
+    ]
+  }
+}

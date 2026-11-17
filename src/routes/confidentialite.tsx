@@ -283,7 +283,7 @@ function PrivacyPage() {
           </span>
         </p>
 
-        <div className="prose prose-stone mt-8 max-w-none space-y-6 text-foreground/85">
+        <div className="prose prose-stone mt-8 max-w-prose space-y-6 text-foreground/85">
           {sections.map((s) => (
             <Section key={s.title} title={s.title}>
               {s.body}

@@ -36,7 +36,7 @@ export function SiteHeader() {
             <span className="font-display text-lg font-semibold tracking-tight md:text-xl">
               Christelle's
             </span>
-            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">
               Family Recipes
             </span>
           </span>

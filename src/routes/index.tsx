@@ -441,7 +441,7 @@ function HomePage() {
               <button
                 type="button"
                 onClick={handleShowMore}
-                className="rounded-full border border-border px-4 py-2 text-xs font-semibold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-6"
+                className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-6"
               >
                 {t.home.showMore}
               </button>
@@ -494,7 +494,7 @@ function ResetButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-4",
+        "inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground pointer-coarse:min-h-11 pointer-coarse:px-4",
         className,
       )}
     >
