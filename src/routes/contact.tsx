@@ -24,8 +24,10 @@ import { CONTACT_EMAIL } from "@/lib/site";
 const INSTAGRAM_HANDLE = "christellefamilyrecipes";
 
 // Clé publique Web3Forms (variable exposée par envPrefix, donc visible dans le bundle) : voir .env.example.
-const WEB3FORMS_ACCESS_KEY = import.meta.env.WEB3FORMS_ACCESS_KEY as
-  string | undefined;
+// Deux noms sont acceptés : WEB3FORMS_ACCESS_KEY (nom documenté) et WEB3FORMS_KEY
+// (nom utilisé dans les variables d'environnement de Vercel).
+const WEB3FORMS_ACCESS_KEY = (import.meta.env.WEB3FORMS_ACCESS_KEY ||
+  import.meta.env.WEB3FORMS_KEY) as string | undefined;
 
 const buildSchema = (t: Dict) =>
   z.object({
