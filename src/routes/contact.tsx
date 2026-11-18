@@ -162,11 +162,15 @@ function ContactPage() {
         message?: string;
       } | null;
       if (res.ok && data?.success) {
+        // Le panneau « Message envoyé ! » prend le focus et confirme déjà
+        // l'envoi : pas de second message en toast.
         setSent(true);
         form.reset();
-        toast.success(t.contact.toastSuccess);
       } else {
-        toast.error(data?.message ?? t.contact.toastError);
+        // Le message de l'API (en anglais, technique) reste dans la console :
+        // la personne voit un message dans sa langue, avec un recours.
+        console.error("Réponse d'erreur du formulaire de contact", data);
+        toast.error(t.contact.toastError);
       }
     } catch (e) {
       console.error("Échec de l'envoi du formulaire de contact", e);
@@ -185,7 +189,7 @@ function ContactPage() {
           className="border-b border-border/60"
           style={{ background: "var(--gradient-hero)" }}
         >
-          <div className="mx-auto max-w-4xl px-4 py-14 md:px-6 md:py-20">
+          <div className="mx-auto max-w-5xl px-4 py-14 md:px-6 md:py-20">
             <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-primary-deep backdrop-blur">
               {t.contact.badge}
             </span>

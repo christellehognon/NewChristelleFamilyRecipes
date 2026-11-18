@@ -260,7 +260,7 @@ export const recipeDescriptions: Record<string, RecipeDescription> = {
   },
   "tarte-aux-pommes": {
     description:
-      "Préchauffer le four à 200 degrés. Peler les pommes. Mettre la pâte feuilletée dans un moule à tarte. Disposer les trannches de pommes. Dans un récipient, battre les oeufs, la crème et le sucre. Mettre à four chaud. À la sortie du four, parsemer de sucre vanillé.",
+      "Préchauffer le four à 200 degrés. Peler les pommes. Mettre la pâte feuilletée dans un moule à tarte. Disposer les tranches de pommes. Dans un récipient, battre les oeufs, la crème et le sucre. Mettre à four chaud. À la sortie du four, parsemer de sucre vanillé.",
     description_en:
       "Preheat the oven to 200 degrees. Peel the apples. Place the puff pastry in a pie dish. Arrange the apple slices on top. In a bowl, whisk together the eggs, cream, and sugar. Bake in the preheated oven. Once removed from the oven, sprinkle with vanilla sugar.",
   },

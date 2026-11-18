@@ -18,6 +18,7 @@ import {
   splitCookingTime,
 } from "@/data/recipes";
 import { isLandscapePhoto } from "@/data/image-orientation";
+import { chefColorStyle } from "@/lib/chef-color";
 import { splitSteps } from "@/lib/steps";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
@@ -144,13 +145,16 @@ function RecipePage() {
                 </div>
               </header>
 
-              <section className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm">
+              <section
+                className="mt-8 flex items-center gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm"
+                style={chefColorStyle(recipe.authorName)}
+              >
                 <img
                   src={recipe.authorImg}
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  className="size-14 rounded-full object-cover ring-2 ring-primary/30"
+                  className="size-14 rounded-full object-cover ring-2 ring-(color:--chef)"
                 />
                 <div className="flex-1">
                   <p className="font-display text-xl font-semibold leading-snug text-foreground">

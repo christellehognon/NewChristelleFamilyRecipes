@@ -2,7 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ChefPhoto } from "@/components/ChefPhoto";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { chiefs, fallbackLang, localizeChief } from "@/data/recipes";
+import {
+  chiefs,
+  fallbackLang,
+  localizeChief,
+  type ChiefName,
+} from "@/data/recipes";
+import { chefColorStyle } from "@/lib/chef-color";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 
@@ -10,9 +16,20 @@ export const Route = createFileRoute("/le-chef")({
   component: ChefPage,
 });
 
-function ChefAvatar({ src, alt }: { src: string; alt: string }) {
+function ChefAvatar({
+  src,
+  alt,
+  name,
+}: {
+  src: string;
+  alt: string;
+  name: ChiefName;
+}) {
   return (
-    <div className="size-32 overflow-hidden rounded-full bg-secondary ring-4 ring-primary/30">
+    <div
+      className="size-32 overflow-hidden rounded-full bg-secondary ring-4 ring-(color:--chef)"
+      style={chefColorStyle(name)}
+    >
       <ChefPhoto
         src={src}
         alt={alt}
@@ -39,19 +56,23 @@ function ChefPage() {
           className="border-b border-border/60"
           style={{ background: "var(--gradient-hero)" }}
         >
-          <div className="mx-auto max-w-4xl px-4 py-14 md:px-6 md:py-20">
-            <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-primary-deep backdrop-blur">
-              {t.chef.badge}
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight md:text-5xl">
-              {t.chef.hello}{" "}
-              <span className="italic text-primary-deep">{lead.name}</span>.
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg text-foreground/75">
-              {t.chef.lead}
-            </p>
-            <div className="mt-6 flex justify-center">
-              <ChefAvatar src={lead.img} alt={lead.name} />
+          {/* Dès `lg`, le portrait passe à droite du texte : le bandeau est plus
+              bas et le portrait n'est plus centré sous un texte aligné à gauche. */}
+          <div className="mx-auto max-w-4xl px-4 py-14 md:px-6 md:py-20 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-x-12">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-primary-deep backdrop-blur">
+                {t.chef.badge}
+              </span>
+              <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight md:text-5xl">
+                {t.chef.hello}{" "}
+                <span className="italic text-primary-deep">{lead.name}</span>.
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg text-foreground/75">
+                {t.chef.lead}
+              </p>
+            </div>
+            <div className="mt-6 flex justify-center lg:mt-0">
+              <ChefAvatar src={lead.img} alt={lead.name} name={lead.name} />
             </div>
           </div>
         </section>
@@ -65,7 +86,10 @@ function ChefPage() {
                 key={c.name}
                 className="flex w-full flex-col items-center rounded-2xl bg-card p-5 text-center shadow-sm sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]"
               >
-                <div className="size-20 overflow-hidden rounded-full bg-secondary ring-2 ring-primary/20">
+                <div
+                  className="size-20 overflow-hidden rounded-full bg-secondary ring-2 ring-(color:--chef)"
+                  style={chefColorStyle(c.name)}
+                >
                   <ChefPhoto
                     src={c.img}
                     lazy

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import type {
   AveragePrice,
   Difficulty,
@@ -66,13 +65,14 @@ type Dictionary = {
     filters: string;
     legendPrep: string;
     legendCook: string;
+    /** Séparateur entre un libellé et sa valeur : espace avant « : » en français seulement. */
+    labelSep: string;
     vegetarian: string;
   };
   chef: {
     badge: string;
     hello: string;
     lead: string;
-    about: string;
     family: string;
     metaTitle: string;
     metaDesc: string;
@@ -99,7 +99,6 @@ type Dictionary = {
     consentLink: string;
     submit: string;
     sending: string;
-    toastSuccess: string;
     toastError: string;
     toastNetwork: string;
     toastNotConfigured: string;
@@ -153,7 +152,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
   fr: {
     nav: {
       home: "Accueil",
-      chef: "Les chefs",
+      chef: "Les cheffes",
       contact: "Contact",
       openMenu: "Ouvrir le menu",
       closeMenu: "Fermer le menu",
@@ -185,7 +184,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: "Carnet de cuisine partagé entre les générations — des classiques de la cuisine française aux expérimentations gourmandes des plus jeunes.",
       shuffle: "Mélanger les recettes",
       shuffled: "Recettes mélangées",
-      showMore: "Afficher plus",
+      showMore: "Afficher plus de recettes",
       searchPlaceholder: "Recherche par recette ou ingrédient…",
       clearSearch: "Effacer la recherche",
       filterType: "Type",
@@ -206,15 +205,15 @@ export const dictionaries: Record<Lang, Dictionary> = {
       filters: "Filtres",
       legendPrep: "Temps de préparation",
       legendCook: "Temps de cuisson",
+      labelSep: " : ",
       vegetarian: "Végétarien",
     },
     chef: {
       badge: "👩‍🍳 La cheffe",
       hello: "Bonjour, moi c'est",
       lead: "Je suis passionnée de cuisine grâce à des femmes merveilleuses qui m'ont énormément appris ! Mon credo : la cuisine doit rester simple, généreuse et partagée. Pas de chichis, des bons produits, et beaucoup d'amour.",
-      about: "À propos",
       family: "Les femmes qui m'ont tout appris",
-      metaTitle: "Le chef — Christelle's Family Recipes",
+      metaTitle: "Les cheffes — Christelle's Family Recipes",
       metaDesc:
         "Christelle, la cheffe de famille derrière le carnet, et toute la tribu qui partage la passion de la cuisine.",
     },
@@ -238,24 +237,25 @@ export const dictionaries: Record<Lang, Dictionary> = {
       placeholderEmail: "jeanne@email.com",
       placeholderMessage: "Bonjour Christelle…",
       consent:
-        "J'accepte que mon nom et mon email soient utilisés uniquement pour me répondre. Aucune donnée n'est stockée sur ce site. Voir la",
+        "J'accepte que mon nom, mon email et mon message soient transmis à Christelle, uniquement pour me répondre, par le service Web3Forms, qui en garde une copie jusqu'à trois ans et peut les traiter hors de l'Union européenne. Voir la",
       consentLink: "politique de confidentialité",
       submit: "Envoyer le message",
       sending: "Envoi en cours…",
-      toastSuccess: "Message envoyé ! Christelle vous répondra bientôt.",
-      toastError: "Une erreur est survenue. Réessayez plus tard.",
+      toastError:
+        "Votre message n'a pas pu être envoyé. Réessayez dans un instant, ou écrivez-moi par email.",
       toastNetwork:
         "Impossible d'envoyer le message. Vérifiez votre connexion.",
       toastNotConfigured:
-        "Le formulaire n'est pas encore configuré. La clé Web3Forms n'a pas été ajoutée.",
+        "Le formulaire est momentanément indisponible. Écrivez-moi directement par email.",
       errName: "Votre nom doit contenir au moins 2 caractères",
-      errNameLong: "Votre nom est trop long",
-      errEmail: "Email invalide",
-      errEmailLong: "Email trop long",
+      errNameLong: "Votre nom est trop long (80 caractères maximum)",
+      errEmail:
+        "Saisissez une adresse email valide, par exemple jeanne@email.com",
+      errEmailLong: "Cette adresse email est trop longue",
       errMessage: "Votre message doit contenir au moins 10 caractères",
       errMessageLong: "Votre message est trop long (max 2000 caractères)",
-      errConsent: "Vous devez accepter pour envoyer le message",
-      errInvalid: "Formulaire invalide",
+      errConsent: "Cochez la case pour envoyer votre message",
+      errInvalid: "Vérifiez les champs du formulaire.",
       requiredNote: "Tous les champs sont obligatoires.",
       subject: (name: string) =>
         `Nouveau message de ${name} — Christelle's Family Recipes`,
@@ -280,7 +280,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       backHome: "← Retour à l'accueil",
       metaTitle: "Politique de confidentialité — Christelle's Family Recipes",
       metaDesc:
-        "Comment vos données sont (ou plutôt, ne sont pas) collectées sur Christelle's Family Recipes.",
+        "Comment vos données sont traitées sur Christelle's Family Recipes.",
     },
     legal: {
       title: "Mentions légales",
@@ -355,7 +355,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       lead: "A cooking notebook shared across generations — from French culinary classics to the youngest's tasty experiments.",
       shuffle: "Shuffle recipes",
       shuffled: "Recipes shuffled",
-      showMore: "Show more",
+      showMore: "Show more recipes",
       searchPlaceholder: "Search by recipe or ingredient…",
       clearSearch: "Clear search",
       filterType: "Type",
@@ -376,13 +376,13 @@ export const dictionaries: Record<Lang, Dictionary> = {
       filters: "Filters",
       legendPrep: "Prep time",
       legendCook: "Cooking time",
+      labelSep: ": ",
       vegetarian: "Vegetarian",
     },
     chef: {
       badge: "👩‍🍳 The chef",
       hello: "Hello, I'm",
-      lead: "I’m passionate about cooking thanks to some wonderful women who have taught me so much! My credo: cooking should stay simple, generous and shared. No fuss, good ingredients, and lots of love.",
-      about: "About",
+      lead: "I'm passionate about cooking thanks to some wonderful women who have taught me so much! My credo: cooking should stay simple, generous and shared. No fuss, good ingredients, and lots of love.",
       family: "The women who taught me everything",
       metaTitle: "The chef — Christelle's Family Recipes",
       metaDesc:
@@ -408,23 +408,23 @@ export const dictionaries: Record<Lang, Dictionary> = {
       placeholderEmail: "jane@email.com",
       placeholderMessage: "Hi Christelle…",
       consent:
-        "I agree that my name and email may be used only to reply to me. No data is stored on this site. See the",
+        "I agree that my name, email and message are sent to Christelle, only so she can reply, through the Web3Forms service, which keeps a copy for up to three years and may process it outside the European Union. See the",
       consentLink: "privacy policy",
       submit: "Send message",
       sending: "Sending…",
-      toastSuccess: "Message sent! Christelle will reply soon.",
-      toastError: "Something went wrong. Please try again later.",
+      toastError:
+        "Your message could not be sent. Please try again in a moment, or email me.",
       toastNetwork: "Could not send the message. Please check your connection.",
       toastNotConfigured:
-        "The form is not configured yet. The Web3Forms key has not been added.",
+        "The form is temporarily unavailable. Please email me directly.",
       errName: "Your name must be at least 2 characters",
-      errNameLong: "Your name is too long",
-      errEmail: "Invalid email",
-      errEmailLong: "Email is too long",
+      errNameLong: "Your name is too long (80 characters maximum)",
+      errEmail: "Enter a valid email address, for example jane@email.com",
+      errEmailLong: "This email address is too long",
       errMessage: "Your message must be at least 10 characters",
       errMessageLong: "Your message is too long (max 2000 characters)",
-      errConsent: "You must accept to send the message",
-      errInvalid: "Invalid form",
+      errConsent: "Tick the box to send your message",
+      errInvalid: "Please check the form fields.",
       requiredNote: "All fields are required.",
       subject: (name: string) =>
         `New message from ${name} — Christelle's Family Recipes`,
@@ -449,8 +449,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
       updated: "Last updated",
       backHome: "← Back to home",
       metaTitle: "Privacy policy — Christelle's Family Recipes",
-      metaDesc:
-        "How your data is (or rather, is not) collected on Christelle's Family Recipes.",
+      metaDesc: "How your data is processed on Christelle's Family Recipes.",
     },
     legal: {
       title: "Legal notice",
@@ -467,7 +466,7 @@ export const dictionaries: Record<Lang, Dictionary> = {
     } as Record<Season, string>,
     difficulty: {
       Facile: "Easy",
-      Technique: "Technical",
+      Technique: "Advanced",
     } as Record<Difficulty, string>,
     type: {
       Entrée: "Starter",
@@ -478,9 +477,9 @@ export const dictionaries: Record<Lang, Dictionary> = {
       Végétarien: "Vegetarian",
     } as Record<RecipeType, string>,
     price: {
-      "€": "$",
-      "€€": "$$",
-      "€€€": "$$",
+      "€": "€",
+      "€€": "€€",
+      "€€€": "€€€",
     } as Record<AveragePrice, string>,
     priceLabel: {
       "€": "Low price",

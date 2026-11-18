@@ -33,15 +33,12 @@ const content = {
               anonyme (pages vues, pays de provenance, type de navigateur et
               d'appareil). Ces données sont agrégées et ne permettent pas de
               vous identifier personnellement. Aucun cookie n'est déposé à cette
-              fin. Lorsque vous utilisez le formulaire de contact, vos
-              informations (nom, email, message) sont uniquement transmises par
-              email à Christelle via le service Web3Forms, conforme RGPD. Aucune
-              copie n'est conservée sur ce site.
+              fin.
             </p>
             <p>
-              Lorsque vous utilisez le formulaire de contact, vos informations
-              (nom, email, message) sont uniquement transmises par email à
-              Christelle via le service{" "}
+              Lorsque vous utilisez le formulaire de contact, votre nom, votre
+              email et votre message sont transmis par email à Christelle via le
+              service{" "}
               <a
                 href="https://web3forms.com/legal/privacy-policy"
                 target="_blank"
@@ -50,7 +47,13 @@ const content = {
               >
                 Web3Forms
               </a>
-              , conforme RGPD. Aucune copie n'est conservée sur ce site.
+              , qui assure l'acheminement du message. Ce site n'en conserve
+              aucune copie, mais Web3Forms en conserve une (voir la section 4).
+              Ce prestataire peut traiter vos données hors de l'Union
+              européenne, notamment aux États-Unis et en Inde, dans le cadre des
+              clauses contractuelles types de l'Union européenne. Pour filtrer
+              le spam, il transmet votre adresse IP et votre email à des
+              services anti-spam (CleanTalk et Akismet).
             </p>
           </>
         ),
@@ -60,9 +63,10 @@ const content = {
         body: (
           <p>
             Vos données sont utilisées <strong>uniquement</strong> pour vous
-            répondre. Elles ne sont jamais transmises à des tiers, ni utilisées
-            à des fins commerciales ou publicitaires. Aucune newsletter, aucun
-            démarchage.
+            répondre. Elles ne sont jamais vendues, ni utilisées à des fins
+            commerciales ou publicitaires. Aucune newsletter, aucun démarchage.
+            Elles ne sont communiquées qu'aux prestataires techniques cités plus
+            haut, pour acheminer votre message et filtrer le spam.
           </p>
         ),
       },
@@ -76,7 +80,8 @@ const content = {
               {CONTACT_EMAIL}
             </code>
             ) le temps nécessaire pour vous répondre, puis archivés ou
-            supprimés.
+            supprimés. Le service Web3Forms conserve de son côté une copie des
+            messages envoyés pendant trois ans au maximum.
           </p>
         ),
       },
@@ -96,6 +101,12 @@ const content = {
                 {CONTACT_EMAIL}
               </a>
               .
+            </p>
+            <p>
+              La copie conservée par Web3Forms ne peut pas être supprimée depuis
+              ce site : pour en demander l'effacement, écrivez à la même
+              adresse, et Christelle transmettra votre demande au support de ce
+              service.
             </p>
             <p>
               Vous pouvez également déposer une réclamation auprès de la{" "}
@@ -159,14 +170,11 @@ const content = {
               Analytics to measure audience in an anonymous way (page views,
               country of origin, browser and device type). This data is
               aggregated and cannot be used to identify you personally. No
-              cookie is set for this purpose. When you use the contact form,
-              your information (name, email, message) is only forwarded by email
-              to Christelle via Web3Forms, a GDPR-compliant service. No copy is
-              kept on this site.
+              cookie is set for this purpose.
             </p>
             <p>
-              When you use the contact form, your information (name, email,
-              message) is only forwarded by email to Christelle via{" "}
+              When you use the contact form, your name, email and message are
+              sent by email to Christelle through the{" "}
               <a
                 href="https://web3forms.com/legal/privacy-policy"
                 target="_blank"
@@ -174,8 +182,13 @@ const content = {
                 className="text-primary-deep underline underline-offset-2"
               >
                 Web3Forms
-              </a>
-              , a GDPR-compliant service. No copy is kept on this site.
+              </a>{" "}
+              service, which delivers the message. This site keeps no copy, but
+              Web3Forms does (see section 4). This provider may process your
+              data outside the European Union, notably in the United States and
+              India, under the European Union's standard contractual clauses. To
+              filter spam, it passes your IP address and email address to
+              anti-spam services (CleanTalk and Akismet).
             </p>
           </>
         ),
@@ -185,8 +198,9 @@ const content = {
         body: (
           <p>
             Your data is used <strong>only</strong> to reply to you. It is never
-            shared with third parties, nor used for commercial or advertising
-            purposes. No newsletter, no marketing.
+            sold, nor used for commercial or advertising purposes. No
+            newsletter, no marketing. It is shared only with the technical
+            providers named above, to deliver your message and filter spam.
           </p>
         ),
       },
@@ -198,7 +212,9 @@ const content = {
             <code className="rounded bg-secondary px-1.5 py-0.5 text-sm">
               {CONTACT_EMAIL}
             </code>
-            ) for as long as needed to reply, then archived or deleted.
+            ) for as long as needed to reply, then archived or deleted. The
+            Web3Forms service keeps its own copy of the messages sent for up to
+            three years.
           </p>
         ),
       },
@@ -217,6 +233,11 @@ const content = {
                 {CONTACT_EMAIL}
               </a>
               .
+            </p>
+            <p>
+              The copy kept by Web3Forms cannot be deleted from this site: to
+              request its erasure, write to the same address and Christelle will
+              pass your request on to that service's support team.
             </p>
             <p>
               You may also lodge a complaint with the French{" "}

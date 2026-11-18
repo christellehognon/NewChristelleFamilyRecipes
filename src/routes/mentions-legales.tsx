@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { useI18n } from "@/i18n/I18nProvider";
 import { usePageMeta } from "@/i18n/usePageMeta";
 import { dictionaries } from "@/i18n/dictionaries";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const Route = createFileRoute("/mentions-legales")({
   component: LegalPage,
@@ -22,12 +23,16 @@ const content = {
             famille.
           </p>
           <p>
+            Responsable de la publication : <strong>Christelle</strong> (site
+            tenu par un particulier).
+          </p>
+          <p>
             Contact :{" "}
             <a
-              href="mailto:christellefamilyrecipes@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-primary-deep underline underline-offset-2"
             >
-              christellefamilyrecipes@gmail.com
+              {CONTACT_EMAIL}
             </a>
           </p>
         </>
@@ -37,15 +42,18 @@ const content = {
       title: "Hébergement",
       body: (
         <p>
-          This site is hosted by <strong>OVH</strong>
+          Ce site est hébergé par <strong>OVH SAS</strong> (OVHcloud)
+          <br />
+          2 rue Kellermann, 59100 Roubaix, France
           <br />
           <a
             href="https://www.ovh.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-deep underline underline-offset-2"
-          ></a>
-          https://www.ovh.com
+          >
+            https://www.ovh.com
+          </a>
         </p>
       ),
     },
@@ -108,12 +116,16 @@ const content = {
             Personal, non-commercial site dedicated to sharing family recipes.
           </p>
           <p>
+            Publisher: <strong>Christelle</strong> (site run by a private
+            individual).
+          </p>
+          <p>
             Contact:{" "}
             <a
-              href="mailto:christellefamilyrecipes@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="text-primary-deep underline underline-offset-2"
             >
-              christellefamilyrecipes@gmail.com
+              {CONTACT_EMAIL}
             </a>
           </p>
         </>
@@ -123,15 +135,17 @@ const content = {
       title: "Hosting",
       body: (
         <p>
-          This site is hosted by <strong>Lovable</strong>
+          This site is hosted by <strong>OVH SAS</strong> (OVHcloud)
+          <br />
+          2 rue Kellermann, 59100 Roubaix, France
           <br />
           <a
-            href="https://lovable.dev"
+            href="https://www.ovh.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-deep underline underline-offset-2"
           >
-            https://lovable.dev
+            https://www.ovh.com
           </a>
         </p>
       ),

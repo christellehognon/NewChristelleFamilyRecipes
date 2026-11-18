@@ -144,21 +144,40 @@
   --input: oklch(0.62 0.03 195); /* bordure des champs : 3,4:1 (WCAG 1.4.11) */
   --ring: oklch(0.53 0.12 195);
 
-  /* Pastilles — saisons */
-  --season-spring: oklch(0.85 0.12 140);
-  --season-summer: oklch(0.85 0.14 80);
-  --season-autumn: oklch(0.78 0.14 50);
-  --season-winter: oklch(0.85 0.08 230);
-  --season-all: oklch(0.88 0.06 195);
+  /* Une couleur par cheffe : anneau autour du portrait (jamais du texte). Six
+     teintes réparties sur le cercle ; Christelle garde le turquoise de la
+     marque. Le nom reste toujours écrit : la couleur n'est qu'un repère. */
+  --chef-christelle: oklch(0.6 0.12 195);
+  --chef-mamie-marie: oklch(0.65 0.13 15);
+  --chef-mamie-colette: oklch(0.7 0.13 75);
+  --chef-loulou: oklch(0.6 0.12 300);
+  --chef-la-memette: oklch(0.65 0.12 145);
+  --chef-eponine: oklch(0.6 0.12 255);
 
-  /* Pastilles — difficulté */
+  /* Pastilles : une pastille de saison, une de difficulté et une de coût
+     peuvent se retrouver sur la même carte ; leurs teintes sont donc choisies
+     pour ne jamais se ressembler d'un type à l'autre (écart perceptuel OKLab
+     ×100 : au moins 6,6 entre deux pastilles de types différents, contre 2,1
+     avant). Le vert est réservé à « Facile », le rose à « Technique », l'or
+     au coût. Les saisons prennent les autres teintes : lilas (printemps),
+     pêche (été), brun chaud (automne), bleu (hiver) ; « Toutes saisons » est
+     un sable neutre (aucune contrainte, donc pas de teinte), qui ne se
+     confond pas avec le cyan des étiquettes de type et de durée. */
+  --season-spring: oklch(0.86 0.08 305);
+  --season-summer: oklch(0.84 0.11 40);
+  --season-autumn: oklch(0.76 0.08 55);
+  --season-winter: oklch(0.84 0.09 250);
+  --season-all: oklch(0.91 0.025 90);
+
   --difficulty-easy: oklch(0.85 0.12 150);
-  --difficulty-hard: oklch(0.78 0.16 30);
+  --difficulty-hard: oklch(0.8 0.11 8);
 
-  /* Pastilles — coût */
-  --cost-low: oklch(0.88 0.1 160);
-  --cost-mid: oklch(0.85 0.13 90);
-  --cost-high: oklch(0.78 0.15 35);
+  /* Coût : une seule teinte (or) qui se renforce avec le prix, plutôt qu'un
+     feu tricolore vert-jaune-orange qui répétait les teintes des autres
+     pastilles. */
+  --cost-low: oklch(0.92 0.09 100);
+  --cost-mid: oklch(0.87 0.12 92);
+  --cost-high: oklch(0.8 0.15 80);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -186,6 +205,14 @@
     --border: oklch(1 0 0 / 12%);
     --input: oklch(0.6 0.02 220);
     --ring: oklch(0.6 0.1 195);
+
+    /* Anneaux des cheffes éclaircis pour rester visibles sur fond sombre. */
+    --chef-christelle: oklch(0.75 0.12 195);
+    --chef-mamie-marie: oklch(0.76 0.12 15);
+    --chef-mamie-colette: oklch(0.8 0.12 75);
+    --chef-loulou: oklch(0.74 0.12 300);
+    --chef-la-memette: oklch(0.76 0.12 145);
+    --chef-eponine: oklch(0.74 0.12 255);
 
     /* Sur fond sombre, une ombre teintée de turquoise ne se voit plus : noire. */
     --shadow-card: 0 6px 24px -12px oklch(0 0 0 / 0.5);

@@ -7,6 +7,7 @@ import {
   type Recipe,
   splitCookingTime,
 } from "@/data/recipes";
+import { chefColorStyle } from "@/lib/chef-color";
 import { RecipeImage } from "./RecipeImage";
 import {
   DifficultyPastille,
@@ -58,13 +59,14 @@ export const RecipeCard = memo(function RecipeCard({
         <div
           id={`${id}-author`}
           className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-background/95 py-1 pl-1 pr-3 shadow-md"
+          style={chefColorStyle(recipe.authorName, "var(--color-card)")}
         >
           <img
             src={recipe.authorImg}
             alt=""
             loading="lazy"
             decoding="async"
-            className="size-9 rounded-full object-cover ring-2 ring-card"
+            className="size-9 rounded-full object-cover ring-2 ring-(color:--chef)"
           />
           {recipe.authorName && (
             <span className="text-xs font-semibold text-foreground">
@@ -100,14 +102,20 @@ export const RecipeCard = memo(function RecipeCard({
         >
           <Clock className="size-3.5" />
           <span>
-            <span className="sr-only">{t.home.legendPrep} : </span>
+            <span className="sr-only">
+              {t.home.legendPrep}
+              {t.home.labelSep}
+            </span>
             <span className="font-medium text-foreground/70">{prep}</span>
           </span>
           {cook && (
             <span className="inline-flex items-center gap-1.5">
               <CookingPot className="size-3.5" />
               <span>
-                <span className="sr-only">{t.home.legendCook} : </span>
+                <span className="sr-only">
+                  {t.home.legendCook}
+                  {t.home.labelSep}
+                </span>
                 <span className="font-medium text-foreground/70">{cook}</span>
               </span>
             </span>

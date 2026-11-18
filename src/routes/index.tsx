@@ -209,37 +209,48 @@ function HomePage() {
           className="border-b border-border/60"
           style={{ background: "var(--gradient-hero)" }}
         >
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-            <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-primary-deep backdrop-blur">
-              {t.home.badge}
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-              {t.home.titleA}
-              <br />
-              <span className="italic text-primary-deep">{t.home.titleB}</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-base text-foreground/75 md:text-lg">
-              {t.home.lead}
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button
-                onClick={handleShuffle}
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary-deep h-11 px-6 shadow-[var(--shadow-card)] cursor-pointer"
-              >
-                <Shuffle className="size-4" />
-                {t.home.shuffle}
-              </Button>
+          {/* Dès `lg`, le titre est à gauche et l'introduction avec le bouton à
+              droite : le bandeau est plus bas et les recettes remontent. */}
+          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-12 lg:grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:items-end lg:gap-x-12">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1 text-xs font-medium text-primary-deep backdrop-blur">
+                {t.home.badge}
+              </span>
+              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
+                {t.home.titleA}
+                <br />
+                <span className="italic text-primary-deep">
+                  {t.home.titleB}
+                </span>
+              </h1>
+            </div>
+            <div>
+              <p className="mt-5 max-w-xl text-base text-foreground/75 md:text-lg lg:mt-0">
+                {t.home.lead}
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Button
+                  onClick={handleShuffle}
+                  className="rounded-full bg-primary text-primary-foreground hover:bg-primary-deep h-11 px-6 shadow-[var(--shadow-card)] cursor-pointer"
+                >
+                  <Shuffle className="size-4" />
+                  {t.home.shuffle}
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Filters */}
         <section className="border-b border-border/60 bg-background/60">
-          <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
+          <div className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-5">
             <div className="flex flex-col gap-4">
               <div role="search" className="relative">
                 <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
+                  id="recipe-search"
+                  name="q"
+                  autoComplete="off"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder={t.home.searchPlaceholder}
@@ -299,7 +310,7 @@ function HomePage() {
               <div
                 id="filters-panel"
                 className={cn(
-                  "flex-col gap-4 md:flex",
+                  "flex-col gap-4 md:flex md:flex-row md:flex-wrap md:gap-x-8 md:gap-y-3",
                   filtersOpen ? "flex" : "hidden",
                 )}
               >
@@ -381,7 +392,7 @@ function HomePage() {
         </section>
 
         {/* Grid */}
-        <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-14">
+        <section className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-10">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
             {/* Le titre est lui-même la zone annoncée quand le nombre change :
                 plus de second texte caché qui répète le compteur. */}
